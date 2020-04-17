@@ -12,5 +12,4 @@ Cette application web fournit les services suivants :
 5. La gestion des plages d'horaire.
 
 
-test push
  
