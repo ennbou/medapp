@@ -1,8 +1,8 @@
-# medapp
+# MedApp
 
 ## Gestion et suivi des dossiers médicaux 
 
-cette application web fournit plusieurs services
+Cette application web fournit plusieurs services
 
 1. La gestion des patients.
 2. La gestion des rendez-vous.
