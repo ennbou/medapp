@@ -1,4 +1,4 @@
-package com.example.demo.entities;
+package com.glsid.medapp.enteties;
 
 
 import javax.persistence.Entity;
