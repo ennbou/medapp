@@ -1,6 +1,5 @@
 package com.example.demo.entities;
 
-import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +8,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-public class Personne implements Serializable{
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class Personne{
 
 	
 	@Id @GeneratedValue

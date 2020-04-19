@@ -1,6 +1,7 @@
 package com.example.demo.entities;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,6 +15,7 @@ public class Dossier {
 	
 	@Id
 	private Long code;
+	private Date dateCreation;
 	
 	
 	@OneToMany(mappedBy = "dossier")
@@ -27,9 +29,10 @@ public class Dossier {
 		super();
 	}
 
-	public Dossier(Long code, Patient patient) {
+	public Dossier(Long code, Date dateCreation ,Patient patient) {
 		super();
 		this.code = code;
+		this.dateCreation = dateCreation;
 		this.patient = patient;
 	}
 
@@ -55,6 +58,14 @@ public class Dossier {
 
 	public void setPatient(Patient patient) {
 		this.patient = patient;
+	}
+
+	public Date getDateCreation() {
+		return dateCreation;
+	}
+
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
 	}
 	
 	

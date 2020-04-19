@@ -21,6 +21,7 @@ public class Consultation {
 	private Date date;
 	private LocalTime date_debut;
 	private LocalTime date_fin;
+	private String resultat;
 	
 	
 	@OneToOne
@@ -35,15 +36,24 @@ public class Consultation {
 		super();
 	}
 
-	public Consultation(Date date, LocalTime date_debut, LocalTime date_fin, RendezVous rendezVous) {
+	public Consultation(Date date, LocalTime date_debut, LocalTime date_fin, RendezVous rendezVous, String resultat) {
 		super();
 		this.date = date;
 		this.date_debut = date_debut;
 		this.date_fin = date_fin;
 		this.rendezVous = rendezVous;
+		this.resultat = resultat;
 	}
 	
 	
+
+	public String getResultat() {
+		return resultat;
+	}
+
+	public void setResultat(String resultat) {
+		this.resultat = resultat;
+	}
 
 	public Consultation(Date date, RendezVous rendezVous) {
 		super();
