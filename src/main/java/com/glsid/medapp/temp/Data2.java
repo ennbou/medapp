@@ -1,4 +1,4 @@
-package com.glsid.medapp.temp2;
+package com.glsid.medapp.temp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.glsid.medapp.entities.Consultation;
-import com.glsid.medapp.temp.RDV;
 
 final public class Data2 {
 
