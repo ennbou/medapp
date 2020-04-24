@@ -3,7 +3,6 @@ package com.glsid.medapp.enteties;
 import java.time.LocalTime;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -27,6 +26,10 @@ public class Consultation {
 	@OneToOne
 	@JoinColumn(name = "RENDEZ_VOUS_ID")
 	private RendezVous rendezVous;
+	
+	@ManyToOne
+	@JoinColumn(name = "ID_MEDCIN")
+	private Medecin medecin;
 	
 	@ManyToOne
 	@JoinColumn(name = "CODE_DOSSIER")

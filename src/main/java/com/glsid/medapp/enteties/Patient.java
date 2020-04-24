@@ -4,12 +4,23 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Patient extends Personne{
 	
+	@NotNull
 	private Boolean sexe;
+	@NotBlank
 	private String address;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull
 	private Date dateNaissance;
 	private String image;
 	
@@ -94,26 +105,5 @@ public class Patient extends Personne{
 
 
 
-
-	
-
-
-
-
-	
-
-
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

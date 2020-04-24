@@ -23,8 +23,9 @@ public class RendezVous{
 	@JoinColumn(name = "ID_SECRETAIRE")
 	private Secretaire secretaire;
 	@ManyToOne
-	@JoinColumn(name = "ID_MEDCIN")
-	private Medecin medecin;
+	@JoinColumn(name = "ID_SPECIALITE")
+	private Specialite specialite;
+	
 	
 	@OneToOne(mappedBy = "rendezVous")
 	private Consultation consultation;
@@ -35,12 +36,13 @@ public class RendezVous{
 	}
 
 
-	public RendezVous(Date date, String description, Secretaire secretaire, Medecin medecin) {
+	public RendezVous(Date date, String description, Secretaire secretaire, Specialite specialite) {
 		super();
 		this.date = date;
 		this.description = description;
 		this.secretaire = secretaire;
-		this.medecin = medecin;
+		this.specialite = specialite;
+		
 	}
 
 
@@ -84,14 +86,7 @@ public class RendezVous{
 	}
 
 
-	public Medecin getMedecin() {
-		return medecin;
-	}
-
-
-	public void setMedecin(Medecin medecin) {
-		this.medecin = medecin;
-	}
+	
 
 
 	public Consultation getConsultation() {

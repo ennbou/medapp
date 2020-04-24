@@ -3,7 +3,8 @@ package com.glsid.medapp.enteties;
 import java.util.Collection;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -11,8 +12,17 @@ public class Medecin extends Personne{
 	
 	
 	
-	@OneToMany(mappedBy = "medecin", fetch = FetchType.LAZY)
-	private Collection<RendezVous> listRendezVous;
+	@ManyToOne
+	@JoinColumn(name = "ID_SPECIALITE")
+	private Specialite specialite;
+	
+	@OneToMany(mappedBy = "medecin")
+	private Collection<Consultation> listConsultations;
+	
+	@OneToMany(mappedBy = "medecin")
+	private Collection<Exception> listExceptions;
+
+	
 
 	public Medecin() {
 		super();
@@ -21,15 +31,28 @@ public class Medecin extends Personne{
 	public Medecin(String prenom, String nom, String telephone, String email) {
 		super(prenom, nom, telephone, email);
 	}
-
-	public Collection<RendezVous> getListRendezVous() {
-		return listRendezVous;
-	}
-
-	public void setListRendezVous(Collection<RendezVous> listRendezVous) {
-		this.listRendezVous = listRendezVous;
-	}
 	
+	public Medecin(String prenom, String nom, String telephone, String email, Specialite specialite) {
+		super(prenom, nom, telephone, email);
+		this.specialite = specialite;
+	}
+
+	
+	public Specialite getSpecialite() {
+		return specialite;
+	}
+
+	public void setSpecialite(Specialite specialite) {
+		this.specialite = specialite;
+	}
+
+	public Collection<Consultation> getListConsultations() {
+		return listConsultations;
+	}
+
+	public void setListConsultations(Collection<Consultation> listConsultations) {
+		this.listConsultations = listConsultations;
+	}
 	
 	
 
