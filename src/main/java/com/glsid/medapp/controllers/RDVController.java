@@ -12,9 +12,12 @@ public class RDVController {
     @RequestMapping(path = {"/", "/liste"})
     public String liste(Model model) {
         model.addAttribute("rdvs", Data.listeRDV);
-        return "rdv/liste";
+        return "/rdv/liste";
     }
 
-
+    @RequestMapping()
+    public String defaultt() {
+        return "redirect:/rdv/liste";
+    }
 
 }
