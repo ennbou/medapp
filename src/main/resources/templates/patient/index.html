@@ -1,70 +1,53 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="temp_fragments :: head">
-<meta charset="utf-8">
-<title>Insert title here</title>
-</head>
-<body id="page-top">
-	<div id="wrapper">
-		<ul th:replace="temp_fragments :: nav_bar_right"></ul>
-		<div id="content-wrapper" class="d-flex flex-column">
-			<div id="content">
-				<nav th:replace="temp_fragments :: nav_bar"></nav>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fr_template.html(title='Patient')}">
+<body>
 
+<section layout:fragment="content">
+     <div class="col-md-7 offset-1">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">Liste des patients</div>
+                        <div class="card-body">
 
-				<div class="col-md-7 offset-1">
-					<div class="card">
-						<div class="card-header bg-primary text-white">Liste des
-							patients</div>
-						<div class="card-body">
+                            <form th:action="@{/patient/index}" method="get">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <input type="text" name="motCle" placeholder="mot clé..." class="form-control bg-light">
+                                    </div>
+                                    <button class="btn btn-success text-white">chercher</button>
+                                </div>
+                            </form>
+                            <p/>
+                            <table class="table">
+                                <tr>
+                                    <th>Prenom</th>
+                                    <th>Nom</th>
+                                    <th>Email</th>
+                                    <th>Telephone</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr th:each="p:${list}">
+                                    <td th:text="${p.prenom}"></td>
+                                    <td th:text="${p.nom}"></td>
+                                    <td th:text="${p.email}"></td>
+                                    <td th:text="${p.telephone}"></td>
+                                    <td><a th:href="@{edit(id = ${p.id})}" class="text-primary btn">afficher</a></td>
+                                    <td><a th:href="@{delete(id = ${p.id})}" class="text-danger btn disabled">supprimer</a></td>
+                                </tr>
+                            </table>
+                            <div th:if="${pages}">
+                                <ul class="pagination">
+                                    <li th:each="p,status:${pages}" class="page-item">
+                                        <a th:href="@{index(motCle = ${motCle}, page = ${status.index})}" th:text="${status.index + 1}" class="page-link"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+</section>
 
-							<form th:action="@{/patient/index}" method="get">
-								<div class="row">
-									<div class="col-md-10">
-										<input type="text" name="motCle" placeholder="mot clé..."
-											class="form-control bg-light">
-									</div>
-									<button class="btn btn-success text-white">chercher</button>
-								</div>
-							</form>
-							<p />
-							<table class="table">
-								<tr>
-									<th>Prenom</th>
-									<th>Nom</th>
-									<th>Email</th>
-									<th>Telephone</th>
-									<th></th>
-									<th></th>
-								</tr>
-								<tr th:each="p:${list}">
-									<td th:text="${p.prenom}"></td>
-									<td th:text="${p.nom}"></td>
-									<td th:text="${p.email}"></td>
-									<td th:text="${p.telephone}"></td>
-									<td><a th:href="@{edit(id = ${p.id})}"
-										class="text-primary">afficher</a></td>
-									<td><a th:href="@{delete(id = ${p.id})}"
-										class="text-danger">supprimer</a></td>
-								</tr>
-							</table>
-							<div th:if="${pages}">
-								<ul class="pagination">
-									<li th:each="p,status:${pages}" class="page-item"><a
-										th:href="@{index(motCle = ${motCle}, page = ${status.index})}"
-										th:text="${status.index + 1}" class="page-link"></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-
-
-			</div>
-		</div>
-	</div>
-
-
-	<div th:replace="temp_fragments :: scripts"></div>
 </body>
 </html>
