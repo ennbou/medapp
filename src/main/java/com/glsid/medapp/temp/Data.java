@@ -14,10 +14,10 @@ final public class Data {
     static {
         for (int i = 0; i < 27; i++) {
             listeRDV.add(new RDV((long) 1,
-                    LocalDateTime.of(2020, 2, i+1, 10, 30),
-                    LocalDate.of(2020, 3, i+1),
-                    "Mohammed Nacire", "Spescialite 1", "medecine 1",
-                    "description pour le maladie x parce que ", true));
+                    LocalDateTime.of(2020, 2, i + 1, 10, 30),
+                    (i % 4 == 0) ? LocalDate.of(2020, 3, i + 1) : null,
+                    "Patient " + i + 10, "Spescialite " + ((i % 2 == 0) ? "1" : "2"), (i % 4 == 0) ? "medecine " + ((i % 4 == 0) ? "1" : "2") : "",
+                    "description pour le maladie x parce que " + i + 20, i % 4 == 0));
 
         }
     }
