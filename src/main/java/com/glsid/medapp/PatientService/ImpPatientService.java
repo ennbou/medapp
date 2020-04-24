@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.glsid.medapp.dao.PatientRepository;
-import com.glsid.medapp.enteties.Patient;
+import com.glsid.medapp.entities.Patient;
 
 @Service
 @Transactional

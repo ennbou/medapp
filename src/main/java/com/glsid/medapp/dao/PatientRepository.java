@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.glsid.medapp.enteties.Patient;
+import com.glsid.medapp.entities.Patient;
 
 public interface PatientRepository extends JpaRepository<Patient, Long>{
 
