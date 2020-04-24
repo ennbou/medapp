@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.glsid.medapp.dao.PatientRepository;
-import com.glsid.medapp.enteties.Patient;
+import com.glsid.medapp.entities.Patient;
 import com.glsid.medapp.PatientService.IPatientService;
 
 @Controller

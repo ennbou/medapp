@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace = "temp_fragments :: head">
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body id="page-top">
+<div id="wrapper">
+<ul th:replace = "temp_fragments :: nav_bar_right"></ul>
+<div id="content-wrapper" class="d-flex flex-column">
+<div id="content">
+<nav th:replace = "temp_fragments :: nav_bar"></nav>
+
+
+<div class="col-md-7 offset-1">
+<div class="card">
+<div class="card-header bg-primary text-white">Ajouter une secretaire</div>
+<div class = "card-body">
+<form th:action="@{/secretaire/save}" method="post">
+<label>Prenom</label>
+<input type="text" name="prenom"  th:value="${secretaire.prenom}" class="form-control">
+<span th:errors = "${secretaire.prenom}" class="text-danger"></span><br>
+<label>Nom</label>
+<input type="text" name="nom"  th:value="${secretaire.nom}" class="form-control">
+<span th:errors = "${secretaire.nom}" class="text-danger"></span><br>
+<label>Telephone</label>
+<input type="text" name="telephone" th:value="${secretaire.telephone}" class="form-control">
+<span th:errors = "${secretaire.telephone}" class="text-danger"></span><br>
+<label>Email</label>
+<input type="text" name="email" th:value="${secretaire.email}" class="form-control">
+<span th:errors = "${secretaire.email}" class="text-danger"></span><br>
+<br>
+<button class="btn btn-success text-white offset-10">Enregister</button>
+</form>
+</div>
+</div>
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+<div th:replace = "temp_fragments :: scripts"></div>
+</body>
+</html>

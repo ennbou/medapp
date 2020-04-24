@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.glsid.medapp.dao.SecretaireRepository;
-import com.glsid.medapp.enteties.Secretaire;
+import com.glsid.medapp.entities.Secretaire;
 
 @Controller
 public class SecretaireController {

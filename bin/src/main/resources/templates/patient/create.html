@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace = "temp_fragments :: head">
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body id="page-top">
+<div id="wrapper">
+<ul th:replace = "temp_fragments :: nav_bar_right"></ul>
+<div id="content-wrapper" class="d-flex flex-column">
+<div id="content">
+<nav th:replace = "temp_fragments :: nav_bar"></nav>
+
+
+<div class="col-md-7 offset-1">
+<div class="card">
+<div class="card-header bg-primary text-white">Ajouter un patient</div>
+<div class = "card-body">
+<form th:action="@{/patient/save}" method="post">
+<label>Prenom</label>
+<input type="text" name="prenom"  th:value="${patient.prenom}" class="form-control">
+<span th:errors = "${patient.prenom}" class="text-danger"></span><br>
+<label>Nom</label>
+<input type="text" name="nom"  th:value="${patient.nom}" class="form-control">
+<span th:errors = "${patient.nom}" class="text-danger"></span><br>
+<label>Telephone</label>
+<input type="text" name="telephone" th:value="${patient.telephone}" class="form-control">
+<span th:errors = "${patient.telephone}" class="text-danger"></span><br>
+<label>Email</label>
+<input type="text" name="email" th:value="${patient.email}" class="form-control">
+<span th:errors = "${patient.email}" class="text-danger"></span><br>
+<label>Date naissance</label>
+<input type="date" name="dateNaissance" th:value="${patient.dateNaissance}" class="form-control">
+<span th:errors = "${patient.dateNaissance}" class="text-danger"></span><br>
+<label>Address</label>
+<input type="text" name="address" th:value="${patient.address}" class="form-control">
+<span th:errors = "${patient.address}" class="text-danger"></span><br>
+<label>Sexe</label><br>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="sexe" id="homme" value="1">
+  <label class="form-check-label" for="homme">Homme</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="sexe" id="femmme" value="0">
+  <label class="form-check-label" for="femme">Femme</label>
+</div>
+<br>
+<span th:errors = "${patient.sexe}" class="text-danger"></span><br>
+<br>
+<button class="btn btn-success text-white offset-10">Enregister</button>
+</form>
+</div>
+</div>
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+<div th:replace = "temp_fragments :: scripts"></div>
+</body>
+</html>
