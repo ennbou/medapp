@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
 
@@ -9,7 +10,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>MEDApp</title>
+    <title th:text="${title}">MedApp</title>
+
+    <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico'/>
+
 
     <!-- Custom fonts for this template-->
     <link href="/css/all.css" rel="stylesheet" type="text/css">
@@ -18,6 +22,9 @@
 
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"/>
+
 
 </head>
 
@@ -121,7 +128,7 @@
                 <!-- Topbar Search -->
                 <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                        <input type="text" class="form-control bg-light border-0 small" placeholder="CIN ou Nom Prenom"
                                aria-label="Search" aria-describedby="basic-addon2">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="button">
@@ -197,6 +204,10 @@
             <!-- End of Topbar -->
 
 
+            <section class="container-fluid" layout:fragment="content">
+                <p class="h1">Le contenu de la page</p>
+            </section>
+
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
@@ -250,6 +261,16 @@
 <!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.js"></script>
 
+
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+    $(document).ready(() => {
+        $('#data-table').DataTable();
+    })
+</script>
 
 </body>
 
