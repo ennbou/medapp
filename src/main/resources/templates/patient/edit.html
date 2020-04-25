@@ -5,32 +5,32 @@
 <body>
 
 <section layout:fragment="content">
-     <div class="col-md-7 offset-1">
+     <div class="col-md-8 offset-2">
                     <div class="alert alert-success" role="alert">
                         valider les informations du patient !
                     </div>
                 </div>
 
-                <div class="col-md-7 offset-1">
+                <div class="col-md-8 offset-2">
                     <div class="card">
-                        <div class="card-header bg-primary text-white">Valider un patient</div>
-                        <div class="card-body">
+                        <div class="card-header bg-light text-dark">Valider un patient</div>
+                        <div class="card-body bg-light">
                             <form th:action="@{/patient/update}" method="post">
                                 <input type="hidden" name="sexe" th:value="${patient.sexe}">
                                 <input type="hidden" name="id" th:value="${patient.id}">
-                                <label>Prenom</label>
+                                <label class="font-weight-bold">Prenom</label>
                                 <input type="text" name="prenom" th:value="${patient.prenom}" class="form-control">
-                                <label>Nom</label>
+                                <label class="font-weight-bold">Nom</label>
                                 <input type="text" name="nom" th:value="${patient.nom}" class="form-control">
-                                <label>Telephone</label>
+                                <label class="font-weight-bold">Telephone</label>
                                 <input type="text" name="telephone" th:value="${patient.telephone}" class="form-control">
-                                <label>Email</label>
+                                <label class="font-weight-bold">Email</label>
                                 <input type="text" name="email" th:value="${patient.email}" class="form-control">
-                                <label>Date naissance</label>
+                                <label class="font-weight-bold">Date naissance</label>
                                 <input type="date" name="dateNaissance" th:value="${patient.dateNaissance}" class="form-control">
-                                <label>Address</label>
+                                <label class="font-weight-bold">Address</label>
                                 <input type="text" name="address" th:value="${patient.address}" class="form-control">
-                                <label>Sexe</label>
+                                <label class="font-weight-bold">Sexe</label>
                                 <br>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="sexe" id="homme" value="1">
