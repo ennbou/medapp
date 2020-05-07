@@ -1,109 +1,50 @@
 package com.glsid.medapp.entities;
 
+import java.time.LocalDate;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-public class Patient extends Personne{
-	
-	@NotNull
-	private Boolean sexe;
-	@NotBlank
-	private String address;
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@NotNull
-	private Date dateNaissance;
-	private String image;
-	
-	
-	@OneToOne(mappedBy = "patient")
-	private Dossier dossier;
-	
-	
-	
-	
-	public Patient() {
-		super();
-	}
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString(callSuper = true)
+@Getter
+@Setter
+@Table(name = Patient.TABLE)
+public class Patient extends Personne {
+
+    public static final String TABLE = "Patient";
+    public static final String ID_F = "id_patient";
 
 
+    @NotBlank
+    private String address;
+    @NotNull
+    @Past
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dateNaissance;
+    private String image;
+    @NotNull
+    private Boolean sexe;
 
+    @OneToOne(mappedBy = "patient")
+    @ToString.Exclude
+    private Dossier dossier;
 
-	public Patient(String prenom, String nom, String telephone, String email, Boolean sexe, String address,
-			Date dateNaissance, String image) {
-		super(prenom, nom, telephone, email);
-		this.sexe = sexe;
-		this.address = address;
-		this.dateNaissance = dateNaissance;
-		this.image = image;
-	}
-
-
-
-
-	public Boolean getSexe() {
-		return sexe;
-	}
-
-
-
-
-	public void setSexe(Boolean sexe) {
-		this.sexe = sexe;
-	}
-
-
-
-
-	public String getAddress() {
-		return address;
-	}
-
-
-
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-
-
-
-	public Date getDateNaissance() {
-		return dateNaissance;
-	}
-
-
-
-
-	public void setDateNaissance(Date dateNaissance) {
-		this.dateNaissance = dateNaissance;
-	}
-
-
-
-
-	public String getImage() {
-		return image;
-	}
-
-
-
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-
-
+    @Builder
+    public Patient(Long id, @NotBlank String cin, @NotBlank String prenom, @NotBlank String nom, @NotBlank String telephone, @NotBlank String email, String address, LocalDate dateNaissance, String image, Boolean sexe) {
+        super(id, cin, prenom, nom, telephone, email);
+        this.address = address;
+        this.dateNaissance = dateNaissance;
+        this.image = image;
+        this.sexe = sexe;
+    }
 
 }

@@ -1,74 +1,37 @@
 package com.glsid.medapp.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Table(name = Dossier.TABLE)
 public class Dossier {
 
-	
-	@Id
-	private Long code;
-	private Date dateCreation;
-	
-	
-	@OneToMany(mappedBy = "dossier")
+    public static final String TABLE = "Dossier";
+    public static final String ID_F = "id_dossier";
+
+    @Id
+    private Long code;
+    private Date dateCreation;
+
+
+    @OneToMany(mappedBy = "dossier")
     private Collection<Consultation> listConsultations;
-	
-	@OneToOne
-	@JoinColumn(name = "ID_PATIENT")
-	private Patient patient;
 
-	public Dossier() {
-		super();
-	}
+    @OneToOne
+    @JoinColumn(name = Patient.ID_F)
+    private Patient patient;
 
-	public Dossier(Long code, Date dateCreation ,Patient patient) {
-		super();
-		this.code = code;
-		this.dateCreation = dateCreation;
-		this.patient = patient;
-	}
 
-	public Long getCode() {
-		return code;
-	}
-
-	public void setCode(Long code) {
-		this.code = code;
-	}
-
-	public Collection<Consultation> getListConsultations() {
-		return listConsultations;
-	}
-
-	public void setListConsultations(Collection<Consultation> listConsultations) {
-		this.listConsultations = listConsultations;
-	}
-
-	public Patient getPatient() {
-		return patient;
-	}
-
-	public void setPatient(Patient patient) {
-		this.patient = patient;
-	}
-
-	public Date getDateCreation() {
-		return dateCreation;
-	}
-
-	public void setDateCreation(Date dateCreation) {
-		this.dateCreation = dateCreation;
-	}
-	
-	
-	
-	
 }

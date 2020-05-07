@@ -12,10 +12,10 @@ final public class Data2 {
 
     public static List<Consultation> listeConsult = new ArrayList<>();
     
-    static {
-    	listeConsult.add(new Consultation(new Long(1),LocalDate.of(2028, 3, 30),LocalTime.of(12,30),LocalTime.of(12,45),"ASPRO + POMADA SAFRA"));
-    }
-    
+//    static {
+//    	listeConsult.add(new Consultation(new Long(1),LocalDate.of(2028, 3, 30),LocalTime.of(12,30),LocalTime.of(12,45),"ASPRO + POMADA SAFRA"));
+//    }
+//
     
 
 }
