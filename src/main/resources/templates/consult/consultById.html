@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{fr_template.html(title='Liste des RDVs')}">
+	layout:decorate="~{fr_template.html(title='Consultation')}">
 <head>
 <meta charset="UTF-8">
 </head>
@@ -10,25 +10,25 @@
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="#">Consultation</a></li>
-				<li class="breadcrumb-item active" aria-current="page">nom_de_patient_ici</li>
+				<li class="breadcrumb-item active" aria-current="page">Patient_X</li>
 			</ol>
 		</nav>
 		
 		<div class="container col-md-10 col-md-offset-3 col-xs-12">
 					<div class="card">
-						<div class="card-header bg-primary text-white">nom_de_patient_ici</div>
+						<div class="card-header bg-primary text-white">Patient_X</div>
 						<div class="card-body">
 							<form th:action="@{/rdv/}" method="post">
 								<label>Date de consultation :</label> 
-								<input type="text" name="date" th:value="${consult.date}" class="form-control"> 
+								<input type="date" name="date" th:value="${consult.date}" class="form-control"> 
 								<span th:errors="${consult.date}" class="text-danger"></span>
 								<br>
 								<label>Heure d'entrée :</label> 
-								<input type="text" name="date_debut" th:value="${consult.date_debut}" class="form-control"> 
+								<input type="time" name="date_debut" th:value="${consult.date_debut}" class="form-control"> 
 								<span th:errors="${consult.date_debut}" class="text-danger"></span>
 								<br>
 								<label>Heure de sortie :</label> 
-								<input type="text" name="date_fin" th:value="${consult.date_fin}" class="form-control"> 
+								<input type="time" name="date_fin" th:value="${consult.date_fin}" class="form-control"> 
 								<span th:errors="${consult.date_fin}" class="text-danger"></span>
 								<br>
 								<label>Resultat :</label> 
@@ -37,11 +37,11 @@
 								<br>
 								<!-- pas encore -manque d'info -->
 								<label>Dossier Médical :</label> 
-								<input type="text" name="dossier" th:value="manque" class="form-control"> 
+								<input type="text" name="dossier" th:value="${consult.dossier}" class="form-control"> 
 								<br>
 								<!-- pas encore -manque d'info -->
 								<label>Medecin concerné :</label> 
-								<input type="text" name="medecin" th:value="manque" class="form-control"> 
+								<input type="text" name="medecin" th:value="${consult.medecin}" class="form-control"> 
 								<br>
 								<div class="form-row text-center">
 								<div class="col-12">

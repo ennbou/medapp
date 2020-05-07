@@ -20,7 +20,14 @@ public class ConsultationController {
 		List<Consultation> data=Data2.listeConsult;
 		// I NEED RDVRepository // THIS IS JUST EXAMPLE
         model.addAttribute("consult", data.get(id));
-        return "consult/liste";
+        return "consult/consultById";
+    }
+	
+	@RequestMapping(path ="/")
+    public String liste(Model model) {
+		List<Consultation> data=Data2.listeConsult;
+        model.addAttribute("consult", data);
+        return "consult/list";
     }
 
 }

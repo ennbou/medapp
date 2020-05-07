@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/rdv")
 public class RDVController {
 
-    @RequestMapping(path = {"/", "/liste"})
+    @RequestMapping(path = {"/", "/list"})
     public String liste(Model model) {
         model.addAttribute("rdvs", Data.listeRDV);
-        return "/rdv/liste";
+        return "/rdv/list";
     }
 
     @RequestMapping()
     public String defaultt() {
-        return "redirect:/rdv/liste";
+        return "redirect:/rdv/list";
     }
 
 }
