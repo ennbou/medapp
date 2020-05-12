@@ -2,8 +2,11 @@ package com.glsid.medapp;
 
 import com.glsid.medapp.dao.MedecinRepository;
 import com.glsid.medapp.dao.PatientRepository;
+import com.glsid.medapp.dao.RendezVousRepository;
 import com.glsid.medapp.entities.Medecin;
 import com.glsid.medapp.entities.Patient;
+import com.glsid.medapp.entities.RendezVous;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -12,6 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class MedappApplication implements ApplicationRunner {
@@ -21,6 +25,8 @@ public class MedappApplication implements ApplicationRunner {
 
     @Autowired
     MedecinRepository repoMedecin;
+    @Autowired
+    RendezVousRepository rendezVousRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(MedappApplication.class, args);
@@ -45,6 +51,8 @@ public class MedappApplication implements ApplicationRunner {
 
 //        repoMedecin.save(m1);
 //        repoMedecin.save(m2);
-
+    	
+    	
+    			
     }
 }

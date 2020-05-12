@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
 @Data
@@ -28,8 +30,11 @@ public class RendezVous {
     @Id
     @GeneratedValue
     private Long id;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     private String description;
+   
+    
 
     @ManyToOne
     @JoinColumn(name = Secretaire.ID_F)
@@ -42,5 +47,6 @@ public class RendezVous {
 
     @OneToOne(mappedBy = "rendezVous")
     private Consultation consultation;
+    
 
 }
