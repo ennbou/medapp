@@ -28,8 +28,8 @@ public class Consultation {
     @GeneratedValue
     private Long id;
     private LocalDate date;
-    private LocalTime date_debut;
-    private LocalTime date_fin;
+    private LocalTime heure_debut;
+    private LocalTime heure_fin;
     private String resultat;
 
 
