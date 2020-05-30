@@ -1,12 +1,8 @@
 package com.glsid.medapp.controllers;
 
 import com.glsid.medapp.dao.RendezVousRepository;
-import com.glsid.medapp.entities.Patient;
 import com.glsid.medapp.entities.RendezVous;
 import com.glsid.medapp.temp.Data;
-
-import java.time.LocalDate;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;

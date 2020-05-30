@@ -1,11 +1,16 @@
 package com.glsid.medapp.entities;
 
 import java.util.Collection;
-
 import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = Specialite.TABLE)
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Specialite {
 
     public static final String TABLE = "specialite";

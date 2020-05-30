@@ -1,7 +1,3 @@
-/**
- * pour la liste des RDVs
- */
-
 package com.glsid.medapp.temp;
 
 import lombok.AllArgsConstructor;
