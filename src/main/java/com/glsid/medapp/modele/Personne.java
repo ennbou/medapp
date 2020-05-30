@@ -1,4 +1,4 @@
-package com.glsid.medapp.entities;
+package com.glsid.medapp.modele;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +10,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

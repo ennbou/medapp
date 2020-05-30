@@ -1,7 +1,7 @@
-package com.glsid.medapp.controllers;
+package com.glsid.medapp.controller;
 
 import com.glsid.medapp.dao.RendezVousRepository;
-import com.glsid.medapp.entities.RendezVous;
+import com.glsid.medapp.modele.RendezVous;
 import com.glsid.medapp.temp.Data;
 import javax.validation.Valid;
 

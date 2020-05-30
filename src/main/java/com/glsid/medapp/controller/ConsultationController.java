@@ -1,8 +1,8 @@
-package com.glsid.medapp.controllers;
+package com.glsid.medapp.controller;
 import java.util.List;
 
 import com.glsid.medapp.dao.ConsultationRepository;
-import com.glsid.medapp.entities.Consultation;
+import com.glsid.medapp.modele.Consultation;
 import com.glsid.medapp.temp.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,17 +25,17 @@ public class ConsultationController {
 	
 	@GetMapping({"/",""})
     public String All(Model model) {
+		//// this is just example 
+		consultationController.save(Data2.consult);
 		List<Consultation> consults = consultationController.findAll();
-		// just example 
-		consults.add(Data2.consult);
         model.addAttribute("consults", consults);
         return "consult/list";
     }
 	
 	@GetMapping("/{id}")
     public String one(Model model,@PathVariable Long id) {
-		// not implemented yet
-        model.addAttribute("consult",Data2.consult);
+		Consultation consult = consultationController.findById(id).get();
+        model.addAttribute("consult",consult);
         return "consult/consultById";
     }
 	

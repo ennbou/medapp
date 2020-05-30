@@ -1,4 +1,4 @@
-package com.glsid.medapp.entities;
+package com.glsid.medapp.modele;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

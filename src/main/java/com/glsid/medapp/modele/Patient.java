@@ -1,4 +1,4 @@
-package com.glsid.medapp.entities;
+package com.glsid.medapp.modele;
 
 import java.time.LocalDate;
 import javax.persistence.*;

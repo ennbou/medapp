@@ -1,8 +1,8 @@
-package com.glsid.medapp.PatientService;
+package com.glsid.medapp.service;
 
 import org.springframework.data.domain.Page;
 
-import com.glsid.medapp.entities.Patient;
+import com.glsid.medapp.modele.Patient;
 
 public interface IPatientService {
 	
