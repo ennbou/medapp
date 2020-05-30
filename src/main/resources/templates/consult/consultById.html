@@ -14,7 +14,7 @@
 			</ol>
 		</nav>
 		
-		<div class="container col-md-10 col-md-offset-3 col-xs-12">
+		<div class="container">
 					<div class="card">
 						<div class="card-header bg-primary text-white">Patient_X</div>
 						<div class="card-body">
@@ -35,11 +35,9 @@
 								<input type="text" name="resultat" th:value="${consult.resultat}" class="form-control"> 
 								<span th:errors="${consult.resultat}" class="text-danger"></span>
 								<br>
-								<!-- pas encore -manque d'info -->
 								<label>Dossier Médical :</label> 
 								<input type="text" name="dossier" th:value="${consult.dossier}" class="form-control"> 
 								<br>
-								<!-- pas encore -manque d'info -->
 								<label>Medecin concerné :</label> 
 								<input type="text" name="medecin" th:value="${consult.medecin}" class="form-control"> 
 								<br>
