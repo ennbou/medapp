@@ -23,6 +23,7 @@ public class ConsultationController {
 	@Autowired
 	private ConsultationRepository consultationController;
 	
+	// get all consults
 	@GetMapping({"/",""})
     public String All(Model model) {
 		//// this is just example 
@@ -32,6 +33,7 @@ public class ConsultationController {
         return "consult/list";
     }
 	
+	// get consult by id
 	@GetMapping("/{id}")
     public String one(Model model,@PathVariable Long id) {
 		Consultation consult = consultationController.findById(id).get();
@@ -39,6 +41,7 @@ public class ConsultationController {
         return "consult/consultById";
     }
 	
+	// add new/update consult
 	@PostMapping("/{id}")
 	public String save(@RequestBody Consultation consult,@PathVariable Long id) {
 		consult.setId(id);
@@ -54,6 +57,7 @@ public class ConsultationController {
 		return "consult/list";
 	}
 	
+	// delete consult
 	@DeleteMapping("/{id}")
 	public String delete(@PathVariable Long id) {
 		consultationController.deleteById(id);
