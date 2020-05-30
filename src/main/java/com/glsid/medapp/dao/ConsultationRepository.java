@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ConsultationRepository extends JpaRepository<Consultation,Long>{
 
-	// TODO la signature de fontion
 	@Query("SELECT c FROM Consultation c WHERE c.id=motCle")
 	public Page<Consultation> getConsultByID(@Param("motCle")Long motCle, Pageable pageable);	
 
