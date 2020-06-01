@@ -1,10 +1,6 @@
-package com.glsid.medapp.controllers;
-
-import java.util.List;
-import java.util.Optional;
+package com.glsid.medapp.controller;
 
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.glsid.medapp.dao.MedecinRepository;
 import com.glsid.medapp.dao.SpecialiteRepository;
-import com.glsid.medapp.entities.Medecin;
-import com.glsid.medapp.entities.Specialite;
+import com.glsid.medapp.modele.Medecin;
 
 @Controller
 public class MedecinController {

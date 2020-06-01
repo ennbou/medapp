@@ -3,15 +3,9 @@ package com.glsid.medapp;
 import com.glsid.medapp.dao.MedecinRepository;
 import com.glsid.medapp.dao.PatientRepository;
 import com.glsid.medapp.dao.RendezVousRepository;
-<<<<<<< HEAD
 import com.glsid.medapp.dao.SpecialiteRepository;
-import com.glsid.medapp.entities.Medecin;
-import com.glsid.medapp.entities.Patient;
-import com.glsid.medapp.entities.RendezVous;
-import com.glsid.medapp.entities.Specialite;
 
-=======
->>>>>>> 00d610350c8ff80a53e018ccf4678346a9cf91ae
+//>>>>>>> 00d610350c8ff80a53e018ccf4678346a9cf91ae
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -25,7 +19,6 @@ public class MedappApplication implements ApplicationRunner {
 
     @Autowired
     PatientRepository repoPatient;
-
     @Autowired
     MedecinRepository repoMedecin;
     @Autowired

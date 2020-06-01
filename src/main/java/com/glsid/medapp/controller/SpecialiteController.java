@@ -1,4 +1,4 @@
-package com.glsid.medapp.controllers;
+package com.glsid.medapp.controller;
 
 
 import javax.validation.Valid;
@@ -12,9 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.glsid.medapp.dao.SpecialiteRepository;
-import com.glsid.medapp.entities.Specialite;
+import com.glsid.medapp.modele.Specialite;
 
 @Controller
 public class SpecialiteController {
