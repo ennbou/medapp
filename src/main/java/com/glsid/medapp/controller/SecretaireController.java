@@ -1,4 +1,4 @@
-package com.glsid.medapp.controllers;
+package com.glsid.medapp.controller;
 
 import javax.validation.Valid;
 
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.glsid.medapp.dao.SecretaireRepository;
-import com.glsid.medapp.entities.Secretaire;
+import com.glsid.medapp.modele.Secretaire;
 
 @Controller
 public class SecretaireController {

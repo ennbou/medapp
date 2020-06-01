@@ -1,4 +1,4 @@
-package com.glsid.medapp.PatientService;
+package com.glsid.medapp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.glsid.medapp.dao.PatientRepository;
-import com.glsid.medapp.entities.Patient;
+import com.glsid.medapp.modele.Patient;
 
 @Service
 @Transactional

@@ -22,19 +22,19 @@
         <tr>
         	<th>Dossier</th>
             <th>Date</th>
-            <th>Départ</th>
-            <th>Fin</th>
+            <th>Heure d'entrée</th>
+            <th>Heure de sortie</th>
             <th>Resultat</th>
             <th>Medecin</th>
         </tr>
         </thead>
         <tbody>
 
-        <tr th:each="cslt : ${consult}" data-id="${cslt.id}">
+        <tr th:each="cslt : ${consults}" data-id="${cslt.id}">
             <td th:text="${cslt.dossier}"></td>
-            <td th:text="${cslt.date}"></td>
-            <td th:text="${cslt.date_debut}"></td>
-            <td th:text="${cslt.date_fin}"></td>
+            <td th:text="${#dates.format(cslt.date, 'dd MMM yyyy')}"></td>
+            <td th:text="${#dates.format(cslt.heure_debut,'HH:mm')}"></td>
+            <td th:text="${#dates.format(cslt.heure_fin,'HH:mm')}"></td>
             <td th:text="${cslt.resultat}"></td>
             <td th:text="${cslt.medecin}"></td>
         </tr>
@@ -43,8 +43,8 @@
         <tr>
             <th>Dossier</th>
             <th>Date</th>
-            <th>Départ</th>
-            <th>Fin</th>
+            <th>Heure d'entrée</th>
+            <th>Heure de sortie</th>
             <th>Resultat</th>
             <th>Medecin</th>
         </tr>

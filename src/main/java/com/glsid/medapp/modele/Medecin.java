@@ -1,22 +1,10 @@
-package com.glsid.medapp.entities;
+package com.glsid.medapp.modele;
 
 import lombok.*;
 
 import java.util.Collection;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-
-
-// TODO complete le DOC
-
-/**
- * Medecin classe, c'est une  Entity qui herite l'Entity ou la classe {@link Personne}
- * <ul>
- *     <li>Il y a un seul medecin pour chaque {@link Specialite} </li>
- *     <li>Le medecin il y a plusieru {@link Consultation} </li>
- * </ul>
- */
 
 @EqualsAndHashCode(callSuper = true)
 @Entity

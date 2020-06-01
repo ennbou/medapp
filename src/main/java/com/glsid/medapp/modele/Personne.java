@@ -1,7 +1,5 @@
-package com.glsid.medapp.entities;
+package com.glsid.medapp.modele;
 
-
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +8,6 @@ import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -41,6 +38,5 @@ public class Personne {
     @Email
     @NotNull
     private String email;
-
 
 }

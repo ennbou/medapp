@@ -1,8 +1,8 @@
-package com.glsid.medapp.entities;
+package com.glsid.medapp.modele;
 
 import java.util.Collection;
-
 import javax.persistence.*;
+<<<<<<< HEAD:src/main/java/com/glsid/medapp/entities/Specialite.java
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -16,6 +16,17 @@ import lombok.ToString;
 @Entity
 @Table(name = Specialite.TABLE)
 @Data @AllArgsConstructor @NoArgsConstructor @ToString
+=======
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = Specialite.TABLE)
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+>>>>>>> 00d610350c8ff80a53e018ccf4678346a9cf91ae:src/main/java/com/glsid/medapp/modele/Specialite.java
 public class Specialite {
 
     public static final String TABLE = "specialite";

@@ -1,8 +1,6 @@
-package com.glsid.medapp.entities;
+package com.glsid.medapp.modele;
 
 import java.time.LocalDate;
-import java.util.Date;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
