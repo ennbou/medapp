@@ -62,7 +62,7 @@
 
         <!-- Divider -->
         <hr class="sidebar-divider">
-
+        
         <!-- Heading -->
         <div class="sidebar-heading">
             Patient
@@ -73,7 +73,7 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
                aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-cog"></i>
-                <span>Gérer les Patient</span>
+                <span>Gérer les Patients</span>
             </a>
             <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
@@ -109,7 +109,7 @@
             </div>
         </li>
         
-         <!-- Heading -->
+        <!-- Heading -->
         <div class="sidebar-heading">
             Consultation
         </div>
@@ -128,7 +128,46 @@
             </div>
         </li>
 
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Spécialité
+        </div>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Gérer les spécialités</span>
+            </a>
+            <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" th:href="@{/listeSpecialite}">Liste des spécialités</a>
+                    <a class="collapse-item" th:href="@{/specialite}">Recherche </a>
+                    <a class="collapse-item" th:href="@{/ajouterSpecialite}">Ajouter des spécialités</a>
+                </div>
+            </div>
+        </li>
 
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Médecin
+        </div>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Gérer les médecins</span>
+            </a>
+            <div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" th:href="@{/listeMedecin}">Liste des médecins</a>
+                    <a class="collapse-item" th:href="@{/medecin}">Recherche </a>
+                    <a class="collapse-item" th:href="@{/ajouterMedecin}">Ajouter des médecins</a>
+                </div>
+            </div>
+        </li>
     </ul>
     <!-- End of Sidebar -->
 

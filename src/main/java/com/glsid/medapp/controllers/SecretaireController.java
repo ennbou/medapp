@@ -65,12 +65,9 @@ public class SecretaireController {
 		secretaireRepository.save(s);
 		return "redirect:/secretaire/index";
 	}
-	
 	@RequestMapping("/secretaire/delete")
 	public String delete(long id) {
 		secretaireRepository.deleteById(id);
 		return "redirect:/secretaire/index";
-	}
-	
-	
+	}	
 }

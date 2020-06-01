@@ -3,9 +3,11 @@ package com.glsid.medapp;
 import com.glsid.medapp.dao.MedecinRepository;
 import com.glsid.medapp.dao.PatientRepository;
 import com.glsid.medapp.dao.RendezVousRepository;
+import com.glsid.medapp.dao.SpecialiteRepository;
 import com.glsid.medapp.entities.Medecin;
 import com.glsid.medapp.entities.Patient;
 import com.glsid.medapp.entities.RendezVous;
+import com.glsid.medapp.entities.Specialite;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -27,6 +29,8 @@ public class MedappApplication implements ApplicationRunner {
     MedecinRepository repoMedecin;
     @Autowired
     RendezVousRepository rendezVousRepository;
+    @Autowired
+    SpecialiteRepository specialiteRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(MedappApplication.class, args);
@@ -50,9 +54,6 @@ public class MedappApplication implements ApplicationRunner {
 //        repoPatient.save(p1);
 
 //        repoMedecin.save(m1);
-//        repoMedecin.save(m2);
-    	
-    	
-    			
+//        repoMedecin.save(m2);   			
     }
 }

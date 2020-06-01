@@ -22,7 +22,6 @@ import java.time.LocalDate;
 @RequestMapping("/patient")
 public class PatientController {
 
-
     @Autowired
     PatientRepository patientRepository;
 

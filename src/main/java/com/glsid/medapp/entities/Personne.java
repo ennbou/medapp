@@ -27,14 +27,19 @@ public class Personne {
     private Long id;
     @NotBlank
     @Column(unique = true)
+    @NotNull
     private String cin;
     @NotBlank
+    @NotNull
     private String prenom;
     @NotBlank
+    @NotNull
     private String nom;
     @NotBlank
+    @NotNull
     private String telephone;
     @Email
+    @NotNull
     private String email;
 
 
