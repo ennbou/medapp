@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -27,12 +29,9 @@ public class Consultation {
 
     @Id @GeneratedValue
     private Long id;
-    @Temporal(TemporalType.DATE)
-    private Date date;
-    @Temporal(TemporalType.TIME)
-    private Date heure_debut;
-    @Temporal(TemporalType.TIME)
-    private Date heure_fin;
+    private LocalDate date;
+    private LocalTime heure_debut;
+    private LocalTime heure_fin;
     
     private String resultat;
 
@@ -45,9 +44,6 @@ public class Consultation {
     @JoinColumn(name = Medecin.ID_F)
     private Medecin medecin;
 
-    @ManyToOne
-    @JoinColumn(name = Dossier.ID_F)
-    private Dossier dossier;
 
 
 }

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 
@@ -23,11 +24,11 @@ public class Dossier {
 
     @Id
     private Long code;
-    private Date dateCreation;
+    private LocalDate dateCreation;
 
 
     @OneToMany(mappedBy = "dossier")
-    private Collection<Consultation> listConsultations;
+    private Collection<RendezVous> listRendezVous;
 
     @OneToOne
     @JoinColumn(name = Patient.ID_F)

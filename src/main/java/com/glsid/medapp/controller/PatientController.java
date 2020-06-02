@@ -18,6 +18,14 @@ import com.glsid.medapp.service.IPatientService;
 
 import java.time.LocalDate;
 
+/**
+ * TODO complete le formulaire d'ajouter(image, validation ... )
+ * TODO button redection to create new Patient
+ * TODO Recherche par CIN ou Nom&Prenom
+ * TODO add page infos patient (RDV, Consultation)
+ *          TODO redirection pour ajouter un nouveau RDV
+ */
+
 @Controller
 @RequestMapping("/patient")
 public class PatientController {

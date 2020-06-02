@@ -5,14 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -31,7 +27,7 @@ public class RendezVous {
     @GeneratedValue
     private Long id;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date date;
+    private LocalDate date;
     private String description;
    
     
@@ -47,6 +43,9 @@ public class RendezVous {
 
     @OneToOne(mappedBy = "rendezVous")
     private Consultation consultation;
-    
+
+    @ManyToOne
+    @JoinColumn(name = Dossier.ID_F)
+    private Dossier dossier;
 
 }

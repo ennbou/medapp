@@ -1,6 +1,7 @@
 package com.glsid.medapp.modele;
 
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.*;
 //<<<<<<< HEAD:src/main/java/com/glsid/medapp/entities/Specialite.java
 import javax.validation.constraints.NotBlank;
@@ -11,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 //=======
 @Entity
 @Table(name = Specialite.TABLE)
@@ -27,19 +29,19 @@ public class Specialite {
     @GeneratedValue
     private Long id;
     @NotNull
-	@Size(min=4,max=30)
+    @Size(min = 4, max = 30)
     private String nom;
 
     @OneToMany(mappedBy = "specialite")
-    private Collection<RendezVous> listRendezVous;
+    private List<RendezVous> listRendezVous;
 
-    @OneToMany(mappedBy = "specialite")
-    private Collection<Medecin> listMedecins;
-    
+    @OneToMany(mappedBy = "specialite", fetch = FetchType.EAGER)
+    private List<Medecin> listMedecins;
+
     @Builder
     public Specialite(Long id, @NotBlank String nom) {
-    	this.id = id;
-    	this.nom = nom;
+        this.id = id;
+        this.nom = nom;
     }
 
 

@@ -2,6 +2,8 @@ package com.glsid.medapp.temp;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import com.glsid.medapp.modele.Consultation;
 import com.glsid.medapp.modele.Dossier;
@@ -11,24 +13,24 @@ import com.glsid.medapp.modele.RendezVous;
 final public class Data2 {
 
     public static Consultation consult;
-    public static Medecin medecin=null;
-    public static Dossier dossier=null;
-    public static RendezVous rendezVous=null;
-    
-    static {
-    	DateFormat timeFormat=new SimpleDateFormat("HH:mm");
-    	DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
-    	try {
-    
-    		//medecin =new Medecin();
-    		//dossier=new Dossier();
-    		//rendezVous=new RendezVous();
-    		
-    		consult= new Consultation(null,dateFormat.parse("2020-03-15"),timeFormat.parse("12:30"),
-    				timeFormat.parse("12:45"),"ASPRO + POMADA SAFRA",rendezVous,medecin,dossier);
-    	}catch(Exception e) {}
-    	}
+    public static Medecin medecin = null;
+    public static Dossier dossier = null;
+    public static RendezVous rendezVous = null;
 
-    
+    static {
+        DateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+
+            medecin =new Medecin();
+            dossier=new Dossier();
+            rendezVous=new RendezVous();
+
+            consult = new Consultation(null, LocalDate.of(2020, 05, 10), LocalTime.of(12, 0),
+                    LocalTime.of(13, 0), "ASPRO + POMADA SAFRA", rendezVous, medecin);
+        } catch (Exception e) {
+        }
+    }
+
 
 }

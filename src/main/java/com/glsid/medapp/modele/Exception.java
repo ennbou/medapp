@@ -1,5 +1,6 @@
 package com.glsid.medapp.modele;
 
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +21,7 @@ public class Exception {
     @Id
     @GeneratedValue
     private Long id;
-    private Date date;
+    private LocalDate date;
     private String raison;
 
     @ManyToOne

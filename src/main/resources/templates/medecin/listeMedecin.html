@@ -19,7 +19,7 @@
                         <th>Nom</th>
                         <th>Prenom</th>
                         <th>Telephone</th>
-                        <th>Id Specialite</th>
+
                     </tr>
                     </thead>
                     <tbody>
@@ -30,21 +30,20 @@
                         <td th:text="${m.nom}"></td>
                         <td th:text="${m.prenom}"></td>
                         <td th:text="${m.telephone}"></td>
-                        <td th:text="${m.specialite}"></td>
                         <td><a class="btn btn-warning" th:href="@{editMedecin(id=${m.id})}">Edit</a></td>
                         <td><a onclick="javascript:return confirm('Voulez vous supprimer cet Element ?')"
-                            th:href="@{deleteMedecins(id=${m.id},page=${currentPage},size=${size})}" 
-                            class="btn btn-danger">Delete</a></td>
+                               th:href="@{deleteMedecins(id=${m.id},page=${currentPage},size=${size})}"
+                               class="btn btn-danger">Delete</a></td>
                     </tr>
-				    </tbody>
+                    </tbody>
                 </table>
-				<ul class="nav nav-pills">
-						<li th:each="page,status:${pages}"><a
-							th:class="${status.index==currentPage?'btn btn-primary':'btn'}"
-							th:href="@{/listeMedecin(page=${status.index},size=${size},motCle=${motCle})}"
-							th:text="${status.index}"></a></li>
-				</ul>
-				</div>
+                <ul class="nav nav-pills">
+                    <li th:each="page,status:${pages}"><a
+                            th:class="${status.index==currentPage?'btn btn-primary':'btn'}"
+                            th:href="@{/listeMedecin(page=${status.index},size=${size},motCle=${motCle})}"
+                            th:text="${status.index}"></a></li>
+                </ul>
+            </div>
         </div>
     </div>
     </p>
