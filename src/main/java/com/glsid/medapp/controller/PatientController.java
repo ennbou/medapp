@@ -2,20 +2,20 @@ package com.glsid.medapp.controller;
 
 import javax.validation.Valid;
 
+import com.glsid.medapp.dao.DossierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import com.glsid.medapp.dao.PatientRepository;
 import com.glsid.medapp.modele.Patient;
 import com.glsid.medapp.service.IPatientService;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 /**
@@ -32,6 +32,8 @@ public class PatientController {
 
     @Autowired
     PatientRepository patientRepository;
+    @Autowired
+    DossierRepository dossierRepository;
 
     @Autowired
     IPatientService service;
@@ -40,8 +42,8 @@ public class PatientController {
     public String index(Model model, String motCle,
                         @RequestParam(name = "page", defaultValue = "0") int page,
                         @RequestParam(name = "size", defaultValue = "10") int size) {
-//        Page<Patient> list = service.listPatient(motCle, page, 8);
-        Page<Patient> list = patientRepository.findAll(PageRequest.of(page, size));
+        Page<Patient> list = service.listPatient(motCle, page, size);
+        //Page<Patient> list = patientRepository.findAll(PageRequest.of(page, size));
         int[] pages = new int[list.getTotalPages()];
         model.addAttribute("pages", pages);
         model.addAttribute("list", list);
@@ -51,42 +53,63 @@ public class PatientController {
 
     @GetMapping("/create")
     public String create(Model model) {
-
-        Patient p = Patient.builder().nom("nom").prenom("prenom").
-                sexe(true).telephone("0666").email("email@email.com").address("address 474").
-                dateNaissance(LocalDate.of(2020, 5, 1)).image("path").build();
-
+        Patient p = new Patient();
         model.addAttribute("patient", p);
         return "patient/create";
     }
 
     @PostMapping("/save")
-    public String save(@Valid Patient patient, BindingResult bindingResult) {
+    public String save(@Valid Patient patient,@RequestParam("imageFile") MultipartFile imageFile, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "/patient/create";
+
+
+            String pathImage = imageFile.getOriginalFilename();
+            if(!pathImage.isEmpty()){
+                patient.setImage(pathImage);
+                try {
+                    service.saveImage(imageFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
         patientRepository.save(patient);
-        return "redirect:/patient/liste";
+
+        return "redirect:/patient/index?motCle=";
     }
 
 
-    @RequestMapping("/edit")
-    public String edit(long id, Model model) {
+    @RequestMapping("/{id}/edit")
+    public String edit(@PathVariable long id, Model model) {
 
         Patient patient = patientRepository.findById(id).get();
         model.addAttribute("patient", patient);
         return "patient/edit";
     }
 
-    @RequestMapping("/update")
-    public String update(Patient patient, boolean sexe, Model model) {
-        Patient p = patientRepository.findById(patient.getId()).get();
-        p = patient;
+    @RequestMapping("/{id}/update")
+    public String update(Patient patient,@RequestParam("imageFile") MultipartFile imageFile, @PathVariable Long id) {
+        Patient p = patientRepository.findById(id).get();
+        String pathImage = imageFile.getOriginalFilename();
+        if(!pathImage.isEmpty()){
+            p.setImage(pathImage);
+            p = patient;
+            try {
+                service.saveImage(imageFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         patientRepository.save(p);
+
         return "redirect:/patient/index?motCle=";
     }
 
-    @RequestMapping("/delete")
-    public String delete(long id) {
+    @RequestMapping("/{id}/delete")
+    public String delete(@PathVariable long id) {
         patientRepository.deleteById(id);
         return "redirect:/patient/index?motCle=";
     }
@@ -99,6 +122,13 @@ public class PatientController {
                 dateNaissance(LocalDate.of(2020, 10, 1)).image("path").build();
         patientRepository.save(p1);
         return "rdv/liste";
+    }
+
+    @RequestMapping("/{id}/rdvs")
+    public String rdvs(@PathVariable Long id, Model model){
+        model.addAttribute("rdvs", patientRepository.findById(id).get().getDossier().getListRendezVous());
+        model.addAttribute("patient", patientRepository.findById(id).get());
+        return "patient/rdvs";
     }
 
 }

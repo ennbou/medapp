@@ -22,6 +22,7 @@ public class ConsultationController {
 	
 	@Autowired
 	private ConsultationRepository consultationController;
+
 	
 	// get all consults
 	@GetMapping({"/",""})

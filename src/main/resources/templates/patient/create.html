@@ -2,6 +2,9 @@
 <html lang="fr" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fr_template.html(title='Ajouter Patient')}">
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+</head>
 <body>
 
 <section layout:fragment="content">
@@ -9,17 +12,16 @@
         <div class="card">
             <div class="card-header bg-light text-dark font-weight-bold">Ajouter un patient</div>
             <div class="card-body bg-light">
-                <form th:action="@{save}" method="post" th:object="${patient}">
+                <form th:action="@{save}" method="post" th:object="${patient}" enctype="multipart/form-data">
 
-                    <div class="row text-center w-100 mb-5">
-                        <img th:src="@{/img/h.png}" class="col mx-auto img-fluid"/>
-                        <img th:src="@{/img/f.png}" class="col mx-auto img-fluid"/>
+                    <div class="row offset-2 text-center w-50 h-50 mb-5">
+                        <img src="/img/hf.png" id="profile-img-tag" class="col mx-auto img-fluid"/>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="img" th:value="*{image}">
-                            <label class="custom-file-label" for="img">Choise file</label>
+                            <input type="file" name="imageFile" id="imageFile" class="custom-file-input">
+                            <label for="imageFile" class="custom-file-label">choisir un fichier</label>
                         </div>
-                        <span th:text="*{image}">Path file</span>
                     </div>
+
                     <div class="form-group">
                         <label class="font-weight-bold">Prenom</label>
                         <input placeholder="Prenom" type="text" th:field="*{prenom}"
@@ -75,7 +77,29 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const inpFile = document.getElementById("imageFile");
+        const image = document.getElementById("profile-img-tag");
+
+        inpFile.addEventListener("change", function () {
+            const file = this.files[0];
+
+            if(file){
+                const reader = new FileReader();
+                reader.addEventListener("load", function () {
+                    console.log(this);
+                    image.setAttribute("src", this.result);
+                });
+
+                reader.readAsDataURL(file);
+            }
+        });
+
+
+    </script>
 </section>
+
 
 </body>
 </html>

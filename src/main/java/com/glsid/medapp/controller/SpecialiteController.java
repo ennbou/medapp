@@ -2,6 +2,7 @@ package com.glsid.medapp.controller;
 
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,9 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import com.glsid.medapp.dao.SpecialiteRepository;
 import com.glsid.medapp.modele.Specialite;
 
@@ -79,5 +78,11 @@ public class SpecialiteController {
 		}
 		specialiteRepository.save(specialite);
 		return "specialite/confirmation";
+	}
+
+	@RequestMapping("/specialite/{id}/medcins")
+	public String listMedcins(@PathVariable() Long id, Model model){
+        model.addAttribute("medcins", specialiteRepository.findById(id).get().getListMedecins());
+		return "specialite/medcins";
 	}
 }

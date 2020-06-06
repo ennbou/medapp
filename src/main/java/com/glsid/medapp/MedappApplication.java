@@ -45,8 +45,8 @@ public class MedappApplication implements ApplicationRunner {
     void initpatient() {
         for (int i = 0; i < 20; i++) {
             Patient p = Patient.builder().nom("nom" + (i + 1)).prenom("prenom" + (i + 1)).
-                    sexe(i % 2 == 0).telephone("06118912").email("email@email").
-                    dateNaissance(LocalDate.now().minusYears(20 + i)).image("path").build();
+                    sexe(i % 2 == 0).telephone("06118912").email("email@email").cin("MYCIN"+i).
+                    dateNaissance(LocalDate.now().minusYears(20 + i)).image("patient.jpg").build();
             patientRepository.save(p);
 
         }
@@ -103,6 +103,7 @@ public class MedappApplication implements ApplicationRunner {
                     rdv.setSpecialite(spec);
                     rdv.setSecretaire(sec);
                     rdv.setDossier(dossier);
+                    rdv.setStatus(false);
                     rendezVousRepository.save(rdv);
                 });
 
