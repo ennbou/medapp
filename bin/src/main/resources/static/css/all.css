@@ -5834,3 +5834,11 @@ readers do not read off random characters that represent icons */
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
 }
+.select2-container .select2-selection--single{
+    height:34px !important;
+}
+.select2-container--default .select2-selection--single{
+         border: 1px solid #ccc !important; 
+     border-radius: 0px !important; 
+}
+

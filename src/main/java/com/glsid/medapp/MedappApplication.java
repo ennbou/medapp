@@ -15,7 +15,6 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class MedappApplication implements ApplicationRunner {
 
@@ -44,9 +43,9 @@ public class MedappApplication implements ApplicationRunner {
 
     void initpatient() {
         for (int i = 0; i < 20; i++) {
-            Patient p = Patient.builder().nom("nom" + (i + 1)).prenom("prenom" + (i + 1)).
-                    sexe(i % 2 == 0).telephone("06118912").email("email@email").
-                    dateNaissance(LocalDate.now().minusYears(20 + i)).image("path").build();
+            Patient p = Patient.builder().id(null).cin("12304"+i).prenom("prenom" + (i + 1)).nom("nom" + (i + 1)).
+                    telephone("06118912").email("email@email").address("Address "+i).
+                    dateNaissance(LocalDate.now().minusYears(20 + i)).image("path").sexe(i % 2 == 0).build();
             patientRepository.save(p);
 
         }
@@ -71,13 +70,12 @@ public class MedappApplication implements ApplicationRunner {
 
         secretaireRepository.save(s1);
         secretaireRepository.save(s2);
-
     }
 
     void initSpecialite() {
-        Specialite s1 = Specialite.builder().nom("specialite 1").build();
-        Specialite s2 = Specialite.builder().nom("specialite 2").build();
-        Specialite s3 = Specialite.builder().nom("specialite 3").build();
+        Specialite s1 = Specialite.builder().id(null).nom("specialite 1").build();
+        Specialite s2 = Specialite.builder().id(null).nom("specialite 2").build();
+        Specialite s3 = Specialite.builder().id(null).nom("specialite 3").build();
 
         specialiteRepository.save(s1);
         specialiteRepository.save(s2);
@@ -118,6 +116,7 @@ public class MedappApplication implements ApplicationRunner {
             c.setHeure_fin(LocalTime.now().plusHours(1));
             c.setMedecin(rdv.getSpecialite().getListMedecins().get(0));
             c.setRendezVous(rdv);
+            c.setResultat("Ordance");
             consultationRepository.save(c);
         });
     }

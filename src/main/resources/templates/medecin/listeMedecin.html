@@ -6,7 +6,7 @@
 
 <section layout:fragment="content">
 
-    <div class="">
+    <div>
         <div class="card">
             <div class="card-header bg-light text-dark font-weight-bold">Liste des medecins</div>
             <div class="card-body bg-light">
@@ -32,7 +32,7 @@
                         <td th:text="${m.telephone}"></td>
                         <td><a class="btn btn-warning" th:href="@{editMedecin(id=${m.id})}">Edit</a></td>
                         <td><a onclick="javascript:return confirm('Voulez vous supprimer cet Element ?')"
-                               th:href="@{deleteMedecins(id=${m.id},page=${currentPage},size=${size})}"
+                               th:href="@{deleteMedecins(id=${m.id},page=${currentPage},size=${size},motCle=${motCle})}"
                                class="btn btn-danger">Delete</a></td>
                     </tr>
                     </tbody>
@@ -40,7 +40,7 @@
                 <ul class="nav nav-pills">
                     <li th:each="page,status:${pages}"><a
                             th:class="${status.index==currentPage?'btn btn-primary':'btn'}"
-                            th:href="@{/listeMedecin(page=${status.index},size=${size},motCle=${motCle})}"
+                            th:href="@{/listeMedecin(page=${status.index},size=${size})}"
                             th:text="${status.index}"></a></li>
                 </ul>
             </div>

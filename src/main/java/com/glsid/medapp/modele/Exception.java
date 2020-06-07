@@ -1,7 +1,6 @@
 package com.glsid.medapp.modele;
 
 import java.time.LocalDate;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

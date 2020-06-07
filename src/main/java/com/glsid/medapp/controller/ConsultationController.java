@@ -1,67 +1,64 @@
 package com.glsid.medapp.controller;
-import java.util.List;
 
 import com.glsid.medapp.dao.ConsultationRepository;
 import com.glsid.medapp.modele.Consultation;
-import com.glsid.medapp.temp.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/consult")
 public class ConsultationController {
 	
 	@Autowired
-	private ConsultationRepository consultationController;
+	private ConsultationRepository consultationRepository;
 	
-	// get all consults
-	@GetMapping({"/",""})
-    public String All(Model model) {
-		//// this is just example 
-		consultationController.save(Data2.consult);
-		List<Consultation> consults = consultationController.findAll();
+	// get all consultations
+	@GetMapping({"/consult/","/consult","/consult/liste"})
+    public String All(Model model,@RequestParam(name="search",defaultValue="") String search,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size) {
+		//Page<Consultation> consults = consultationRepository.findAll(PageRequest.of(page, size));
+		Page<Consultation> consults = consultationRepository.searchUsingWord(search, PageRequest.of(page, size));
+        int[] pages = new int[consults.getTotalPages()];
+        model.addAttribute("pages", pages);
+        model.addAttribute("size", size);
         model.addAttribute("consults", consults);
-        return "consult/list";
+        model.addAttribute("pageActual", page);
+        model.addAttribute("search", search);
+        return "consult/listeConsult";
     }
 	
-	// get consult by id
-	@GetMapping("/{id}")
+	// get/update consultation by id
+	@GetMapping("/consult/{id}")
     public String one(Model model,@PathVariable Long id) {
-		Consultation consult = consultationController.findById(id).get();
+		Consultation consult = consultationRepository.findById(id).get();
         model.addAttribute("consult",consult);
-        return "consult/consultById";
+        return "consult/consultPatient";
     }
 	
-	// add new/update consult
-	@PostMapping("/{id}")
-	public String save(@RequestBody Consultation consult,@PathVariable Long id) {
-		consult.setId(id);
-		consultationController.save(consult);
-        return "consult/list";
-    }
+	// update consultation
+		@GetMapping("/consult/modification")
+		public String update(Long id) {
+			return "redirect:"+id;
+		}
 	
-	// the same thing
-	@PutMapping("/{id}")
-	public String update(@RequestBody Consultation consultation,@PathVariable Long id) {
-		consultation.setId(id);
-		consultationController.save(consultation);
-		return "consult/list";
+	// delete consultation
+	@GetMapping("/consult/suppression")
+	public String delete(Long id, String page, String size, String search) {
+		consultationRepository.deleteById(id);
+		return "redirect:"+"?page="+page+"&size="+size+"&search="+search;
 	}
 	
-	// delete consult
-	@DeleteMapping("/{id}")
-	public String delete(@PathVariable Long id) {
-		consultationController.deleteById(id);
-		return "consult/list";
+	// cas d'erreur
+	@GetMapping(path = "/consult/403")
+	public String accessDenied() {
+		return "403";
 	}
 	
 }

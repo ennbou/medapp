@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fr_template.html(title='Rechercher des medecins')}">
+<body>
+
+<section layout:fragment="content">
+
+    <div class="">
+        <div class="card">
+            <div class="card-header bg-light text-dark font-weight-bold">Liste des medecins</div>
+            <div class="card-body bg-light">
+                <form th:action="@{medecin}" method="get">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <input type="text" name="motCle" th:value=${motCle} placeholder="Nom Medecin..." class="form-control bg-light">
+                        </div>
+                        <button class="btn btn-success text-white">Rechercher</button>
+                    </div>
+                </form>
+                <p/>
+                <table class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Carte d'Identite</th>
+                        <th>Adresse email</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Telephone</th>
+                        <th>Id Specialite</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="m:${pageMedecins.content}">
+                        <td th:text="${m.id}"></td>
+                        <td th:text="${m.cin}"></td>
+						<td th:text="${m.email}"></td>
+						<td th:text="${m.nom}"></td>
+						<td th:text="${m.prenom}"></td>
+						<td th:text="${m.telephone}"></td>
+						<td th:text="${m.specialite}"></td>
+				    </tr>
+				    </tbody>
+                </table>
+				<ul class="nav nav-pills">
+						<li th:each="page,status:${pages}"><a
+							th:class="${status.index==currentPage?'btn btn-primary':'btn'}"
+							th:href="@{/medecin(page=${status.index},size=${size},motCle=${motCle})}"
+							th:text="${status.index}"></a></li>
+				</ul>
+				</div>
+        </div>
+    </div>
+    </p>
+</section>
+
+</body>
+</html>

@@ -55,9 +55,9 @@ public class MedecinController {
 	}
 	
 	@GetMapping(path = "/deleteMedecins")
-	public String delete(Long id, String motCle, String page, String size) {
-		medecinRepository.deleteById(id);;
-		return "redirect:/listeMedecin?page="+page+"&size="+size;
+	public String delete(Long id, String page, String size) {
+		medecinRepository.deleteById(id);
+		return "redirect:listeMedecin?page="+page+"&size="+size;
 	}
 	
 	@GetMapping(path = "/ajouterMedecin")

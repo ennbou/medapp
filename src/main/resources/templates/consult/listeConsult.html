@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fr_template.html(title='Liste des Consultation')}">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+
+	<section layout:fragment="content">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a th:href="@{/consult}">Consultation</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Liste</li>
+			</ol>
+		</nav>
+		<p class="h3">Liste des consultations</p>
+
+		<div class="float-right">
+			<form th:action="@{/consult}" method="GET">
+				<div class="mb-3">
+					<input class="p-1" type="text" name="search" placeholder="nom, prenom ou nᵒ de dossier" th:value="${search}" />
+					<button class="btn btn-warning">Chercher</button>
+				</div>
+			</form>
+		</div>
+
+		<table class="table table-striped table-bordered" style="width: 100%">
+			<thead>
+				<tr>
+					<th>Dossier</th>
+					<th>Patient</th>
+					<th>Date</th>
+					<th>Heure d'entrée</th>
+					<th>Heure de sortie</th>
+					<th>Resultat</th>
+					<th>Medecin</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr th:each="cslt : ${consults}" data-id="${cslt.id}">
+					<td th:text="${cslt.rendezVous.dossier.code}"></td>
+					<td
+						th:text="${cslt.rendezVous.dossier.patient.nom}+' '+${cslt.rendezVous.dossier.patient.prenom}"></td>
+					<td th:text="${cslt.date}"></td>
+					<td th:text="${cslt.heure_debut}"></td>
+					<td th:text="${cslt.heure_fin}"></td>
+					<td th:text="${cslt.resultat}"></td>
+					<td th:text="${cslt.medecin.nom}+' '+${cslt.medecin.prenom}"></td>
+					<td>
+						<a class="btn btn-info"
+							th:href="@{/consult/modification(id=${cslt.id})}">Modifier</a>
+					</td>
+					<td>
+						<a
+							onclick="javascript:return confirm('Etes-vous sûr de vouloir supprimer cette consultation ?')"
+							th:href="@{/consult/suppression(id=${cslt.id}, page=${pageActual}, size=${size}, search=${search})}"
+							class="btn btn-danger">Supprimer</a>
+					</td>
+
+				</tr>
+			</tbody>
+		</table>
+
+		<div class="d-flex justify-content-center">
+			<ul class="nav nav-pills">
+				<li th:each="page,status:${pages}" class="btn"><a
+					th:class="${status.index==pageActual?'btn btn-warning':'btn btn-light'}"
+					th:href="@{/consult(page=${status.index},size=${size},search=${search})}"
+					th:text="${status.index}"> </a></li>
+			</ul>
+		</div>
+
+	</section>
+</body>
+</html>
