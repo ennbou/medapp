@@ -28,6 +28,7 @@ public class RendezVous {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
     private String description;
+    private boolean status;
    
     
 

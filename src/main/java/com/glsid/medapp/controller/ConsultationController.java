@@ -16,7 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ConsultationController {
 	
 	@Autowired
+<<<<<<< HEAD
 	private ConsultationRepository consultationRepository;
+=======
+	private ConsultationRepository consultationController;
+
+>>>>>>> 5b7dd6372a7b7ae9278b8e8ab98b86295a78ff12
 	
 	// get all consultations
 	@GetMapping({"/consult/","/consult","/consult/liste"})

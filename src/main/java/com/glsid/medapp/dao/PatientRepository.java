@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.glsid.medapp.modele.Patient;
+import org.springframework.web.multipart.MultipartFile;
 
 @Repository
 public interface PatientRepository extends JpaRepository<Patient, Long> {
@@ -16,10 +17,10 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     // TODO liste tous les patients
     public Page<Patient> findAll(Pageable pageable);
 
-    @Query("SELECT p FROM Patient p WHERE p.nom LIKE %:motCle%")
+    @Query("SELECT p FROM Patient p WHERE p.nom LIKE %:motCle% or p.cin LIKE %:motCle%")
     public Page<Patient> listPatient(@Param("motCle") String motCle, Pageable pageable);
-    // TODO  la liste des patiente by nom
-    // Page<Patient> findByNomContaining(String nom, Pageable pageable);
+
+
 
 
 

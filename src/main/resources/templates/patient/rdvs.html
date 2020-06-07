@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fr_template.html(title='Liste des RDVs')}">
+<body>
+
+<section layout:fragment="content">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item text-dark font-weight-bold"><p th:text="${patient.getNom()} + ' ' + ${patient.getPrenom()}"></p></li>
+            <li class="breadcrumb-item active" aria-current="page">rendez-vous</li>
+        </ol>
+    </nav>
+
+
+    <table id="data-table" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+        <tr>
+            <th>Date creation</th>
+            <th>Statut</th>
+            <th>Patient</th>
+            <th>Specialite</th>
+            <th>Medecine</th>
+            <th>Date RDV</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="rdv : ${rdvs}" data-id="${rdv.id}">
+            <td th:text="${#temporals.format(rdv.getDate(), 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td class="text-center">
+                <button type="button" class="btn btn-warning" th:unless="${rdv.isStatus()}">
+                    <span class="fas fa-circle"></span>
+                </button>
+                <span class="text-success" th:if="${rdv.isStatus()}">
+                    <span class="fas fa-check-circle"></span>
+                </span>
+
+            </td>
+            <td th:text="${rdv.getDossier().getPatient().getNom()}"></td>
+            <td th:text="${rdv.getSpecialite().getNom()}"></td>
+            <td th:text="${rdv.getSpecialite().getNom()}"></td>
+            <td th:text="${#temporals.format(rdv.getDate(), 'yyyy-MM-dd')}">-----------</td>
+            <td th:text="${rdv.description}"></td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <th>Date creation</th>
+            <th>Statut</th>
+            <th>Patient</th>
+            <th>Specialite</th>
+            <th>Medecine</th>
+            <th>Date RDV</th>
+            <th>Description</th>
+        </tr>
+        </tfoot>
+    </table>
+
+</section>
+
+</body>
+</html>

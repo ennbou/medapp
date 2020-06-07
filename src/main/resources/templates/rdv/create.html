@@ -5,22 +5,26 @@ layout:decorate="~{fr_template.html(title='ajouter un rendez-vous')}">
 <body>
  
 <section layout:fragment="content">
-    <div class="col-md-8 offset-2">
+    <div class="col-md-9 offset-2">
         <div class="card">
-            <div class="card-header bg-light text-dark font-weight-bold">Ajouter un rendez-vous</div>
+            <div class="card-header bg-light text-dark font-weight-bold">Ajouter un rendez-vous pour</div>
             <div class="card-body bg-light">
                 <form th:action="@{save}" method="post">
-                  <div class="form-group">
-                        <label class="font-weight-bold">Patient : </label>
-                         <select class="form-control select2">
-							<option  disabled selected>Choisir un patient</option>
-							</select>
-						
-                    </div>
+<input type="hidden" name="idpatient" th:value="${patient.getId()}">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+
+                            <li class="breadcrumb-item" th:text="${patient.nom}"></li>
+                            <li class="breadcrumb-item" th:text="${patient.prenom}"></li>
+                            <li class="breadcrumb-item active" th:text="${patient.cin}"></li>
+                        </ol>
+                    </nav>
+
                     <div class="form-group">
                         <label class="font-weight-bold">Specialite : </label>
-                         <select class="form-control select2">
+                         <select class="form-control select2" name="idspec">
 							<option  disabled selected>Choisir une specialite</option>
+                             <option th:each="sp:${spes}" th:text="${sp.getNom()}" th:value="${sp.getId()}"></option>
 							</select>
 						
                     </div>
