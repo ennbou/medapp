@@ -5,6 +5,12 @@
 <body>
 
 <section layout:fragment="content">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/specialite/listeSpecialite}">Specialite</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Confirmation</li>
+          </ol>
+        </nav>
         <div class="col-md-8 offset-2">
 			<div class="alert alert-success" role="alert">Valider la specialite</div>
 		</div>
@@ -12,10 +18,6 @@
 		    <div class="card">
 		        <div class="card-header bg-light text-dark font-weight-bold">Confirmation</div>
 		        <div class="card-body bg-light">
-					<div class="form-group">
-						<label>Id :</label> 
-						<label th:text="${specialite.id}"></label>
-					</div>
 					<div class="form-group">
                         <label>Nom de specialite :</label>
                         <label th:text="${specialite.nom}"></label>    

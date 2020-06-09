@@ -2,13 +2,13 @@
 <html lang="fr"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{fr_template.html(title='Liste des Medcins')}">
+      layout:decorate="~{fr_template.html(title='Liste des Medecins')}">
 <body>
 
 <section layout:fragment="content">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Medcins</a></li>
+            <li class="breadcrumb-item"><a href="/medecin/listeMedecin/">Medecins</a></li>
             <li class="breadcrumb-item active" aria-current="page">Liste</li>
         </ol>
     </nav>
@@ -26,7 +26,7 @@
         </thead>
         <tbody>
 
-        <tr th:each="med : ${medcins}">
+        <tr th:each="med : ${medecins}">
 
             <td th:text="${med.nom}"></td>
             <td th:text="${med.prenom}"></td>

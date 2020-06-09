@@ -5,17 +5,17 @@
 <body>
 
 <section layout:fragment="content">
-        
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/specialite/listeSpecialite}">Specialite</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Formulaire d'Ajout</li>
+          </ol>
+        </nav>
         <div class="col-md-8 offset-2">
             <div class="card">
                 <div class="card-header bg-light text-dark font-weight-bold">Ajouter une specialite</div>
                 <div class="card-body bg-light">
-                     <form th:action="@{save}" method="post">
-                          <div class="form-group">
-                               <label class="font-weight-bold">Id :</label>
-                               <input class="form-control" placeholder="Id" type="text" name="id" th:value="${specialite.id}"/>
-                               <span  th:errors="${specialite.id}"></span>
-                          </div>
+                     <form th:action="@{/specialite/save}" method="post">
                            <div class="form-group">
                                <label class="font-weight-bold">Nom Specialite :</label>
                                <input class="form-control" placeholder="Nom Specialite" type="text" name="nom" th:value="${specialite.nom}"/>

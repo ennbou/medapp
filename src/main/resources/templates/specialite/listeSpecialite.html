@@ -7,18 +7,18 @@
 
 <section layout:fragment="content">
     <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Specialité</a></li>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/specialite/listeSpecialite}">Specialite</a></li>
             <li class="breadcrumb-item active" aria-current="page">Liste</li>
-        </ol>
+          </ol>
     </nav>
-    <p class="h3">Liste des Specialités</p>
+    <p class="h3">Liste des Specialites</p>
 
     <table id="data-table" class="table table-striped table-bordered" style="width:100%">
         <thead>
         <tr>
 
-            <th>Nom Specialité</th>
+            <th>Nom Specialite</th>
 
         </tr>
         </thead>
@@ -28,10 +28,10 @@
             <td th:text="${s.getNom()}"></td>
            <td>
                <div class="d-flex justify-content-end">
-                   <a class="btn btn-success" th:href="@{edit(id=${s.id})}"><li class="fa fa-edit"></li></a>
-                   <a th:href="@{/specialite/{id}/medcins(id=${s.id})}" class="btn btn-primary"><li class="fa fa-address-card"></li></a>
+                   <a class="btn btn-success" th:href="@{/specialite/edit(id=${s.id})}"><li class="fa fa-edit"></li></a>
+                   <a th:href="@{/specialite/{id}/medecins(id=${s.id})}" class="btn btn-primary"><li class="fa fa-address-card"></li></a>
                    <a onclick="javascript:return confirm('Voulez vous supprimer cet Element ?')"
-                      th:href="@{deleteSpecialites(id=${s.id},page=${currentPage},size=${size})}"
+                      th:href="@{/specialite/deleteSpecialites(id=${s.id},page=${currentPage},size=${size})}"
                       class="btn btn-danger"><li class="fa fa-trash"></li></a>
 
                </div>
@@ -42,13 +42,19 @@
         <tfoot>
         <tr>
 
-            <th>Nom Specialité</th>
+            <th>Nom Specialite</th>
 
         </tr>
         </tfoot>
     </table>
-
-
+     <div class="d-flex justify-content-center">
+			 <ul class="nav nav-pills">
+				<li th:each="page,status:${pages}" class="btn"><a
+					th:class="${status.index==currentPage?'btn btn-warning':'btn btn-light'}"
+					th:href="@{/specialite/listeSpecialite(page=${status.index},size=${size},motCle=${motCle})}"
+					th:text="${status.index}"> </a></li>
+		 	 </ul>
+     </div>
 </section>
 
 </body>
