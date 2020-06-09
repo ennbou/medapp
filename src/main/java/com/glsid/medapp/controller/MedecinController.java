@@ -23,7 +23,7 @@ public class MedecinController {
 	@Autowired
 	public SpecialiteRepository specialiteRepository;
 	
-	@GetMapping(path = "/medecin")
+	@GetMapping(path = "/medecin/search")
 	public String medecin(Model model,
 			@RequestParam(name="page",defaultValue="0")int page,
 			@RequestParam(name="size",defaultValue="10")int size,
@@ -40,7 +40,7 @@ public class MedecinController {
 		return "medecin/index";
 	}
 	
-	@GetMapping(path = "/listeMedecin")
+	@GetMapping(path = "/medecin/listeMedecin")
 	public String listSpecialite(Model model,
 			@RequestParam(name="page",defaultValue="0")int page,
 			@RequestParam(name="size",defaultValue="10")int size
@@ -54,27 +54,27 @@ public class MedecinController {
 		return "medecin/listeMedecin";
 	}
 	
-	@GetMapping(path = "/deleteMedecins")
+	@GetMapping(path = "/medecins/deleteMedecins")
 	public String delete(Long id, String page, String size) {
 		medecinRepository.deleteById(id);
-		return "redirect:listeMedecin?page="+page+"&size="+size;
+		return "redirect:/medecin/listeMedecin?page="+page+"&size="+size;
 	}
 	
-	@GetMapping(path = "/ajouterMedecin")
+	@GetMapping(path = "/medecin/ajouterMedecin")
 	public String formMedecin(Model model) {
 		Medecin medecin = new Medecin();
 		model.addAttribute("medecin", medecin);
 		return "medecin/FormMedecin";
 	}
 	
-	@GetMapping(path = "/editMedecin")
+	@GetMapping(path = "/medecin/editMedecin")
 	public String edit(Model model, Long id) {
 		Medecin medecin = medecinRepository.getOne(id);
 		model.addAttribute("medecin",medecin);
 		return "medecin/EditMedecin";
 	}
 	
-	@PostMapping(path = "/saveMedecin")
+	@PostMapping(path = "/medecin/saveMedecin")
 	public String save(Model model,@Valid Medecin medecin, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			return "medecin/FormMedecin";
