@@ -13,10 +13,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
+// exclude = {SecurityAutoConfiguration.class}
+@SpringBootApplication()
 public class MedappApplication implements ApplicationRunner {
 
     @Autowired
@@ -44,8 +45,8 @@ public class MedappApplication implements ApplicationRunner {
 
     void initpatient() {
         for (int i = 0; i < 20; i++) {
-            Patient p = Patient.builder().nom("nom" + (i + 1)).prenom("prenom" + (i + 1)).
-                    sexe(i % 2 == 0).telephone("06118912").email("email@email").
+            Patient p = Patient.builder().nom("nom" + (i + 1)).prenom("prenom" + (i + 1)).cin("MC1234" + i).
+                    sexe(i % 2 == 0).telephone("06118912").email("email@email").address("adress 474").
                     dateNaissance(LocalDate.now().minusYears(20 + i)).image("path").build();
             patientRepository.save(p);
 
@@ -86,7 +87,7 @@ public class MedappApplication implements ApplicationRunner {
 
     void initMedecine() {
         specialiteRepository.findAll().forEach(spec -> {
-            Medecin m = Medecin.builder().nom("nom "+(spec.getId())+1).cin("MC1243" + spec.getId()).prenom("prenom "+(spec.getId())+1).
+            Medecin m = Medecin.builder().nom("nom " + (spec.getId()) + 1).cin("MC1243" + spec.getId()).prenom("prenom " + (spec.getId()) + 1).
                     telephone("06347853423").email("email@medapp.ma").build();
             m.setSpecialite(spec);
             medecinRepository.save(m);
@@ -99,7 +100,7 @@ public class MedappApplication implements ApplicationRunner {
                 dossierRepository.findAll().forEach(dossier -> {
                     RendezVous rdv = new RendezVous();
                     rdv.setDescription("la description de RDV par le patient.");
-                    rdv.setDate(LocalDate.now().minusDays(10));
+                    rdv.setDate(LocalDateTime.now().minusDays(10));
                     rdv.setSpecialite(spec);
                     rdv.setSecretaire(sec);
                     rdv.setDossier(dossier);

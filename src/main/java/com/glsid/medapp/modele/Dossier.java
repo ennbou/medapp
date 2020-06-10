@@ -8,6 +8,7 @@ import lombok.ToString;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -28,10 +29,9 @@ public class Dossier {
 
 
     @OneToMany(mappedBy = "dossier")
-    private Collection<RendezVous> listRendezVous;
+    private List<RendezVous> listRendezVous;
 
     @OneToOne
-    @JoinColumn(name = Patient.ID_F)
     private Patient patient;
 
 

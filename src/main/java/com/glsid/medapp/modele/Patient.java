@@ -33,6 +33,7 @@ public class Patient extends Personne {
     private Boolean sexe;
 
     @OneToOne(mappedBy = "patient")
+    @JoinColumn(name = Dossier.ID_F)
     @ToString.Exclude
     private Dossier dossier;
 

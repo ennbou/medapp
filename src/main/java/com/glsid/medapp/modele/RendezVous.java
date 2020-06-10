@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.*;
@@ -27,10 +28,8 @@ public class RendezVous {
     @GeneratedValue
     private Long id;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate date;
+    private LocalDateTime date; // date creation
     private String description;
-   
-    
 
     @ManyToOne
     @JoinColumn(name = Secretaire.ID_F)
