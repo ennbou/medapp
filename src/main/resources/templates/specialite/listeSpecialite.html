@@ -2,7 +2,7 @@
 <html lang="fr"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{fr_template.html(title='Liste des RDVs')}">
+      layout:decorate="~{fr_template.html(title='Liste des specialites')}">
 <body>
 
 <section layout:fragment="content">
@@ -18,7 +18,7 @@
         <thead>
         <tr>
 
-            <th>Nom Specialite</th>
+            <th>Specialite</th>
 
         </tr>
         </thead>
@@ -28,24 +28,22 @@
             <td th:text="${s.getNom()}"></td>
            <td>
                <div class="d-flex justify-content-end">
-                   <a class="btn btn-success" th:href="@{/specialite/edit(id=${s.id})}"><li class="fa fa-edit"></li></a>
-                   <a th:href="@{/specialite/{id}/medecins(id=${s.id})}" class="btn btn-primary"><li class="fa fa-address-card"></li></a>
-                   <a onclick="javascript:return confirm('Voulez vous supprimer cet Element ?')"
+               <div class="pl-sm-1">
+               <a class="btn btn-success" th:href="@{/specialite/edit(id=${s.id})}"><li class="fa fa-edit"></li></a>
+               </div>
+               <div class="pl-sm-1">
+               <a th:href="@{/specialite/{id}/medecins(id=${s.id})}" class="btn btn-primary"><li class="fa fa-address-card"></li></a>
+               </div>
+               <div class="pl-sm-1">
+               <a onclick="javascript:return confirm('Voulez vous supprimer cette specialité?')"
                       th:href="@{/specialite/deleteSpecialites(id=${s.id},page=${currentPage},size=${size})}"
                       class="btn btn-danger"><li class="fa fa-trash"></li></a>
-
+               </div>
                </div>
            </td>
         </tr>
 
         </tbody>
-        <tfoot>
-        <tr>
-
-            <th>Nom Specialite</th>
-
-        </tr>
-        </tfoot>
     </table>
      <div class="d-flex justify-content-center">
 			 <ul class="nav nav-pills">

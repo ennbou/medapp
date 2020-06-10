@@ -23,6 +23,7 @@
                     <th>Nom</th>
                     <th>Prenom</th>
                     <th>Telephone</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -34,12 +35,15 @@
                     <td th:text="${m.telephone}"></td>
                     <td>
                         <div class="d-flex justify-content-center">
-                            <a class="btn btn-success" th:href="@{/medecin/editMedecin(id=${m.id})}"><li class="fa fa-edit"></li></a>
-                            <a onclick="javascript:return confirm('Voulez vous supprimer cet Element ?')"
+                        <div class="pl-sm-1">
+                        <a class="btn btn-success" th:href="@{/medecin/editMedecin(id=${m.id})}"><li class="fa fa-edit"></li></a>
+                        </div>
+                        <div class="pl-sm-1">
+                        <a onclick="javascript:return confirm('Voulez vous supprimer ce medecin?')"
                                th:href="@{/medecins/deleteMedecins(id=${m.id},page=${currentPage},size=${size})}"
                                class="btn btn-danger"><li class="fa fa-trash"></li></a>
                         </div>
-
+                        </div>
                     </td>
 
                 </tr>
