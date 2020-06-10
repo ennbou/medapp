@@ -23,7 +23,7 @@ public interface ConsultationRepository extends JpaRepository<Consultation,Long>
 			+ "OR c.rendezVous.dossier.code LIKE %:search%")
     public Page<Consultation> searchUsingWord(@Param("search") String search, Pageable pageable);
 
-	// TODO : liste des consultation entre deux date
+	// TODO : liste des consultation entre deux date & recherche optionnelle
 	@Query("SELECT c FROM Consultation c WHERE "
 			+ "(c.rendezVous.dossier.patient.nom LIKE %:search% " 
 			+ "OR c.rendezVous.dossier.patient.prenom LIKE %:search% "  
