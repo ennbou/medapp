@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import com.glsid.medapp.dao.ConsultationRepository;
 import com.glsid.medapp.dao.SpecialiteRepository;
 import com.glsid.medapp.modele.Specialite;
 
@@ -80,7 +82,7 @@ public class SpecialiteController {
 	}
 
 	@RequestMapping("/specialite/{id}/medecins")
-	public String listMedcins(@PathVariable() Long id, Model model){
+	public String listMedecins(@PathVariable() Long id, Model model){
         model.addAttribute("medecins", specialiteRepository.findById(id).get().getListMedecins());
 		return "specialite/medecins";
 	}

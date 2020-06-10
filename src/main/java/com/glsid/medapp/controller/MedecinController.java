@@ -8,7 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.glsid.medapp.dao.MedecinRepository;
@@ -81,5 +83,11 @@ public class MedecinController {
 		}
 		medecinRepository.save(medecin);
 		return "medecin/confirmation";
+	}
+	
+	@RequestMapping("/medecin/{id}/consultations")
+	public String listConsultations(@PathVariable Long id, Model model) {
+		model.addAttribute("consultations", medecinRepository.findById(id).get().getListConsultations());
+		return "medecin/consultations";
 	}
 }
