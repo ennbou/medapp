@@ -19,7 +19,8 @@
 		<div class="float-right">
 			<form th:action="@{/consult}" method="GET">
 				<div class="mb-3">
-					<input class="p-1" type="text" name="search" placeholder="nom, prenom ou nᵒ de dossier" th:value="${search}" />
+					<input class="p-1" type="text" name="search"
+						placeholder="nom, prenom ou nᵒ de dossier" th:value="${search}" />
 					<button class="btn btn-warning">Chercher</button>
 				</div>
 			</form>
@@ -51,14 +52,18 @@
 					<td th:text="${cslt.resultat}"></td>
 					<td th:text="${cslt.medecin.nom}+' '+${cslt.medecin.prenom}"></td>
 					<td>
-						<a class="btn btn-info"
-							th:href="@{/consult/modification(id=${cslt.id})}">Modifier</a>
+						<div class="pl-sm-1">
+							<a class="btn btn-info"
+								th:href="@{/consult/modification(id=${cslt.id})}">
+								<li class="fa fa-edit"></li></a>
+						</div>
 					</td>
 					<td>
-						<a
-							onclick="javascript:return confirm('Etes-vous sûr de vouloir supprimer cette consultation ?')"
-							th:href="@{/consult/suppression(id=${cslt.id}, page=${pageActual}, size=${size}, search=${search})}"
-							class="btn btn-danger">Supprimer</a>
+						<div class="pl-sm-1">
+							<a onclick="javascript:return confirm('Etes-vous sûr de vouloir supprimer cette consultation ?')"
+								th:href="@{/consult/suppression(id=${cslt.id}, page=${pageActual}, size=${size}, search=${search})}"
+								class="btn btn-danger"><li class="fa fa-trash"></li></a>
+						</div>
 					</td>
 
 				</tr>
@@ -70,7 +75,7 @@
 				<li th:each="page,status:${pages}" class="btn"><a
 					th:class="${status.index==pageActual?'btn btn-warning':'btn btn-light'}"
 					th:href="@{/consult(page=${status.index},size=${size},search=${search})}"
-					th:text="${status.index}"> </a></li>
+					th:text="${status.index+1}"> </a></li>
 			</ul>
 		</div>
 

@@ -20,17 +20,18 @@
 						<label th:text="${consult.rendezVous.dossier.patient.nom}+' '+${consult.rendezVous.dossier.patient.prenom}"></label>
 						</div>
 						<div class="card-body">
-							<form th:action="@{/rdv/}" method="post">
+							<form th:action="@{save}" method="post">
+								<input type="hidden" name="id" th:value="${consult.id}" class="form-control">
 								<label>Date de consultation :</label> 
-								<input type="date" name="date" th:value="${consult.date}" class="form-control"> 
+								<input type="date" name="date"  th:value="${#temporals.format(consult.date, 'yyyy-MM-dd')}" class="form-control"> 
 								<span th:errors="${consult.date}" class="text-danger"></span>
 								<br>
 								<label>Heure d'entrée :</label> 
-								<input type="time" name="date_debut" th:value="${consult.heure_debut}" class="form-control"> 
+								<input type="time" name="heure_debut" th:value="${#temporals.format(consult.heure_debut,'HH:mm')}" class="form-control"> 
 								<span th:errors="${consult.heure_debut}" class="text-danger"></span>
 								<br>
 								<label>Heure de sortie :</label> 
-								<input type="time" name="date_fin" th:value="${consult.heure_fin}" class="form-control"> 
+								<input type="time" name="heure_fin" th:value="${#temporals.format(consult.heure_fin, 'HH:mm')}" class="form-control"> 
 								<span th:errors="${consult.heure_fin}" class="text-danger"></span>
 								<br>
 								<label>Resultat :</label> 
@@ -38,15 +39,16 @@
 								<span th:errors="${consult.resultat}" class="text-danger"></span>
 								<br>
 								<label>Dossier Médical :</label> 
-								<input type="text" name="dossier" th:value="${consult.rendezVous.dossier.code}" class="form-control"> 
+								<input type="hidden" name="rendezVous" th:value="${consult.rendezVous.id}" class="form-control"> 
+								<input type="text" disabled th:value="${consult.rendezVous.dossier.code}" class="form-control"> 
 								<br>
 								<label>Medecin concerné :</label> 
-								<input type="text" name="medecin" th:value="${consult.medecin.nom}+' '+${consult.medecin.prenom}" class="form-control"> 
+								<input type="hidden" name="medecin" th:value="${consult.medecin.id}" class="form-control"> 
+								<input type="text" disabled th:value="${consult.medecin.nom}+' '+${consult.medecin.prenom}" class="form-control"> 
 								<br>
 								<div class="form-row text-center">
 								<div class="col-12">
 								<button class="btn btn-success text-white" >Enregister</button>
-								<button class="btn btn-danger text-white">Envoyé</button>
 								</div>
 								</div>
 							</form>
