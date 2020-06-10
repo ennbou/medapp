@@ -7,16 +7,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="MedApp Application">
+    <meta name="author" content="GLSID">
+
 
     <title th:text="${title}">MedApp</title>
 
-    <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico'/>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
 
 
+    <link rel='stylesheet' type='image/x-icon' href='/favicon.ico'/>
+    
     <!-- Custom fonts for this template-->
     <link href="/css/all.css" rel="stylesheet" type="text/css">
+    
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
 
@@ -79,8 +83,6 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" th:href="@{/patient/index?motCle=}">Liste</a>
                     <a class="collapse-item" th:href="@{/patient/create}">Ajouter</a>
-                    <a class="collapse-item" href="cards.html">Recherche</a>
-                    <a class="collapse-item" href="cards.html">....</a>
                 </div>
             </div>
         </li>
@@ -103,8 +105,6 @@
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" th:href="@{/rdv/list}">Liste</a>
-                    <a class="collapse-item" th:href="@{/rdv/create}">Ajouter</a>
-                    <a class="collapse-item" href="cards.html">Recherche</a>
                 </div>
             </div>
         </li>
@@ -119,11 +119,11 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
                aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-cog"></i>
-                <span>En cours de construction</span>
+                <span>Gérer les consultations</span>
             </a>
             <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" th:href="@{/consult/}">Liste</a>
+                    <a class="collapse-item" th:href="@{/consult}">Liste</a>
                 </div>
             </div>
         </li>
@@ -141,9 +141,9 @@
             </a>
             <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" th:href="@{/listeSpecialite}">Liste des spécialités</a>
-                    <a class="collapse-item" th:href="@{/specialite}">Recherche </a>
-                    <a class="collapse-item" th:href="@{/ajouterSpecialite}">Ajouter des spécialités</a>
+                    <a class="collapse-item" th:href="@{/specialite/listeSpecialite}">Liste des spécialités</a>
+                    <a class="collapse-item" th:href="@{/specialite/search}">Recherche </a>
+                    <a class="collapse-item" th:href="@{/specialite/ajouterSpecialite}">Ajouter des spécialités</a>
                 </div>
             </div>
         </li>
@@ -162,9 +162,29 @@
             </a>
             <div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" th:href="@{/listeMedecin}">Liste des médecins</a>
-                    <a class="collapse-item" th:href="@{/medecin}">Recherche </a>
-                    <a class="collapse-item" th:href="@{/ajouterMedecin}">Ajouter des médecins</a>
+                    <a class="collapse-item" th:href="@{/medecin/listeMedecin}">Liste des médecins</a>
+                    <a class="collapse-item" th:href="@{/medecin/search}">Recherche </a>
+                    <a class="collapse-item" th:href="@{/medecin/ajouterMedecin}">Ajouter des médecins</a>
+                </div>
+            </div>
+        </li>
+        
+         <!-- Heading -->
+        <div class="sidebar-heading">
+            Secretaire
+        </div>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Gérer les secrétaires</span>
+            </a>
+            <div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" th:href="@{/secretaire/listeSecretaire}">Liste des secrétaires</a>
+                    <a class="collapse-item" th:href="@{/secretaire/search}">Recherche </a>
+                    <a class="collapse-item" th:href="@{/secretaire/ajouterSecretaire}">Ajouter des secrétaires</a>
                 </div>
             </div>
         </li>

@@ -4,7 +4,7 @@
 
 <head>
 
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -24,6 +24,8 @@
     <link href="/css/sb-admin-2.css" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css"/>
 
 
 </head>
@@ -37,7 +39,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="fr_template.html">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
             <div class="sidebar-brand-icon">
                 <i class="fas fa-hospital"></i>
             </div>
@@ -53,14 +55,14 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <a class="nav-link" href="fr_template.html">
+            <a class="nav-link" th:href="@{/}">
                 <i class="fas fa-fw fa-home"></i>
                 <span>Accueil</span></a>
         </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider">
-
+        
         <!-- Heading -->
         <div class="sidebar-heading">
             Patient
@@ -71,7 +73,7 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
                aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-cog"></i>
-                <span>Gere Les Patient</span>
+                <span>Gérer les Patients</span>
             </a>
             <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
@@ -96,18 +98,76 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-cog"></i>
-                <span>Gere Les RDV</span>
+                <span>Gérer les rendez-vous</span>
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="buttons.html">Liste</a>
-                    <a class="collapse-item" href="cards.html">Ajouter</a>
+                    <a class="collapse-item" th:href="@{/rdv/list}">Liste</a>
+                    <a class="collapse-item" th:href="@{/rdv/create}">Ajouter</a>
                     <a class="collapse-item" href="cards.html">Recherche</a>
+                </div>
+            </div>
+        </li>
+        
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Consultation
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>En cours de construction</span>
+            </a>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" th:href="@{/consult/}">Liste</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Spécialité
+        </div>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Gérer les spécialités</span>
+            </a>
+            <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" th:href="@{/listeSpecialite}">Liste des spécialités</a>
+                    <a class="collapse-item" th:href="@{/specialite}">Recherche </a>
+                    <a class="collapse-item" th:href="@{/ajouterSpecialite}">Ajouter des spécialités</a>
                 </div>
             </div>
         </li>
 
 
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Médecin
+        </div>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Gérer les médecins</span>
+            </a>
+            <div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" th:href="@{/listeMedecin}">Liste des médecins</a>
+                    <a class="collapse-item" th:href="@{/medecin}">Recherche </a>
+                    <a class="collapse-item" th:href="@{/ajouterMedecin}">Ajouter des médecins</a>
+                </div>
+            </div>
+        </li>
     </ul>
     <!-- End of Sidebar -->
 
@@ -173,7 +233,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">USER NAME</span>
-                            <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                            <img class="img-profile rounded-circle" src="">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -212,7 +272,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2019</span>
+                        <span>Copyright &copy; MEDApp 2020</span>
                     </div>
                 </div>
             </footer>
@@ -262,9 +322,9 @@
 <script src="/js/sb-admin-2.js"></script>
 
 
-
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
 
 <script>
     $(document).ready(() => {

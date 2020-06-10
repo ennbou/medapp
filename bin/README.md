@@ -9,6 +9,3 @@ Cette application web fournit les services suivants :
 2. La gestion des rendez-vous/consultations
 3. La gestion des dossiers médicaux
 4. La gestion des plages d'horaire
-
-
- 

@@ -5,6 +5,12 @@
 <body>
 
 <section layout:fragment="content">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/medecin/listeMedecin}">Medecins</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Modification</li>
+          </ol>
+        </nav>
 		<div class="col-md-8 offset-2">
 			<div class="alert alert-success" role="alert">Modifier les informations du Medecin</div>
 		</div>
@@ -12,10 +18,9 @@
             <div class="card">
                 <div class="card-header bg-light text-dark font-weight-bold">Modifier un medecin</div>
                 <div class="card-body bg-light">
-                     <form th:action="@{saveMedecin}" method="post">
+                     <form th:action="@{/medecin/saveMedecin}" method="post">
                           <div class="form-group">
-                               <label class="font-weight-bold">Id :</label>
-                               <input class="form-control" placeholder="Id" type="text" name="id" th:value="${medecin.id}"/>
+                               <input class="form-control" placeholder="Id" type="hidden" name="id" th:value="${medecin.id}"/>
                           </div>
                           <div class="form-group">
                                <label class="font-weight-bold">Carte d'Identite :</label>

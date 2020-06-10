@@ -1,6 +1,5 @@
 package com.glsid.medapp.modele;
 
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.*;
 //<<<<<<< HEAD:src/main/java/com/glsid/medapp/entities/Specialite.java

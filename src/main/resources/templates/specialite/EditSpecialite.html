@@ -5,6 +5,12 @@
 <body>
 
 <section layout:fragment="content">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/specialite/listeSpecialite}">Specialite</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Modification</li>
+          </ol>
+        </nav>
 		<div class="col-md-8 offset-2">
 			<div class="alert alert-success" role="alert">Modifier les informations de la specialite</div>
 		</div>
@@ -12,10 +18,9 @@
             <div class="card">
                 <div class="card-header bg-light text-dark font-weight-bold">Modifier une specialite</div>
                 <div class="card-body bg-light">
-                     <form th:action="@{save}" method="post">
+                     <form th:action="@{/specialite/save}" method="post">
                           <div class="form-group">
-                               <label class="font-weight-bold">Id :</label>
-                               <input class="form-control" placeholder="Id" type="text" name="id" th:value="${specialite.id}"/>
+                               <input class="form-control" placeholder="Id" type="hidden" name="id" th:value="${specialite.id}"/>
                                <span  th:errors="${specialite.id}"></span>
                           </div>
                            <div class="form-group">

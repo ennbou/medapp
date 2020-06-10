@@ -9,9 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import com.glsid.medapp.dao.SpecialiteRepository;
 import com.glsid.medapp.modele.Specialite;
 
@@ -21,7 +19,7 @@ public class SpecialiteController {
 	@Autowired
 	public SpecialiteRepository specialiteRepository;
 	
-	@GetMapping(path = "/specialite")
+	@GetMapping(path = "/specialite/search")
 	public String specialite(Model model,
 			@RequestParam(name="page",defaultValue="0")int page,
 			@RequestParam(name="size",defaultValue="10")int size,
@@ -37,7 +35,7 @@ public class SpecialiteController {
 		model.addAttribute("currentPage",page);
 		return "specialite/index";
 	}
-	@GetMapping(path = "/listeSpecialite")
+	@GetMapping(path = "/specialite/listeSpecialite")
 	public String listSpecialite(Model model,
 			@RequestParam(name="page",defaultValue="0")int page,
 			@RequestParam(name="size",defaultValue="10")int size
@@ -51,27 +49,27 @@ public class SpecialiteController {
 		return "specialite/listeSpecialite";
 	}
 	
-	@GetMapping(path = "/deleteSpecialites")
-	public String delete(Long id, String motCle, String page, String size) {
+	@GetMapping(path = "/specialite/deleteSpecialites")
+	public String delete(Long id, String page, String size) {
 		specialiteRepository.deleteById(id);
-		return "redirect:/listeSpecialite?page="+page+"&size="+size;
+		return "redirect:/specialite/listeSpecialite?page="+page+"&size="+size;
 	}
 	
-	@GetMapping(path = "/ajouterSpecialite")
+	@GetMapping(path = "/specialite/ajouterSpecialite")
 	public String formSpecialite(Model model) {
 		Specialite specialite = new Specialite();
 		model.addAttribute("specialite", specialite);
 		return "specialite/FormSpecialite";
 	}
 	
-	@GetMapping(path = "/edit")
+	@GetMapping(path = "/specialite/edit")
 	public String edit(Model model, Long id) {
 		Specialite specialite = specialiteRepository.getOne(id);
 		model.addAttribute("specialite", specialite);
 		return "specialite/EditSpecialite";
 	}
 	
-	@PostMapping(path = "/save")
+	@PostMapping(path = "/specialite/save")
 	public String save(Model model, @Valid Specialite specialite
 			,BindingResult bindResult) {
 		if(bindResult.hasErrors()) {
@@ -79,5 +77,11 @@ public class SpecialiteController {
 		}
 		specialiteRepository.save(specialite);
 		return "specialite/confirmation";
+	}
+
+	@RequestMapping("/specialite/{id}/medecins")
+	public String listMedecins(@PathVariable() Long id, Model model){
+        model.addAttribute("medecins", specialiteRepository.findById(id).get().getListMedecins());
+		return "specialite/medecins";
 	}
 }

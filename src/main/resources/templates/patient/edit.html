@@ -5,6 +5,12 @@
 <body>
 
 <section layout:fragment="content">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/patient/index?motCle=}">Patient</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Modification</li>
+        </ol>
+    </nav>
     <div class="col-md-8 offset-2">
         <div class="alert alert-success" role="alert">
             valider les informations du patient !
@@ -13,18 +19,20 @@
 
     <div class="col-md-8 offset-2">
         <div class="card">
-            <div class="card-header bg-light text-dark">Valider un patient</div>
+            <div class="card-header bg-light text-dark font-weight-bold">Valider un patient</div>
             <div class="card-body bg-light">
                 <form th:action="@{update}" method="post" th:object="${patient}">
 
-                    <div class="row text-center w-100 mb-5">
-                        <img th:src="@{/img/h.png}" class="col mx-auto img-fluid"/>
-                        <img th:src="@{/img/f.png}" class="col mx-auto img-fluid"/>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="img" th:value="*{image}">
-                            <label class="custom-file-label" for="img">Choise file</label>
+                    <div class="row offset-2 text-center w-50 h-50 mb-5">
+                        <div class="col w-50 h-50">
+                            <img th:src="@{/img/profiles/{img}(img=${patient.getImage()})}" class="col mx-auto img-fluid"/>
                         </div>
-                        <span th:text="*{image}">Path file</span>
+
+                        <div class="custom-file">
+                            <input type="file" name="imageFile" id="imageFile" class="custom-file-input">
+                            <label for="imageFile" class="custom-file-label">Choise file</label>
+                        </div>
+                        
                     </div>
 
                     <div class="form-group">
