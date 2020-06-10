@@ -9,7 +9,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.glsid.medapp.modele.Patient;
-import org.springframework.web.multipart.MultipartFile;
 
 @Repository
 public interface PatientRepository extends JpaRepository<Patient, Long> {
