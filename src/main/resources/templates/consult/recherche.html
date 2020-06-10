@@ -17,15 +17,15 @@
 		<p class="h3">Liste des consultations</p>
 
 		<div class="float-right">
-			<form th:action="@{/consult}" method="GET">
-				<div class="mb-4">
+			<form th:action="@{recherche}" method="Post">
+				<div class="mb-3">
 					<input class="p-1" type="search" name="search"
 						placeholder="nom, prenom ou nᵒ de dossier" th:value="${search}" />
-					<span >
-						<button class="btn btn-outline-secondary" type="submit">
-							<i class="fa fa-search"></i>
-						</button>
-					</span>
+					Entre
+					<input class="p-1" type="Date" name="date1" th:value="${date1}" />
+					Et
+					<input class="p-1" type="Date" name="date2" th:value="${date2}" />
+					<button class="btn btn-warning">Chercher</button>
 				</div>
 			</form>
 		</div>
@@ -59,14 +59,12 @@
 						<div class="pl-sm-1">
 							<a class="btn btn-info"
 								th:href="@{/consult/modification(id=${cslt.id})}">
-								<li class="fa fa-edit"></li>
-							</a>
+								<li class="fa fa-edit"></li></a>
 						</div>
 					</td>
 					<td>
 						<div class="pl-sm-1">
-							<a
-								onclick="javascript:return confirm('Etes-vous sûr de vouloir supprimer cette consultation ?')"
+							<a onclick="javascript:return confirm('Etes-vous sûr de vouloir supprimer cette consultation ?')"
 								th:href="@{/consult/suppression(id=${cslt.id}, page=${pageActual}, size=${size}, search=${search})}"
 								class="btn btn-danger"><li class="fa fa-trash"></li></a>
 						</div>
