@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fr_template.html(title='Confirmation Secretaire')}">
+<body>
+
+<section layout:fragment="content">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/secretaire/listeSecretaire}">Secretaires</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Confirmation</li>
+          </ol>
+        </nav>
+        <div class="col-md-8 offset-2">
+			<div class="alert alert-success" role="alert">Valider la secretaire</div>
+		</div>
+		<div class="col-md-8 offset-2">
+		    <div class="card">
+		        <div class="card-header bg-light text-dark font-weight-bold">Confirmation</div>
+		        <div class="card-body bg-light">
+					<div class="form-group">
+                        <label>Carte d'Identite du secretaire:</label>
+                        <label th:text="${secretaire.cin}"></label>    
+                    </div>
+                      <div class="form-group">
+                        <label>Adresse email :</label>
+                        <label th:text="${secretaire.email}"></label>    
+                    </div>
+                    <div class="form-group">
+                        <label>Nom de Secretaire :</label>
+                        <label th:text="${secretaire.nom}"></label>    
+                    </div>
+                    <div class="form-group">
+                        <label>Prenom du Secretaire :</label>
+                        <label th:text="${secretaire.prenom}"></label>    
+                    </div>
+                    <div class="form-group">
+                        <label>Telephone :</label>
+                        <label th:text="${secretaire.telephone}"></label>    
+                    </div>
+		        </div>
+		    </div>
+		</div>
+		</p>
+</section>
+
+</body>
+</html>

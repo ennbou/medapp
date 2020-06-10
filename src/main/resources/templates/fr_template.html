@@ -168,6 +168,26 @@
                 </div>
             </div>
         </li>
+        
+         <!-- Heading -->
+        <div class="sidebar-heading">
+            Secretaire
+        </div>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Gérer les secrétaires</span>
+            </a>
+            <div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" th:href="@{/secretaire/listeSecretaire}">Liste des secrétaires</a>
+                    <a class="collapse-item" th:href="@{/secretaire/search}">Recherche </a>
+                    <a class="collapse-item" th:href="@{/secretaire/ajouterSecretaire}">Ajouter des secrétaires</a>
+                </div>
+            </div>
+        </li>
     </ul>
     <!-- End of Sidebar -->
 
