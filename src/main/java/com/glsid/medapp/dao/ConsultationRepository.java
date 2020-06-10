@@ -1,7 +1,7 @@
 package com.glsid.medapp.dao;
 
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,8 +24,13 @@ public interface ConsultationRepository extends JpaRepository<Consultation,Long>
     public Page<Consultation> searchUsingWord(@Param("search") String search, Pageable pageable);
 
 	// TODO : liste des consultation entre deux date
-	@Query("SELECT c FROM Consultation c WHERE c.date>d1 AND c.date<d2")
-    public Page<Consultation> searchUsingDate(@Param("d1") Date first_date,@Param("d1") Date second_date,Pageable pageable);
+	@Query("SELECT c FROM Consultation c WHERE "
+			+ "c.rendezVous.dossier.patient.nom LIKE %:search% " 
+			+ "OR c.rendezVous.dossier.patient.prenom LIKE %:search% "  
+			+ "OR c.rendezVous.dossier.code LIKE %:search% "
+			+ "AND c.date between :d1 and :d2")
+    public Page<Consultation> searchUsingDate(@Param("search") String search, @Param("d1") LocalDate first_date, 
+    		@Param("d2") LocalDate second_date,Pageable pageable);
 
 	// TODO : liste des consultation par un patient en fonction de ID
 	@Query("SELECT c FROM Consultation c WHERE c.rendezVous.dossier.patient.id=id")
