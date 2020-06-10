@@ -94,7 +94,7 @@ public class ConsultationController {
 	}
 	
 	// button search
-	@PostMapping("/recherche/")
+	@PostMapping("/rechercheConsult")
 	public String searchDateAvancee(Model model, @RequestParam(name = "search",defaultValue="") String search,
 			@RequestParam(name = "date1") String d1, 
 			@RequestParam(name = "date2") String d2,

@@ -17,7 +17,7 @@
 		<p class="h3">Liste des consultations</p>
 
 		<div class="float-right">
-			<form th:action="@{recherche}" method="Post">
+			<form th:action="@{rechercheConsult}" method="Post">
 				<div class="mb-3">
 					<input class="p-1" type="search" name="search"
 						placeholder="nom, prenom ou nᵒ de dossier" th:value="${search}" />
@@ -25,7 +25,7 @@
 					<input class="p-1" type="Date" name="date1" th:value="${date1}" />
 					Et
 					<input class="p-1" type="Date" name="date2" th:value="${date2}" />
-					<button class="btn btn-warning">Chercher</button>
+					<button class="btn btn-warning" type=submit">Chercher</button>
 				</div>
 			</form>
 		</div>
