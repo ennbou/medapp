@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.glsid.medapp.dao.SecretaireRepository;
-import com.glsid.medapp.modele.Medecin;
 import com.glsid.medapp.modele.Secretaire;
-import com.glsid.medapp.modele.Specialite;
+
 
 @Controller
 public class SecretaireController {

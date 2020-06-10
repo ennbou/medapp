@@ -28,17 +28,21 @@ public class ConsultationController {
 	
 	// get all consultations
 	@GetMapping({"","/","/liste"})
-    public String All(Model model, @RequestParam(name="search",defaultValue="") String search,
+    public String All(Model model, @RequestParam(name="search",defaultValue="") String search, LocalDate d1, LocalDate d2,
             @RequestParam(name = "page", defaultValue = "0") int page,
             @RequestParam(name = "size", defaultValue = "10") int size) {
 		//Page<Consultation> consults = consultationRepository.findAll(PageRequest.of(page, size));
-		Page<Consultation> consults = consultationRepository.searchUsingWord(search, PageRequest.of(page, size));
+		d1= LocalDate.of(2000, 1, 1);
+		d2= LocalDate.now();
+		Page<Consultation> consults = consultationRepository.searchUsingDate(search, d1, d2, PageRequest.of(page, size));
         int[] pages = new int[consults.getTotalPages()];
         model.addAttribute("pages", pages);
         model.addAttribute("size", size);
         model.addAttribute("consults", consults);
         model.addAttribute("pageActual", page);
         model.addAttribute("search", search);
+	    model.addAttribute("date1", d1);
+	    model.addAttribute("date2", d2);
         return "consult/listeConsult";
     }
 	
@@ -69,33 +73,13 @@ public class ConsultationController {
 	
 	// delete consultation
 	@GetMapping("/suppression")
-	public String delete(Long id, String page, String size, String search) {
+	public String delete(Long id, String page, String size) {
 		consultationRepository.deleteById(id);
-		return "redirect:"+"?page="+page+"&size="+size+"&search="+search;
+		return "redirect:"+"?page="+page+"&size="+size;
 	}
 	
 	// get consultations by date and search
-	@GetMapping("/recherche")
-	public String searchDate(Model model, String search,
-			LocalDate d1, LocalDate d2,
-	        @RequestParam(name = "page", defaultValue = "0") int page,
-	        @RequestParam(name = "size", defaultValue = "10") int size) {
-		d1= LocalDate.now();
-		d2= LocalDate.now();
-		search="";
-		Page<Consultation> consults = consultationRepository.searchUsingDate(search, d1, d2, PageRequest.of(page, size));
-	    int[] pages = new int[consults.getTotalPages()];
-	    model.addAttribute("pages", pages);
-	    model.addAttribute("size", size);
-	    model.addAttribute("consults", consults);
-	    model.addAttribute("pageActual", page);
-	    model.addAttribute("date1", d1);
-	    model.addAttribute("date2", d2);
-	    return "consult/recherche";
-	}
-	
-	// button search
-	@PostMapping("/rechercheConsult")
+	@PostMapping("/recherche")
 	public String searchDateAvancee(Model model, @RequestParam(name = "search",defaultValue="") String search,
 			@RequestParam(name = "date1") String d1, 
 			@RequestParam(name = "date2") String d2,
@@ -113,7 +97,7 @@ public class ConsultationController {
 	    model.addAttribute("search", search);
 	    model.addAttribute("date1", d1);
 	    model.addAttribute("date2", d2);
-	    return "consult/recherche";
+	    return "consult/listeConsult";
 	}
 	
 	// cas d'erreur
