@@ -5,6 +5,12 @@
 <body>
 
 <section layout:fragment="content">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/patient/index?motCle=}">Patient</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Liste</li>
+        </ol>
+    </nav>
 
     <div class="">
         <div class="card">

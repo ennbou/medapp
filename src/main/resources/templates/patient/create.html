@@ -8,6 +8,12 @@
 <body>
 
 <section layout:fragment="content">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/patient/index?motCle=}">Patient</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Formulaire d'Ajout</li>
+        </ol>
+    </nav>
     <div class="col-md-8 offset-2">
         <div class="card">
             <div class="card-header bg-light text-dark font-weight-bold">Ajouter un patient</div>
