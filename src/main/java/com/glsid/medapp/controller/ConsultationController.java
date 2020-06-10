@@ -76,12 +76,13 @@ public class ConsultationController {
 	
 	// get consultations by date and search
 	@GetMapping("/recherche")
-	public String searchDate(Model model, @RequestParam(name="search",defaultValue="") String search,
+	public String searchDate(Model model, String search,
 			LocalDate d1, LocalDate d2,
 	        @RequestParam(name = "page", defaultValue = "0") int page,
 	        @RequestParam(name = "size", defaultValue = "10") int size) {
 		d1= LocalDate.now();
 		d2= LocalDate.now();
+		search="";
 		Page<Consultation> consults = consultationRepository.searchUsingDate(search, d1, d2, PageRequest.of(page, size));
 	    int[] pages = new int[consults.getTotalPages()];
 	    model.addAttribute("pages", pages);
@@ -94,7 +95,7 @@ public class ConsultationController {
 	}
 	
 	// button search
-	@PostMapping("/recherche/")
+	@PostMapping("/rechercheConsult")
 	public String searchDateAvancee(Model model, @RequestParam(name = "search",defaultValue="") String search,
 			@RequestParam(name = "date1") String d1, 
 			@RequestParam(name = "date2") String d2,
