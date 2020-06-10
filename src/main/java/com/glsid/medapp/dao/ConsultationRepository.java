@@ -25,9 +25,9 @@ public interface ConsultationRepository extends JpaRepository<Consultation,Long>
 
 	// TODO : liste des consultation entre deux date
 	@Query("SELECT c FROM Consultation c WHERE "
-			+ "c.rendezVous.dossier.patient.nom LIKE %:search% " 
+			+ "(c.rendezVous.dossier.patient.nom LIKE %:search% " 
 			+ "OR c.rendezVous.dossier.patient.prenom LIKE %:search% "  
-			+ "OR c.rendezVous.dossier.code LIKE %:search% "
+			+ "OR c.rendezVous.dossier.code LIKE %:search%)"
 			+ "AND c.date between :d1 and :d2")
     public Page<Consultation> searchUsingDate(@Param("search") String search, @Param("d1") LocalDate first_date, 
     		@Param("d2") LocalDate second_date,Pageable pageable);
