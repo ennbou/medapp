@@ -77,5 +77,4 @@ public class ConsultationController {
 	public String accessDenied() {
 		return "403";
 	}
-	
 }
