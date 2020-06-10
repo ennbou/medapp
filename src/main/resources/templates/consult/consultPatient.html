@@ -23,15 +23,15 @@
 							<form th:action="@{save}" method="post">
 								<input type="hidden" name="id" th:value="${consult.id}" class="form-control">
 								<label>Date de consultation :</label> 
-								<input type="date" name="date"  th:value="${#temporals.format(consult.date, 'yyyy-MM-dd')}" class="form-control"> 
+								<input type="date" name="date"  th:value="${consult.date}" class="form-control"> 
 								<span th:errors="${consult.date}" class="text-danger"></span>
 								<br>
 								<label>Heure d'entrée :</label> 
-								<input type="time" name="heure_debut" th:value="${#temporals.format(consult.heure_debut,'HH:mm')}" class="form-control"> 
+								<input type="time" name="heure_debut" th:value="${consult.heure_debut}" class="form-control"> 
 								<span th:errors="${consult.heure_debut}" class="text-danger"></span>
 								<br>
 								<label>Heure de sortie :</label> 
-								<input type="time" name="heure_fin" th:value="${#temporals.format(consult.heure_fin, 'HH:mm')}" class="form-control"> 
+								<input type="time" name="heure_fin" th:value="${consult.heure_fin}" class="form-control"> 
 								<span th:errors="${consult.heure_fin}" class="text-danger"></span>
 								<br>
 								<label>Resultat :</label> 
