@@ -46,6 +46,8 @@ public class PatientController {
         int[] pages = new int[list.getTotalPages()];
         model.addAttribute("pages", pages);
         model.addAttribute("list", list);
+        model.addAttribute("size", size);
+        model.addAttribute("currentPage", page);
         model.addAttribute("motCle", motCle);
         return "/patient/index";
     }

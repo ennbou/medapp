@@ -47,10 +47,18 @@
                         <td th:text="${p.cin}"></td>
                         <td>
                             <div class="d-flex justify-content-center">
+                                <div class="pl-sm-1">
                                 <a th:href="@{/patient/{id}/edit(id = ${p.id})}" class="btn btn-success text-white"><i class="fa fa-edit"></i></a>
+                                </div>
+                                <div class="pl-sm-1">
                                 <a th:href="@{/patient/{id}/rdvs(id = ${p.id})}" class="btn btn-warning text-white"><i class="fa fa-address-card"></i></a>
+                                </div>
+                                <div class="pl-sm-1">
                                 <a th:href="@{/rdv/{id}/create(id=${p.id})}" class="btn btn-primary text-white"><i class="fa fa-plus"></i></a>
+                                </div>
+                                <div class="pl-sm-1">
                                 <a th:href="@{/patient/{id}/delete(id = ${p.id})}" class="btn btn-danger text-white disabled"><i class="fa fa-trash"></i></a>
+                                </div>
                             </div>
 
                         </td>
@@ -70,16 +78,14 @@
                     </tr>
                     </tfoot>
                 </table>
-                <div class="float-right" th:if="${pages}">
-                    <ul class="pagination">
-
-                        <li th:each="p,status:${pages}" class="page-item">
-                            <a th:href="@{index(motCle = ${motCle}, page = ${status.index})}"
-                               th:text="${status.index + 1}" class="page-link"></a>
-                        </li>
-
-                    </ul>
-                </div>
+                <div class="d-flex justify-content-center">
+			      <ul class="nav nav-pills">
+				    <li th:each="page,status:${pages}" class="btn"><a
+					th:class="${status.index==currentPage?'btn btn-warning':'btn btn-light'}"
+					th:href="@{index(page=${status.index},size=${size},motCle=${motCle})}"
+					th:text="${status.index}"> </a></li>
+		 	      </ul>
+		        </div>
             </div>
         </div>
     </div>
