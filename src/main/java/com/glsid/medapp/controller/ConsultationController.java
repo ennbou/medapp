@@ -5,6 +5,7 @@ import com.glsid.medapp.dao.MedecinRepository;
 import com.glsid.medapp.modele.Consultation;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
 
 import javax.validation.Valid;
 
@@ -14,14 +15,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/consult")
 public class ConsultationController {
 	
 	@Autowired
@@ -30,7 +30,7 @@ public class ConsultationController {
 	private MedecinRepository medecinRepository;
 	
 	// get all consultations
-	@GetMapping({"","/","/liste"})
+	@GetMapping(path ={"/consult","/consult/","/consult/liste"})
     public String All(Model model, @RequestParam(name="search",defaultValue="") String search, LocalDate d1, LocalDate d2,
             @RequestParam(name = "page", defaultValue = "0") int page,
             @RequestParam(name = "size", defaultValue = "10") int size) {
@@ -50,7 +50,7 @@ public class ConsultationController {
     }
 	
 	// get/update consultation by id
-	@GetMapping("/{id}")
+	@GetMapping(path ="/consult/{id}")
     public String one(Model model,@PathVariable Long id) {
 		Consultation consult = consultationRepository.findById(id).get();
         model.addAttribute("consult",consult);
@@ -59,13 +59,13 @@ public class ConsultationController {
     }
 	
 	// update consultation
-	@GetMapping("/modification")
+	@GetMapping(path ="/consult/modification")
 	public String update(Long id) {
 		return "redirect:"+id;
 	}
 	
 	// save consultation
-	@PostMapping("/save")
+	@PostMapping(path ="/consult/save")
 	public String save(@Valid Consultation consultation, BindingResult bindingResult) {
 		
 		if(bindingResult.hasErrors()) {
@@ -76,14 +76,14 @@ public class ConsultationController {
 	}
 	
 	// delete consultation
-	@GetMapping("/suppression")
+	@GetMapping(path ="/consult/suppression")
 	public String delete(Long id, String page, String size) {
 		consultationRepository.deleteById(id);
 		return "redirect:"+"?page="+page+"&size="+size;
 	}
 	
 	// get consultations by date and search
-	@PostMapping("/recherche")
+	@PostMapping(path ="/consult/recherche")
 	public String searchDateAvancee(Model model, @RequestParam(name = "search",defaultValue="") String search,
 			@RequestParam(name = "date1") String d1, 
 			@RequestParam(name = "date2") String d2,
@@ -94,9 +94,8 @@ public class ConsultationController {
 		LocalDate date2 = LocalDate.parse(d2, formatter);
 		//use it to search for all input used by user
 		String mots[] = search.split(" ");
-		Page<Consultation> consults=null;
-		for(int i=0;i<mots.length;i++)
-			consults = consultationRepository.searchUsingDate(mots[i], date1, date2, PageRequest.of(page, size));
+		int i= new Random().nextInt(mots.length);
+		Page<Consultation> consults = consultationRepository.searchUsingDate(mots[i], date1, date2, PageRequest.of(page, size));
 	    int[] pages = new int[consults.getTotalPages()];
 	    model.addAttribute("pages", pages);
 	    model.addAttribute("size", size);
@@ -109,8 +108,9 @@ public class ConsultationController {
 	}
 	
 	// cas d'erreur
-	@GetMapping("/403")
+	@ExceptionHandler(RuntimeException.class)
+	@PostMapping(path ={"/404","/403","/500","**/**/error"})
 	public String accessDenied() {
-		return "403";
+		return "consult/erreur";
 	}
 }

@@ -41,7 +41,7 @@ public class RendezVous {
     private Specialite specialite;
 
 
-    @OneToOne
+    @OneToOne(mappedBy = "rendezVous")
     private Consultation consultation;
 
     @ManyToOne

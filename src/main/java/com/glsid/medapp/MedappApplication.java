@@ -63,7 +63,7 @@ public class MedappApplication implements ApplicationRunner {
 	}
 
 	void initSecretaire() {
-		Secretaire s1 = Secretaire.builder().cin("MC1243").prenom("prenom 1").nom("nom 1").telephone("0634853423")
+		Secretaire s1 = Secretaire.builder().cin("MC124364").prenom("prenom 1").nom("nom 1").telephone("0634853423")
 				.email("nom1.prenom1@medapp.ma").build();
 		Secretaire s2 = Secretaire.builder().cin("MC973497").prenom("prenom 2").nom("nom 2").telephone("0766041305")
 				.email("nom2.prenom2@medapp.ma").build();
@@ -111,8 +111,8 @@ public class MedappApplication implements ApplicationRunner {
 
 	void initMedecine() {
 		specialiteRepository.findAll().forEach(spec -> {
-			Medecin m = Medecin.builder().nom("nom " + (spec.getId()) + 1).cin("MC1243" + spec.getId())
-					.prenom("prenom " + (spec.getId()) + 1).telephone("06347853423").email("email@medapp.ma").build();
+			Medecin m = Medecin.builder().nom("nom" + (spec.getId()) + 1).cin("MC1243" + spec.getId())
+					.prenom("prenom" + (spec.getId()) + 1).telephone("06347853423").email("email@medapp.ma").build();
 			m.setSpecialite(spec);
 			medecinRepository.save(m);
 		});
@@ -130,7 +130,7 @@ public class MedappApplication implements ApplicationRunner {
 				rdv.setSpecialite(specialites.get(i));
 				rdv.setSecretaire(sec);
 				rdv.setDossier(dossier);
-				rdv.setStatus(false);
+				rdv.setStatus(true);
 				rendezVousRepository.save(rdv);
 			});
 
