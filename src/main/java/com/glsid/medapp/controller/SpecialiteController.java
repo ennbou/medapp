@@ -19,32 +19,19 @@ public class SpecialiteController {
 	@Autowired
 	public SpecialiteRepository specialiteRepository;
 	
-	@GetMapping(path = "/specialite/search")
-	public String specialite(Model model,
+	@GetMapping(path = "/specialite/listeSpecialite")
+	public String listSpecialite(Model model,
 			@RequestParam(name="page",defaultValue="0")int page,
 			@RequestParam(name="size",defaultValue="10")int size,
 			@RequestParam(name="motCle",defaultValue="")String motCle
 			) {
         Page<Specialite> pageSpecialites = specialiteRepository
-        		.findByNom(motCle, PageRequest.of(page, size));
+        		.listSpecialite(motCle, PageRequest.of(page, size));
 		model.addAttribute("pageSpecialites", pageSpecialites);
 		int[] pages =  new int[pageSpecialites.getTotalPages()];
 		model.addAttribute("pages",pages);
 		model.addAttribute("size", size);
 		model.addAttribute("motCle", motCle);
-		model.addAttribute("currentPage",page);
-		return "specialite/index";
-	}
-	@GetMapping(path = "/specialite/listeSpecialite")
-	public String listSpecialite(Model model,
-			@RequestParam(name="page",defaultValue="0")int page,
-			@RequestParam(name="size",defaultValue="10")int size
-			) {
-        Page<Specialite> pageSpecialites = specialiteRepository.findAll(PageRequest.of(page, size));
-		model.addAttribute("pageSpecialites", pageSpecialites);
-		int[] pages =  new int[pageSpecialites.getTotalPages()];
-		model.addAttribute("pages",pages);
-		model.addAttribute("size", size);
 		model.addAttribute("currentPage",page);
 		return "specialite/listeSpecialite";
 	}

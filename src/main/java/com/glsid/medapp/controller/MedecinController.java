@@ -25,33 +25,18 @@ public class MedecinController {
 	@Autowired
 	public SpecialiteRepository specialiteRepository;
 	
-	@GetMapping(path = "/medecin/search")
-	public String medecin(Model model,
+	@GetMapping(path = "/medecin/listeMedecin")
+	public String listSpecialite(Model model,
 			@RequestParam(name="page",defaultValue="0")int page,
 			@RequestParam(name="size",defaultValue="10")int size,
 			@RequestParam(name="motCle",defaultValue="")String motCle
 			) {
-        Page<Medecin> pageMedecins = medecinRepository
-        		.findByNom(motCle, PageRequest.of(page, size));
+        Page<Medecin> pageMedecins = medecinRepository.listMedecin(motCle, PageRequest.of(page, size));
 		model.addAttribute("pageMedecins", pageMedecins);
 		int[] pages =  new int[pageMedecins.getTotalPages()];
 		model.addAttribute("pages",pages);
 		model.addAttribute("size", size);
 		model.addAttribute("motCle", motCle);
-		model.addAttribute("currentPage",page);
-		return "medecin/index";
-	}
-	
-	@GetMapping(path = "/medecin/listeMedecin")
-	public String listSpecialite(Model model,
-			@RequestParam(name="page",defaultValue="0")int page,
-			@RequestParam(name="size",defaultValue="10")int size
-			) {
-        Page<Medecin> pageMedecins = medecinRepository.findAll(PageRequest.of(page, size));
-		model.addAttribute("pageMedecins", pageMedecins);
-		int[] pages =  new int[pageMedecins.getTotalPages()];
-		model.addAttribute("pages",pages);
-		model.addAttribute("size", size);
 		model.addAttribute("currentPage",page);
 		return "medecin/listeMedecin";
 	}
