@@ -76,6 +76,7 @@ public class MedecinController {
 	public String save(Model model,@Valid Medecin medecin, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("specialites", specialiteRepository.findAll());
+
 			return "medecin/FormMedecin";
 		}
 		medecinRepository.save(medecin);
