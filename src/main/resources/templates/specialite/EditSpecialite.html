@@ -1,42 +1,51 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{fr_template.html(title='Specialite')}">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fr_template.html(title='Specialite')}">
+<head>
+<meta charset="utf-8">
+</head>
 <body>
 
-<section layout:fragment="content">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a th:href="@{/specialite/listeSpecialite}">Specialite</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Modification</li>
-          </ol>
-        </nav>
+	<section layout:fragment="content">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a
+					th:href="@{/specialite/listeSpecialite}">Specialite</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Modification</li>
+			</ol>
+		</nav>
 		<div class="col-md-8 offset-2">
-			<div class="alert alert-success" role="alert">Modifier les informations de la specialite</div>
+			<div class="alert alert-success" role="alert">Modifier les
+				informations de la specialite</div>
 		</div>
 		<div class="col-md-8 offset-2">
-            <div class="card">
-                <div class="card-header bg-light text-dark font-weight-bold">Modifier une specialite</div>
-                <div class="card-body bg-light">
-                     <form th:action="@{/specialite/save}" method="post">
-                          <div class="form-group">
-                               <input class="form-control" placeholder="Id" type="hidden" name="id" th:value="${specialite.id}"/>
-                               <span  th:errors="${specialite.id}"></span>
-                          </div>
-                           <div class="form-group">
-                               <label class="font-weight-bold">Nom Specialite :</label>
-                               <input class="form-control" placeholder="Nom Specialite" type="text" name="nom" th:value="${specialite.nom}"/>
-                               <span  th:errors="${specialite.nom}"></span>
-                          </div>
-                          <div class="form-group">
-                               <button type="submit" class="btn btn-success text-white offset-10">Enregistrer</button>
-                          </div>
-                     </form>
-                </div>
-            </div>
-        </div>
-        </p>
-</section>
+			<div class="card">
+				<div class="card-header bg-light text-dark font-weight-bold">Modifier
+					une specialite</div>
+				<div class="card-body bg-light">
+					<form th:action="@{/specialite/save}" method="post">
+						<div class="form-group">
+							<input class="form-control" placeholder="Id" type="hidden"
+								name="id" th:value="${specialite.id}" /> <span
+								th:errors="${specialite.id}"></span>
+						</div>
+						<div class="form-group">
+							<label class="font-weight-bold">Nom Specialite :</label> <input
+								class="form-control" placeholder="Nom Specialite" type="text"
+								name="nom" th:value="${specialite.nom}" /> <span
+								th:errors="${specialite.nom}"></span>
+						</div>
+						<div class="form-group">
+							<button type="submit"
+								class="btn btn-success text-white offset-10">Enregistrer</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		</p>
+	</section>
 
 </body>
 </html>

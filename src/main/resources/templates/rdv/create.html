@@ -2,6 +2,9 @@
 <html lang="fr" xmlns:th="http://www.thymeleaf.org"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 layout:decorate="~{fr_template.html(title='Rendez Vous')}">
+<head>
+<meta charset="utf-8">
+</head>
 <body>
  
 <section layout:fragment="content">
@@ -21,9 +24,9 @@ layout:decorate="~{fr_template.html(title='Rendez Vous')}">
                     </nav>
 
                     <div class="form-group">
-                        <label class="font-weight-bold">Specialite : </label>
+                        <label class="font-weight-bold">Specialité : </label>
                          <select class="form-control select2" name="idspec">
-							<option  disabled selected>Choisir une specialite</option>
+							<option  disabled selected>Choisir une specialité</option>
                              <option th:each="sp:${spes}" th:text="${sp.getNom()}" th:value="${sp.getId()}"></option>
 							</select>
 						
@@ -38,14 +41,14 @@ layout:decorate="~{fr_template.html(title='Rendez Vous')}">
                     
                    
                     <div class="form-group">
-                        <label class="font-weight-bold">Date RDV : </label>
+                        <label class="font-weight-bold">Date Rendez-Vous : </label>
                         <input type="date" class="form-control" name="date">
                        
                     </div>
                    
                     <div class="form-group">
                         <label class="font-weight-bold">Description: </label>
-                        <textarea class="form-control" placeholder="entrer une description ...."  rows="3" name="description"></textarea>
+                        <textarea class="form-control" placeholder="Veuillez saisir le problème sanitaire..."  rows="3" name="description"></textarea>
                        
                     </div>
                     

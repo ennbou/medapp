@@ -1,92 +1,109 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{fr_template.html(title='Patient')}">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fr_template.html(title='Patient')}">
+<head>
+<meta charset="utf-8">
+</head>
 <body>
 
-<section layout:fragment="content">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a th:href="@{/patient/index?motCle=}">Patient</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Liste</li>
-        </ol>
-    </nav>
+	<section layout:fragment="content">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a
+					th:href="@{/patient/index?motCle=}">Patient</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Liste</li>
+			</ol>
+		</nav>
 
-    <div class="">
-        <div class="card">
-            <div class="card-header bg-light text-dark font-weight-bold">Liste des patients</div>
-            <div class="card-body bg-light">
+		<div class="">
+			<div class="card">
+				<div class="card-header bg-light text-dark font-weight-bold">Liste
+					des patients</div>
+				<div class="card-body bg-light">
 
-                <div class="row">
-                    <div class="col-md-6">
-                <form th:action="@{index}" method="get" class="form-inline">
-
-
-                            <input type="text" name="motCle" placeholder="CIN ou Nom..." class="form-control bg-light">&nbsp;&nbsp;
-
-                        <button class="btn btn-outline-secondary"><li class="fa fa-search"> Chercher</li></button>
-                </form>
-                    </div>
-                    <div class="offset-4">
-                        <a th:href="@{/patient/create}" class="btn btn-primary"><li class="fa fa-plus-circle"></li>&nbsp;&nbsp;Ajouter</a>
-                    </div>
-                </div>
-                <p/>
-                <div class="justify-content-center table-responsive">
-                <table class="table table-striped text-center" style="width:100%">
-                    <thead class="thead-dark">
-                    <tr>
-                        <th>Prenom</th>
-                        <th>Nom</th>
-                        <th>Email</th>
-                        <th>Telephone</th>
-                        <th>CIN</th>
-                        <th></th>
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="p:${list}">
-                        <td th:text="${p.prenom}"></td>
-                        <td th:text="${p.nom}"></td>
-                        <td th:text="${p.email}"></td>
-                        <td th:text="${p.telephone}"></td>
-                        <td th:text="${p.cin}"></td>
-                        <td>
-                            <div class="d-flex justify-content-center">
-                                <div class="pl-sm-1">
-                                <a th:href="@{/patient/{id}/edit(id = ${p.id})}" class="btn btn-success text-white"><i class="fa fa-edit"></i></a>
-                                </div>
-                                <div class="pl-sm-1">
-                                <a th:href="@{/patient/{id}/rdvs(id = ${p.id})}" class="btn btn-warning text-white"><i class="fa fa-address-card"></i></a>
-                                </div>
-                                <div class="pl-sm-1">
-                                <a th:href="@{/rdv/{id}/create(id=${p.id})}" class="btn btn-primary text-white"><i class="fa fa-plus"></i></a>
-                                </div>
-                                <div class="pl-sm-1">
-                                <a th:href="@{/patient/{id}/delete(id = ${p.id})}" class="btn btn-danger text-white disabled"><i class="fa fa-trash"></i></a>
-                                </div>
-                            </div>
-
-                        </td>
+					<div class="row">
+						<div class="col-md-6">
+							<form th:action="@{index}" method="get" class="form-inline">
 
 
-                    </tr>
-                    </tbody>
-                </table>
-                </div>
-                <div class="d-flex justify-content-center">
-			      <ul class="nav nav-pills">
-				    <li th:each="page,status:${pages}" class="btn"><a
-					th:class="${status.index==currentPage?'btn btn-warning':'btn btn-light'}"
-					th:href="@{index(page=${status.index},size=${size},motCle=${motCle})}"
-					th:text="${status.index}"> </a></li>
-		 	      </ul>
-		        </div>
-            </div>
-        </div>
-    </div>
-</section>
+								<input type="text" name="motCle" placeholder="CIN ou Nom..."
+									class="form-control bg-light">&nbsp;&nbsp;
+
+								<button class="btn btn-outline-secondary">
+									<li class="fa fa-search">Chercher</li>
+								</button>
+							</form>
+						</div>
+						<div class="offset-4">
+							<a th:href="@{/patient/create}" class="btn btn-primary"><li
+								class="fa fa-plus-circle"></li>&nbsp;&nbsp;Ajouter</a>
+						</div>
+					</div>
+					<p />
+					<div class="justify-content-center table-responsive">
+						<table class="table table-striped text-center" style="width: 100%">
+							<thead class="thead-dark">
+								<tr>
+									<th>Prenom</th>
+									<th>Nom</th>
+									<th>Email</th>
+									<th>Telephone</th>
+									<th>CIN</th>
+									<th></th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="p:${list}">
+									<td th:text="${p.prenom}"></td>
+									<td th:text="${p.nom}"></td>
+									<td th:text="${p.email}"></td>
+									<td th:text="${p.telephone}"></td>
+									<td th:text="${p.cin}"></td>
+									<td>
+										<div class="d-flex justify-content-center">
+											<div class="pl-sm-1">
+												<a th:href="@{/patient/{id}/edit(id = ${p.id})}"
+													class="btn btn-success text-white"><i
+													class="fa fa-edit"></i></a>
+											</div>
+											<div class="pl-sm-1">
+												<a th:href="@{/patient/{id}/rdvs(id = ${p.id})}"
+													class="btn btn-warning text-white"><i
+													class="fa fa-address-card"></i></a>
+											</div>
+											<div class="pl-sm-1">
+												<a th:href="@{/rdv/{id}/create(id=${p.id})}"
+													class="btn btn-primary text-white"><i
+													class="fa fa-plus"></i></a>
+											</div>
+											<div class="pl-sm-1">
+												<a th:href="@{/patient/{id}/delete(id = ${p.id})}"
+													class="btn btn-danger text-white disabled"><i
+													class="fa fa-trash"></i></a>
+											</div>
+										</div>
+
+									</td>
+
+
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="d-flex justify-content-center">
+						<ul class="nav nav-pills">
+							<li th:each="page,status:${pages}" class="btn"><a
+								th:class="${status.index==currentPage?'btn btn-warning':'btn btn-light'}"
+								th:href="@{index(page=${status.index},size=${size},motCle=${motCle})}"
+								th:text="${status.index}"> </a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
 </body>
 </html>
