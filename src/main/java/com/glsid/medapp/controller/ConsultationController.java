@@ -1,6 +1,7 @@
 package com.glsid.medapp.controller;
 
 import com.glsid.medapp.dao.ConsultationRepository;
+import com.glsid.medapp.dao.MedecinRepository;
 import com.glsid.medapp.modele.Consultation;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -25,6 +26,8 @@ public class ConsultationController {
 	
 	@Autowired
 	private ConsultationRepository consultationRepository;
+	@Autowired
+	private MedecinRepository medecinRepository;
 	
 	// get all consultations
 	@GetMapping({"","/","/liste"})
@@ -51,6 +54,7 @@ public class ConsultationController {
     public String one(Model model,@PathVariable Long id) {
 		Consultation consult = consultationRepository.findById(id).get();
         model.addAttribute("consult",consult);
+        model.addAttribute("medecins",medecinRepository.findAll());
         return "consult/consultPatient";
     }
 	
