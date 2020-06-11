@@ -43,6 +43,9 @@ public class SecretaireController {
 	
 	@GetMapping(path = "/secretaire/deleteSecretaires")
 	public String delete(Long id, String page, String size) {
+		if(!secretaireRepository.findById(id).get().getListRendezVous().isEmpty()) {
+			return "secretaire/alert";
+		}
 		secretaireRepository.deleteById(id);
 		return "redirect:/secretaire/listeSecretaire?page="+page+"&size="+size;
 	}

@@ -38,6 +38,9 @@ public class SpecialiteController {
 	
 	@GetMapping(path = "/specialite/deleteSpecialites")
 	public String delete(Long id, String page, String size) {
+		if(!specialiteRepository.findById(id).get().getListMedecins().isEmpty()) {
+			return "specialite/alert";
+		}
 		specialiteRepository.deleteById(id);
 		return "redirect:/specialite/listeSpecialite?page="+page+"&size="+size;
 	}
