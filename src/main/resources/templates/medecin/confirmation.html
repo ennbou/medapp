@@ -38,6 +38,10 @@
                         <label>Telephone :</label>
                         <label th:text="${medecin.telephone}"></label>    
                     </div>
+                      <div class="form-group">
+                        <label>Specialite :</label>
+                        <label th:field="*{medecin.getSpecialite().nom}"></label>    
+                    </div>
 		        </div>
 		    </div>
 		</div>

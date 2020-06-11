@@ -40,7 +40,15 @@
                                <label class="font-weight-bold">Telephone du Medecin</label>
                                <input class="form-control" placeholder="Telephone" type="text" name="telephone" th:value="${medecin.telephone}"/>
                                <span th:errors="${medecin.telephone}"></span>
-                          </div>
+                          </div>          
+                          <div class="form-group">
+                          <label class="font-weight-bold">Specialite du Medecin : </label>
+                          <select class="form-control" th:field="*{medecin.specialite.id}">
+                               <option th:each="i : ${specialites}" th:value="${i.id}" th:text="${i.nom}"
+                                       th:selected="i.id==medecin.specialite.id">
+                               </option>
+                          </select>
+                          </div>              
                           <div class="form-group">
                                <button type="submit" class="btn btn-success text-white offset-10">Enregistrer</button>
                           </div>

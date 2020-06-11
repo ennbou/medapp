@@ -53,24 +53,32 @@ public class MedecinController {
 	@GetMapping(path = "/medecin/ajouterMedecin")
 	public String formMedecin(Model model) {
 		Medecin medecin = new Medecin();
+		model.addAttribute("specialites",specialiteRepository.findAll());
 		model.addAttribute("medecin", medecin);
 		return "medecin/FormMedecin";
 	}
 	
-	@GetMapping(path = "/medecin/editMedecin")
-	public String edit(Model model, Long id) {
-		Medecin medecin = medecinRepository.getOne(id);
+	@GetMapping("/medecin/{id}")
+	public String edit(Model model,@PathVariable Long id) {
+		Medecin medecin = medecinRepository.findById(id).get();
 		model.addAttribute("medecin",medecin);
+		model.addAttribute("specialites",specialiteRepository.findAll());
 		return "medecin/EditMedecin";
 	}
 	
+	//Modifier medecin
+	@GetMapping("/medecin/modification")
+	public String update(Long id) {
+			return "redirect:"+id;
+	}
+		
 	@PostMapping(path = "/medecin/saveMedecin")
 	public String save(Model model,@Valid Medecin medecin, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			return "medecin/FormMedecin";
 		}
 		medecinRepository.save(medecin);
-		return "medecin/confirmation";
+		return "medecin/listeMedecin";
 	}
 	
 	@RequestMapping("/medecin/{id}/consultations")

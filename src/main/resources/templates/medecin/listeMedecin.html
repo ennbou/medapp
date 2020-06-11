@@ -24,7 +24,7 @@
                     </div>
                 </form>
                 <p/>
-        <div class="justify-content-center table-responsive">
+          <div class="justify-content-center table-responsive">
             <table class="table table-striped text-center" style="width:100%">
                 <thead class="thead-dark">
                 <tr>
@@ -33,7 +33,7 @@
                     <th>Nom</th>
                     <th>Prenom</th>
                     <th>Telephone</th>
-                    <!-- <th>Specialite</th>-->
+                    <th>Specialite</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -44,11 +44,11 @@
                     <td th:text="${m.nom}"></td>
                     <td th:text="${m.prenom}"></td>
                     <td th:text="${m.telephone}"></td>
-                    <!-- <td th:text="${m.getSpecialite().id}"></td>-->
+                    <td th:text="${m.specialite.nom}"></td>
                     <td>
                         <div class="d-flex justify-content-center">
                         <div class="pl-sm-1">
-                        <a class="btn btn-success" th:href="@{/medecin/editMedecin(id=${m.id})}"><li class="fa fa-edit"></li></a>
+                        <a class="btn btn-success" th:href="@{/medecin/modification(id=${m.id})}"><li class="fa fa-edit"></li></a>
                         </div>
                         <div class="pl-sm-1">
                         <a th:href="@{/medecin/{id}/consultations(id=${m.id})}" class="btn btn-primary"><li class="fa fa-address-card"></li></a>
