@@ -23,15 +23,23 @@
 							<input class="form-control" type="search" name="search"
 								placeholder="nom, prenom ou nᵒ de dossier" th:value="${search}" />
 								<div class="row p-4 p-md-2">
-								<div class="col-5">
+								<div class="col-3">
+							<input class="form-control text-center" type="text" disabled
+									th:value="Entre" />
+							</div>
+								<div class="col-3">
 								<input class="form-control" type="Date" name="date1"
 									th:value="${date1}" />
 							</div>
-							<div class="col-5">
+							<div class="col-2">
+							<input class="form-control text-center" type="text" disabled
+									th:value="Et" />
+							</div>
+							<div class="col-3">
 								<input class="form-control" type="Date" name="date2"
 									th:value="${date2}" />
 							</div>
-							<div class="col-2">
+							<div class="col-1">
 								<button class="btn btn-outline-secondary">
 									<i class="fa fa-search"></i>
 								</button>

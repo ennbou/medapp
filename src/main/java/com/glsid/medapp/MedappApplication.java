@@ -2,7 +2,6 @@ package com.glsid.medapp;
 
 import com.glsid.medapp.dao.*;
 
-//>>>>>>> 00d610350c8ff80a53e018ccf4678346a9cf91ae
 import com.glsid.medapp.modele.*;
 import com.glsid.medapp.modele.Exception;
 import org.springframework.beans.factory.annotation.Autowired;
