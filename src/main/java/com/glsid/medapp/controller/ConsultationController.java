@@ -35,7 +35,7 @@ public class ConsultationController {
             @RequestParam(name = "page", defaultValue = "0") int page,
             @RequestParam(name = "size", defaultValue = "10") int size) {
 		//Page<Consultation> consults = consultationRepository.findAll(PageRequest.of(page, size));
-		d1= LocalDate.of(2000, 1, 1);
+		d1= LocalDate.of(2018, 1, 1);
 		d2= LocalDate.now();
 		Page<Consultation> consults = consultationRepository.searchUsingDate(search, d1, d2, PageRequest.of(page, size));
         int[] pages = new int[consults.getTotalPages()];
@@ -92,7 +92,11 @@ public class ConsultationController {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate date1 = LocalDate.parse(d1, formatter);
 		LocalDate date2 = LocalDate.parse(d2, formatter);
-		Page<Consultation> consults = consultationRepository.searchUsingDate(search, date1, date2, PageRequest.of(page, size));
+		//use it to search for all input used by user
+		String mots[] = search.split(" ");
+		Page<Consultation> consults=null;
+		for(int i=0;i<mots.length;i++)
+			consults = consultationRepository.searchUsingDate(mots[i], date1, date2, PageRequest.of(page, size));
 	    int[] pages = new int[consults.getTotalPages()];
 	    model.addAttribute("pages", pages);
 	    model.addAttribute("size", size);
