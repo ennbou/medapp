@@ -60,18 +60,18 @@ public class SpecialiteController {
 	}
 	
 	@PostMapping(path = "/specialite/save")
-	public String save(Model model, @Valid Specialite specialite
-			,BindingResult bindResult) {
+	public String save(Model model, @Valid Specialite specialite, BindingResult bindResult) {
 		if(bindResult.hasErrors()) {
 			return "specialite/FormSpecialite";
 		}
 		specialiteRepository.save(specialite);
-		return "specialite/confirmation";
+		return "redirect:/specialite/listeSpecialite";
 	}
 
 	@RequestMapping("/specialite/{id}/medecins")
 	public String listMedecins(@PathVariable() Long id, Model model){
         model.addAttribute("medecins", specialiteRepository.findById(id).get().getListMedecins());
+        model.addAttribute("specialite", specialiteRepository.findById(id).get());
 		return "specialite/medecins";
 	}
 }

@@ -8,11 +8,12 @@
 <body>
 
 	<section layout:fragment="content">
-
+	
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="/consult">Consultations</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Liste</li>
+				<li class="breadcrumb-item text-dark font-weight-bold"><p
+						th:text="${medecin.getNom()}+' '+${medecin.getPrenom()}"></p></li>
+				<li class="breadcrumb-item active" aria-current="page">Consultations</li>
 			</ol>
 		</nav>
 		<p class="h3">Liste des Consultations</p>
@@ -27,7 +28,6 @@
 					<th>Heure d'entree</th>
 					<th>Heure de sortie</th>
 					<th>Resultat</th>
-					<th>Medecin</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -41,8 +41,6 @@
 					<td th:text="${consultation.heure_debut}"></td>
 					<td th:text="${consultation.heure_fin}"></td>
 					<td th:text="${consultation.resultat}"></td>
-					<td
-						th:text="${consultation.getMedecin().nom}+' '+${consultation.getMedecin().prenom}"></td>
 				</tr>
 			</tbody>
 			<tfoot>
@@ -53,7 +51,6 @@
 					<th>Heure d'entree</th>
 					<th>Heure de sortie</th>
 					<th>Resultat</th>
-					<th>Medecin</th>
 				</tr>
 			</tfoot>
 		</table>

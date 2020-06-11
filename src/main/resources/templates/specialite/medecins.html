@@ -10,8 +10,9 @@
 	<section layout:fragment="content">
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="/medecin/listeMedecin/">Medecins</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Liste</li>
+				<li class="breadcrumb-item text-dark font-weight-bold">
+				<p th:text="${specialite.getNom()}"></p></li>
+				<li class="breadcrumb-item active" aria-current="page">Medecins</li>
 			</ol>
 		</nav>
 		<p class="h3">Liste des medecins</p>
@@ -23,8 +24,6 @@
 					<th>Nom</th>
 					<th>Prenom</th>
 					<th>CIN</th>
-					<th>Specialite</th>
-
 				</tr>
 			</thead>
 			<tbody>
@@ -34,8 +33,6 @@
 					<td th:text="${med.nom}"></td>
 					<td th:text="${med.prenom}"></td>
 					<td th:text="${med.cin}"></td>
-					<td th:text="${med.getSpecialite().getNom()}"></td>
-
 				</tr>
 			</tbody>
 			<tfoot>
@@ -43,8 +40,6 @@
 					<th>Nom</th>
 					<th>Prenom</th>
 					<th>CIN</th>
-					<th>Specialite</th>
-
 				</tr>
 			</tfoot>
 		</table>

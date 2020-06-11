@@ -76,7 +76,6 @@ public class MedecinController {
 	public String save(Model model,@Valid Medecin medecin, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("specialites", specialiteRepository.findAll());
-
 			return "medecin/FormMedecin";
 		}
 		medecinRepository.save(medecin);
@@ -86,6 +85,7 @@ public class MedecinController {
 	@RequestMapping("/medecin/{id}/consultations")
 	public String listConsultations(@PathVariable Long id, Model model) {
 		model.addAttribute("consultations", medecinRepository.findById(id).get().getListConsultations());
+		model.addAttribute("medecin", medecinRepository.findById(id).get());
 		return "medecin/consultations";
 	}
 }

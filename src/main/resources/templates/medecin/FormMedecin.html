@@ -12,14 +12,12 @@
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a
 					th:href="@{/medecin/listeMedecin}">Medecins</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Formulaire
-					d'Ajout</li>
+				<li class="breadcrumb-item active" aria-current="page">Formulaire d'Ajout</li>
 			</ol>
 		</nav>
 		<div class="col-md-8 offset-2">
 			<div class="card">
-				<div class="card-header bg-light text-dark font-weight-bold">Ajouter
-					un medecin</div>
+				<div class="card-header bg-light text-dark font-weight-bold">Ajouter un medecin</div>
 				<div class="card-body bg-light">
 					<form th:action="@{/medecin/saveMedecin}" method="post">
 						<div class="form-group">

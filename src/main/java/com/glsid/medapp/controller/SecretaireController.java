@@ -70,12 +70,13 @@ public class SecretaireController {
 			return "secretaire/FormSecretaire";
 		}
 		secretaireRepository.save(secretaire);
-		return "secretaire/confirmation";
+		return "redirect:/secretaire/listeSecretaire";
 	}
 	
 	@RequestMapping("/secretaire/{id}/rendezVous")
 	public String listRendezVous(@PathVariable Long id, Model model) {
 		model.addAttribute("rendezVous", secretaireRepository.findById(id).get().getListRendezVous());
+		model.addAttribute("secretaire", secretaireRepository.findById(id).get());
 		return "secretaire/rendezVous";
 	}
 }

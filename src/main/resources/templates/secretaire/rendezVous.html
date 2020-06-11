@@ -11,8 +11,9 @@
 
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="/rdv/list">Rendez-Vous</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Liste</li>
+				<li class="breadcrumb-item text-dark font-weight-bold"><p
+						th:text="${secretaire.getNom()}+' '+${secretaire.getPrenom()}"></p></li>
+				<li class="breadcrumb-item active" aria-current="page">Rendez-Vous</li>
 			</ol>
 		</nav>
 		<p class="h3">Liste des Rendez-Vous</p>
@@ -25,7 +26,6 @@
 					<th>Date Creation</th>
 					<th>Description</th>
 					<th>Statut</th>
-					<th>Secretaire</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -42,8 +42,6 @@
 							class="fas fa-check-circle"></span>
 					</span>
 					</td>
-					<td
-						th:text="${rendezVous.getSecretaire().nom}+' '+${rendezVous.getSecretaire().prenom}"></td>
 				</tr>
 			</tbody>
 			<tfoot>
