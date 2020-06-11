@@ -75,10 +75,11 @@ public class MedecinController {
 	@PostMapping(path = "/medecin/saveMedecin")
 	public String save(Model model,@Valid Medecin medecin, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
+			model.addAttribute("specialites",specialiteRepository.findAll());
 			return "medecin/FormMedecin";
 		}
 		medecinRepository.save(medecin);
-		return "medecin/listeMedecin";
+		return "redirect:/medecin/listeMedecin";
 	}
 	
 	@RequestMapping("/medecin/{id}/consultations")
