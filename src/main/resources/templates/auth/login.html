@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" class="h-100">
+<head>
+    <title>Cabinet Medical</title>
+    <link rel='stylesheet' type='image/x-icon' href='/favicon.ico'/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+    
+    <style type="text/css">
+       
+       body{
+          background-image: url(https://previews.123rf.com/images/ipopba/ipopba1706/ipopba170600019/80132009-m%C3%A9dical-ic%C3%B4ne-r%C3%A9seau-avec-%C3%A9cran-virtuel-interface-moderne-sur-le-concept-de-r%C3%A9seau-de-technologie-de-l-amp-o.jpg);
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center center;
+          height: 97%;
+          width: 98%;
+       }
+    </style>
+       
+</head>
+<body class="h-100">
+<div class="row justify-content-center h-100">
+    <div class="card">
+    <div class="card-body">
+    <div class="col-11 my-auto">
+        <form class="form-signin" th:action="@{/login}" method="post">
+            <div class="text-center mb-4">
+                <div class="mb-4"
+                     width="72"
+                     height="72">
+                    <i class="fas fa-hospital position-relative w-25 h-25 text-primary"></i>
+                </div>
+                <h1 class="h3 mb-3 font-weight-normal display-4 text-primary">MEDAPP</h1>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail">CIN</label>
+                <input type="text" id="inputEmail" class="form-control" name="username" placeholder="email@medapp.ma"
+                       required autofocus>
+            </div>
+
+            <div class="form-group">
+                <label for="inputPassword">Password</label>
+                <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password"
+                       required>
+            </div>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <p class="mt-5 mb-3 text-muted text-center">© 2017-2018</p>
+            <p class="mt-5 mb-3 text-muted text-center">
+            <div th:if="${param.error}" class="h4 text-danger">
+                Invalid username and password.
+            </div>
+            <div th:if="${param.logout}" class="h4 text-success">
+                You have been logged out.
+            </div>
+        </form>
+    </div> 
+    </div>
+    </div> 
+
+</div>
+</body>
+</html>
+
