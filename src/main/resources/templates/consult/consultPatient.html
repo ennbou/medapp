@@ -22,6 +22,10 @@
 						<div class="card-body">
 							<form th:action="@{save}" method="post">
 								<input type="hidden" name="id" th:value="${consult.id}" class="form-control">
+								<label>Dossier Médical :</label> 
+								<input type="hidden" name="rendezVous" th:value="${consult.rendezVous.id}" class="form-control"> 
+								<input type="text" disabled th:value="${consult.rendezVous.dossier.code}" class="form-control"> 
+								<br>
 								<label>Date de consultation :</label> 
 								<input type="date" name="date"  th:value="${consult.date}" class="form-control"> 
 								<span th:errors="${consult.date}" class="text-danger"></span>
@@ -34,17 +38,17 @@
 								<input type="time" name="heure_fin" th:value="${consult.heure_fin}" class="form-control"> 
 								<span th:errors="${consult.heure_fin}" class="text-danger"></span>
 								<br>
-								<label>Resultat :</label> 
-								<input type="text" name="resultat" th:value="${consult.resultat}" class="form-control"> 
-								<span th:errors="${consult.resultat}" class="text-danger"></span>
-								<br>
-								<label>Dossier Médical :</label> 
-								<input type="hidden" name="rendezVous" th:value="${consult.rendezVous.id}" class="form-control"> 
-								<input type="text" disabled th:value="${consult.rendezVous.dossier.code}" class="form-control"> 
-								<br>
 								<label>Medecin concerné :</label> 
-								<input type="hidden" name="medecin" th:value="${consult.medecin.id}" class="form-control"> 
-								<input type="text" disabled th:value="${consult.medecin.nom}+' '+${consult.medecin.prenom}" class="form-control"> 
+								<select class="form-control" th:field="*{consult.medecin.id}">
+   		 							<option th:each="i : ${medecins}" th:value="${i.id}" th:text="${i.nom}+' '+${i.prenom}"
+   		 							th:selected="${i.id==consult.medecin.id}">
+   		 							</option>
+								</select>
+								<br>
+								<label>Resultat :</label> 
+								<textarea  type="text" name="resultat" th:text="${consult.resultat}" class="form-control"> 
+								</textarea>
+								<span th:errors="${consult.resultat}" class="text-danger"></span>
 								<br>
 								<div class="form-row text-center">
 								<div class="col-12">

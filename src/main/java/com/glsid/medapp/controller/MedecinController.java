@@ -25,39 +25,27 @@ public class MedecinController {
 	@Autowired
 	public SpecialiteRepository specialiteRepository;
 	
-	@GetMapping(path = "/medecin/search")
-	public String medecin(Model model,
+	@GetMapping(path = "/medecin/listeMedecin")
+	public String listSpecialite(Model model,
 			@RequestParam(name="page",defaultValue="0")int page,
 			@RequestParam(name="size",defaultValue="10")int size,
 			@RequestParam(name="motCle",defaultValue="")String motCle
 			) {
-        Page<Medecin> pageMedecins = medecinRepository
-        		.findByNom(motCle, PageRequest.of(page, size));
+        Page<Medecin> pageMedecins = medecinRepository.listMedecin(motCle, PageRequest.of(page, size));
 		model.addAttribute("pageMedecins", pageMedecins);
 		int[] pages =  new int[pageMedecins.getTotalPages()];
 		model.addAttribute("pages",pages);
 		model.addAttribute("size", size);
 		model.addAttribute("motCle", motCle);
 		model.addAttribute("currentPage",page);
-		return "medecin/index";
-	}
-	
-	@GetMapping(path = "/medecin/listeMedecin")
-	public String listSpecialite(Model model,
-			@RequestParam(name="page",defaultValue="0")int page,
-			@RequestParam(name="size",defaultValue="10")int size
-			) {
-        Page<Medecin> pageMedecins = medecinRepository.findAll(PageRequest.of(page, size));
-		model.addAttribute("pageMedecins", pageMedecins);
-		int[] pages =  new int[pageMedecins.getTotalPages()];
-		model.addAttribute("pages",pages);
-		model.addAttribute("size", size);
-		model.addAttribute("currentPage",page);
 		return "medecin/listeMedecin";
 	}
 	
 	@GetMapping(path = "/medecins/deleteMedecins")
 	public String delete(Long id, String page, String size) {
+		if(!medecinRepository.findById(id).get().getListConsultations().isEmpty()) {
+			return "medecin/alert";
+		}
 		medecinRepository.deleteById(id);
 		return "redirect:/medecin/listeMedecin?page="+page+"&size="+size;
 	}
@@ -65,29 +53,39 @@ public class MedecinController {
 	@GetMapping(path = "/medecin/ajouterMedecin")
 	public String formMedecin(Model model) {
 		Medecin medecin = new Medecin();
+		model.addAttribute("specialites",specialiteRepository.findAll());
 		model.addAttribute("medecin", medecin);
 		return "medecin/FormMedecin";
 	}
 	
-	@GetMapping(path = "/medecin/editMedecin")
-	public String edit(Model model, Long id) {
-		Medecin medecin = medecinRepository.getOne(id);
+	@GetMapping("/medecin/{id}")
+	public String edit(Model model,@PathVariable Long id) {
+		Medecin medecin = medecinRepository.findById(id).get();
 		model.addAttribute("medecin",medecin);
+		model.addAttribute("specialites",specialiteRepository.findAll());
 		return "medecin/EditMedecin";
 	}
 	
+	//Modifier medecin
+	@GetMapping("/medecin/modification")
+	public String update(Long id) {
+			return "redirect:"+id;
+	}
+		
 	@PostMapping(path = "/medecin/saveMedecin")
 	public String save(Model model,@Valid Medecin medecin, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
+			model.addAttribute("specialites", specialiteRepository.findAll());
 			return "medecin/FormMedecin";
 		}
 		medecinRepository.save(medecin);
-		return "medecin/confirmation";
+		return "redirect:/medecin/listeMedecin";
 	}
 	
 	@RequestMapping("/medecin/{id}/consultations")
 	public String listConsultations(@PathVariable Long id, Model model) {
 		model.addAttribute("consultations", medecinRepository.findById(id).get().getListConsultations());
+		model.addAttribute("medecin", medecinRepository.findById(id).get());
 		return "medecin/consultations";
 	}
 }

@@ -1,60 +1,81 @@
 <!DOCTYPE html>
-<html lang="fr"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{fr_template.html(title='Liste des specialites')}">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fr_template.html(title='Specialité')}">
+<head>
+<meta charset="utf-8">
+</head>
 <body>
 
-<section layout:fragment="content">
-    <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a th:href="@{/specialite/listeSpecialite}">Specialite</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Liste</li>
-          </ol>
-    </nav>
-    <p class="h3">Liste des Specialites</p>
-
-    <table class="table table-striped table-bordered" style="width:100%">
-        <thead>
-        <tr>
-
-            <th>Specialite</th>
-            <th></th>
-
-        </tr>
-        </thead>
-        <tbody>
-
-        <tr th:each="s:${pageSpecialites}" data-id="${s.id}">
-            <td th:text="${s.getNom()}"></td>
-           <td>
-               <div class="d-flex justify-content-center">
-               <div class="pl-sm-1">
-               <a class="btn btn-success" th:href="@{/specialite/edit(id=${s.id})}"><li class="fa fa-edit"></li></a>
-               </div>
-               <div class="pl-sm-1">
-               <a th:href="@{/specialite/{id}/medecins(id=${s.id})}" class="btn btn-primary"><li class="fa fa-address-card"></li></a>
-               </div>
-               <div class="pl-sm-1">
-               <a onclick="javascript:return confirm('Voulez vous supprimer cette specialit�?')"
-                      th:href="@{/specialite/deleteSpecialites(id=${s.id},page=${currentPage},size=${size})}"
-                      class="btn btn-danger"><li class="fa fa-trash"></li></a>
-               </div>
-               </div>
-           </td>
-        </tr>
-
-        </tbody>
-    </table>
-     <div class="d-flex justify-content-center">
-			 <ul class="nav nav-pills">
-				<li th:each="page,status:${pages}" class="btn"><a
-					th:class="${status.index==currentPage?'btn btn-warning':'btn btn-light'}"
-					th:href="@{/specialite/listeSpecialite(page=${status.index},size=${size},motCle=${motCle})}"
-					th:text="${status.index+1}"> </a></li>
-		 	 </ul>
-     </div>
-</section>
+	<section layout:fragment="content">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a
+					th:href="@{/specialite/listeSpecialite}">Specialité</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Liste</li>
+			</ol>
+		</nav>
+		<div class="card">
+			<div class="card-header bg-light text-dark font-weight-bold">Liste
+				des specialités</div>
+			<div class="card-body bg-light">
+				<form th:action="@{/specialite/listeSpecialite}" method="get">
+					<div class="row">
+						<div class="col-md-3">
+							<input type="text" name="motCle" th:value=${motCle}
+								placeholder="Nom Specialité..." class="form-control bg-light">
+						</div>
+						<button class="btn btn-outline-secondary">
+							<i class="fa fa-search"> Rechercher</i>
+						</button>
+					</div>
+				</form>
+				</p>
+				<div class="justify-content-center table-responsive">
+					<table class="table table-striped text-center" style="width: 100%">
+						<thead class="thead-dark">
+							<tr>
+								<th>Specialité</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="s:${pageSpecialites}" data-id="${s.id}">
+								<td th:text="${s.getNom()}"></td>
+								<td>
+									<div class="d-flex justify-content-center">
+										<div class="pl-sm-1">
+											<a class="btn btn-success"
+												th:href="@{/specialite/edit(id=${s.id})}"><li
+												class="fa fa-edit"></li></a>
+										</div>
+										<div class="pl-sm-1">
+											<a th:href="@{/specialite/{id}/medecins(id=${s.id})}"
+												class="btn btn-primary"><li class="fa fa-address-card"></li></a>
+										</div>
+										<div class="pl-sm-1">
+											<a
+												onclick="javascript:return confirm('Voulez vous supprimer cette specialité?')"
+												th:href="@{/specialite/deleteSpecialites(id=${s.id},page=${currentPage},size=${size})}"
+												class="btn btn-danger"><li class="fa fa-trash"></li></a>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="d-flex justify-content-center">
+						<ul class="nav nav-pills">
+							<li th:each="page,status:${pages}" class="btn"><a
+								th:class="${status.index==currentPage?'btn btn-warning':'btn btn-light'}"
+								th:href="@{/specialite/listeSpecialite(page=${status.index},size=${size},motCle=${motCle})}"
+								th:text="${status.index+1}"> </a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
 </body>
 </html>

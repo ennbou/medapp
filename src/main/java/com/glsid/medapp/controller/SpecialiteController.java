@@ -19,38 +19,28 @@ public class SpecialiteController {
 	@Autowired
 	public SpecialiteRepository specialiteRepository;
 	
-	@GetMapping(path = "/specialite/search")
-	public String specialite(Model model,
+	@GetMapping(path = "/specialite/listeSpecialite")
+	public String listSpecialite(Model model,
 			@RequestParam(name="page",defaultValue="0")int page,
 			@RequestParam(name="size",defaultValue="10")int size,
 			@RequestParam(name="motCle",defaultValue="")String motCle
 			) {
         Page<Specialite> pageSpecialites = specialiteRepository
-        		.findByNom(motCle, PageRequest.of(page, size));
+        		.listSpecialite(motCle, PageRequest.of(page, size));
 		model.addAttribute("pageSpecialites", pageSpecialites);
 		int[] pages =  new int[pageSpecialites.getTotalPages()];
 		model.addAttribute("pages",pages);
 		model.addAttribute("size", size);
 		model.addAttribute("motCle", motCle);
 		model.addAttribute("currentPage",page);
-		return "specialite/index";
-	}
-	@GetMapping(path = "/specialite/listeSpecialite")
-	public String listSpecialite(Model model,
-			@RequestParam(name="page",defaultValue="0")int page,
-			@RequestParam(name="size",defaultValue="10")int size
-			) {
-        Page<Specialite> pageSpecialites = specialiteRepository.findAll(PageRequest.of(page, size));
-		model.addAttribute("pageSpecialites", pageSpecialites);
-		int[] pages =  new int[pageSpecialites.getTotalPages()];
-		model.addAttribute("pages",pages);
-		model.addAttribute("size", size);
-		model.addAttribute("currentPage",page);
 		return "specialite/listeSpecialite";
 	}
 	
 	@GetMapping(path = "/specialite/deleteSpecialites")
 	public String delete(Long id, String page, String size) {
+		if(!specialiteRepository.findById(id).get().getListMedecins().isEmpty()) {
+			return "specialite/alert";
+		}
 		specialiteRepository.deleteById(id);
 		return "redirect:/specialite/listeSpecialite?page="+page+"&size="+size;
 	}
@@ -70,18 +60,18 @@ public class SpecialiteController {
 	}
 	
 	@PostMapping(path = "/specialite/save")
-	public String save(Model model, @Valid Specialite specialite
-			,BindingResult bindResult) {
+	public String save(Model model, @Valid Specialite specialite, BindingResult bindResult) {
 		if(bindResult.hasErrors()) {
 			return "specialite/FormSpecialite";
 		}
 		specialiteRepository.save(specialite);
-		return "specialite/confirmation";
+		return "redirect:/specialite/listeSpecialite";
 	}
 
 	@RequestMapping("/specialite/{id}/medecins")
 	public String listMedecins(@PathVariable() Long id, Model model){
         model.addAttribute("medecins", specialiteRepository.findById(id).get().getListMedecins());
+        model.addAttribute("specialite", specialiteRepository.findById(id).get());
 		return "specialite/medecins";
 	}
 }

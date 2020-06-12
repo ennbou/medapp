@@ -1,56 +1,77 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{fr_template.html(title='Modifier Medecin')}">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fr_template.html(title='Medecin')}">
+<head>
+<meta charset="utf-8">
+</head>
 <body>
 
-<section layout:fragment="content">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a th:href="@{/medecin/listeMedecin}">Medecins</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Modification</li>
-          </ol>
-        </nav>
+	<section layout:fragment="content">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a
+					th:href="@{/medecin/listeMedecin}">Medecin</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Modification</li>
+			</ol>
+		</nav>
 		<div class="col-md-8 offset-2">
-			<div class="alert alert-success" role="alert">Modifier les informations du Medecin</div>
+			<div class="alert alert-success" role="alert">Modifier les
+				informations du Medecin</div>
 		</div>
 		<div class="col-md-8 offset-2">
-            <div class="card">
-                <div class="card-header bg-light text-dark font-weight-bold">Modifier un medecin</div>
-                <div class="card-body bg-light">
-                     <form th:action="@{/medecin/saveMedecin}" method="post">
-                          <div class="form-group">
-                               <input class="form-control" placeholder="Id" type="hidden" name="id" th:value="${medecin.id}"/>
-                          </div>
-                          <div class="form-group">
-                               <label class="font-weight-bold">Carte d'Identite :</label>
-                               <input class="form-control" placeholder="Carte d'Identite" type="text" name="cin" th:value="${medecin.cin}"/>
-                          </div>
-                          <div class="form-group">
-                               <label class="font-weight-bold">Adresse Email :</label>
-                               <input class="form-control" placeholder="Adresse email" type="text" name="email" th:value="${medecin.email}"/>
-                          </div>
-                          <div class="form-group">
-                               <label class="font-weight-bold">Nom du Medecin :</label>
-                               <input class="form-control" placeholder="Nom" type="text" name="nom" th:value="${medecin.nom}"/>
-                          </div>
-                          <div class="form-group">
-                               <label class="font-weight-bold">Prenom du Medecin :</label>
-                               <input class="form-control" placeholder="Prenom" type="text" name="prenom" th:value="${medecin.prenom}"/>
-                          </div>
-                          <div class="form-group">
-                               <label class="font-weight-bold">Telephone du Medecin</label>
-                               <input class="form-control" placeholder="Telephone" type="text" name="telephone" th:value="${medecin.telephone}"/>
-                          </div>
-                          <div class="form-group">
-                               <button type="submit" class="btn btn-success text-white offset-10">Enregistrer</button>
-                          </div>
-                     </form>
-                </div>
-            </div>
-        </div>
-        </p>
-</section>
+			<div class="card">
+				<div class="card-header bg-light text-dark font-weight-bold">Modifier
+					un medecin</div>
+				<div class="card-body bg-light">
+					<form th:action="@{/medecin/saveMedecin}" method="post">
+						<div class="form-group">
+							<input class="form-control" placeholder="Id" type="hidden"
+								name="id" th:value="${medecin.id}" />
+						</div>
+						<div class="form-group">
+							<label class="font-weight-bold">Carte d'identité :</label> <input
+								class="form-control" placeholder="Carte d'Identite" type="text"
+								name="cin" th:value="${medecin.cin}" />
+						</div>
+						<div class="form-group">
+							<label class="font-weight-bold">Adresse d'Email :</label> <input
+								class="form-control" placeholder="Adresse email" type="text"
+								name="email" th:value="${medecin.email}" />
+						</div>
+						<div class="form-group">
+							<label class="font-weight-bold">Nom du Medecin :</label> <input
+								class="form-control" placeholder="Nom" type="text" name="nom"
+								th:value="${medecin.nom}" />
+						</div>
+						<div class="form-group">
+							<label class="font-weight-bold">Prenom du Medecin :</label> <input
+								class="form-control" placeholder="Prenom" type="text"
+								name="prenom" th:value="${medecin.prenom}" />
+						</div>
+						<div class="form-group">
+							<label class="font-weight-bold">Telephone du Medecin :</label> <input
+								class="form-control" placeholder="Telephone" type="text"
+								name="telephone" th:value="${medecin.telephone}" />
+						</div>
+						<div class="form-group">
+							<label class="font-weight-bold">Specialité du Medecin : </label>
+							<select class="form-control" th:field="*{medecin.specialite.id}">
+								<option th:each="i : ${specialites}" th:value="${i.id}"
+									th:text="${i.nom}" th:selected="i.id==medecin.specialite.id">
+								</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<button type="submit"
+								class="btn btn-success text-white offset-10">Enregistrer</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		</p>
+	</section>
 
 </body>
 </html>

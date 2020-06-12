@@ -24,39 +24,28 @@ public class SecretaireController {
 	@Autowired
 	SecretaireRepository secretaireRepository;
 	
-	@GetMapping(path = "/secretaire/search")
-	public String secreBtaire(Model model,
+	@GetMapping(path = "/secretaire/listeSecretaire")
+	public String listSecretaire(Model model,
 			@RequestParam(name="page",defaultValue="0")int page,
 			@RequestParam(name="size",defaultValue="10")int size,
 			@RequestParam(name="motCle",defaultValue="")String motCle
 			) {
         Page<Secretaire> pageSecretaires = secretaireRepository
-        		.findByNom(motCle, PageRequest.of(page, size));
+        		.listSecretaire(motCle, PageRequest.of(page, size));
 		model.addAttribute("pageSecretaires", pageSecretaires);
 		int[] pages =  new int[pageSecretaires.getTotalPages()];
 		model.addAttribute("pages",pages);
 		model.addAttribute("size", size);
 		model.addAttribute("motCle", motCle);
 		model.addAttribute("currentPage",page);
-		return "secretaire/index";
-	}
-
-	@GetMapping(path = "/secretaire/listeSecretaire")
-	public String listSecretaire(Model model,
-			@RequestParam(name="page",defaultValue="0")int page,
-			@RequestParam(name="size",defaultValue="10")int size
-			) {
-        Page<Secretaire> pageSecretaires = secretaireRepository.findAll(PageRequest.of(page, size));
-		model.addAttribute("pageSecretaires", pageSecretaires);
-		int[] pages =  new int[pageSecretaires.getTotalPages()];
-		model.addAttribute("pages",pages);
-		model.addAttribute("size", size);
-		model.addAttribute("currentPage",page);
 		return "secretaire/listeSecretaire";
 	}
 	
 	@GetMapping(path = "/secretaire/deleteSecretaires")
 	public String delete(Long id, String page, String size) {
+		if(!secretaireRepository.findById(id).get().getListRendezVous().isEmpty()) {
+			return "secretaire/alert";
+		}
 		secretaireRepository.deleteById(id);
 		return "redirect:/secretaire/listeSecretaire?page="+page+"&size="+size;
 	}
@@ -81,12 +70,13 @@ public class SecretaireController {
 			return "secretaire/FormSecretaire";
 		}
 		secretaireRepository.save(secretaire);
-		return "secretaire/confirmation";
+		return "redirect:/secretaire/listeSecretaire";
 	}
 	
 	@RequestMapping("/secretaire/{id}/rendezVous")
 	public String listRendezVous(@PathVariable Long id, Model model) {
 		model.addAttribute("rendezVous", secretaireRepository.findById(id).get().getListRendezVous());
+		model.addAttribute("secretaire", secretaireRepository.findById(id).get());
 		return "secretaire/rendezVous";
 	}
 }

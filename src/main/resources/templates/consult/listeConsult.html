@@ -15,6 +15,9 @@
 			</ol>
 		</nav>
 
+        <div class="card">
+            <div class="card-header bg-light text-dark font-weight-bold">Liste des consultations</div>
+            <div class="card-body bg-light">
 		<div class="d-flex float-right">
 			<div class="container">
 				<form th:action="@{/consult/recherche}" method="Post">
@@ -23,15 +26,23 @@
 							<input class="form-control" type="search" name="search"
 								placeholder="nom, prenom ou nᵒ de dossier" th:value="${search}" />
 								<div class="row p-4 p-md-2">
-								<div class="col-5">
+								<div class="col-3">
+							<input class="form-control text-center" type="text" disabled
+									th:value="Entre" />
+							</div>
+								<div class="col-3">
 								<input class="form-control" type="Date" name="date1"
 									th:value="${date1}" />
 							</div>
-							<div class="col-5">
+							<div class="col-2">
+							<input class="form-control text-center" type="text" disabled
+									th:value="Et" />
+							</div>
+							<div class="col-3">
 								<input class="form-control" type="Date" name="date2"
 									th:value="${date2}" />
 							</div>
-							<div class="col-2">
+							<div class="col-1">
 								<button class="btn btn-outline-secondary">
 									<i class="fa fa-search"></i>
 								</button>
@@ -60,7 +71,6 @@
 					</tr>
 				</thead>
 				<tbody>
-
 					<tr th:each="cslt : ${consults}" data-id="${cslt.id}">
 						<td th:text="${cslt.rendezVous.dossier.code}"></td>
 						<td
@@ -88,9 +98,25 @@
 						</td>
 
 					</tr>
+					
+					<tr th:if="${consults.empty}">
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>Aucun</td>
+						<td>resultat !</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					
 				</tbody>
 			</table>
 		</div>
+		</div>
+		</div>
+
 
 		<div class="d-flex justify-content-center">
 			<ul class="nav nav-pills">
@@ -103,5 +129,6 @@
 		</div>
 
 	</section>
+	
 </body>
 </html>
