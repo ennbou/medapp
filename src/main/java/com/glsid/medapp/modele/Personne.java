@@ -43,8 +43,7 @@ public class Personne {
     private String email;
     @NotBlank
     @NotNull
-    private String password;
-    @NotBlank
+    private String password = "pass";
     @NotNull
-    private String roles;
+    private String roles = "";
 }

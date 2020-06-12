@@ -71,17 +71,17 @@ public class MedecinController {
 	public String update(Long id) {
 			return "redirect:"+id;
 	}
-		
-	@PostMapping(path = "/medecin/saveMedecin")
-	public String save(Model model,@Valid Medecin medecin, BindingResult bindingResult) {
-		if(bindingResult.hasErrors()) {
-			model.addAttribute("specialites", specialiteRepository.findAll());
-			return "medecin/FormMedecin";
-		}
-		medecinRepository.save(medecin);
-		return "redirect:/medecin/listeMedecin";
-	}
-	
+
+    @PostMapping(path = "/medecin/saveMedecin")
+    public String save(Model model,@Valid Medecin medecin, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("specialites", specialiteRepository.findAll());
+            return "medecin/FormMedecin";
+        }
+        medecinRepository.save(medecin);
+        return "redirect:/medecin/listeMedecin";
+    }
+
 	@RequestMapping("/medecin/{id}/consultations")
 	public String listConsultations(@PathVariable Long id, Model model) {
 		model.addAttribute("consultations", medecinRepository.findById(id).get().getListConsultations());

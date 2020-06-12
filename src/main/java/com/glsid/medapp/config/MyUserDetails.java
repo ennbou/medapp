@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class MyUserDetails implements UserDetails {
 
     private Long id;
-    private String email;
+    private String cin;
     private String password;
     private String fullName;
     private List<GrantedAuthority> grantedAuthorities;
@@ -23,7 +23,7 @@ public class MyUserDetails implements UserDetails {
 
     public MyUserDetails(Personne personne) {
         id = personne.getId();
-        email = personne.getEmail();
+        cin = personne.getCin();
         password = personne.getPassword();
         fullName = personne.getNom() + " " + personne.getPrenom();
         grantedAuthorities = Arrays.stream(personne.getRoles().split(","))
@@ -51,7 +51,7 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return cin;
     }
 
     @Override

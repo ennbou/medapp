@@ -23,10 +23,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/rdv/**", "/patient/**", "/").hasRole("SECRETAIRE")
+                .antMatchers("/rdv/list", "/patient/detail", "/patient/detail/**").hasRole("PATIENT")
                 .and()
                 .authorizeRequests()
-                .antMatchers("/rdv/list", "/patient/detail", "/patient/detail/**").hasRole("PATIENT")
+                .antMatchers("/rdv/**", "/patient/**", "/").hasRole("SECRETAIRE")
                 .and()
                 .authorizeRequests()
                 .antMatchers("/**").hasRole("ADMIN")
@@ -47,8 +47,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(new UserDetailsService() {
             @Override
             public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-                Personne p = personneRepository.findByEmail(s);
-                if (p == null) throw new UsernameNotFoundException("EMail not found");
+                Personne p = personneRepository.findByCin(s);
+                if (p == null) throw new UsernameNotFoundException("CIN not found");
                 return new MyUserDetails(p);
             }
         });
