@@ -128,8 +128,10 @@ public class MedappApplication implements ApplicationRunner {
             Consultation c = new Consultation();
             c.setDate(LocalDate.now());
             c.setHeure_debut(LocalTime.now());
+            c.setResultat("exemple");
             c.setHeure_fin(LocalTime.now().plusHours(1));
             c.setMedecin(medecins.get(i));
+            c.setRendezVous(rdv);
             consultationRepository.save(c);
         });
     }
