@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{fr_template.html(title='Specialite')}">
+	layout:decorate="~{fr_template.html(title='Specialité')}">
 <head>
 <meta charset="utf-8">
 </head>
@@ -11,18 +11,18 @@
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a
-					th:href="@{/specialite/listeSpecialite}">Specialite</a></li>
+					th:href="@{/specialite/listeSpecialite}">Specialité</a></li>
 				<li class="breadcrumb-item active" aria-current="page">Modification</li>
 			</ol>
 		</nav>
 		<div class="col-md-8 offset-2">
 			<div class="alert alert-success" role="alert">Modifier les
-				informations de la specialite</div>
+				informations de la specialité</div>
 		</div>
 		<div class="col-md-8 offset-2">
 			<div class="card">
 				<div class="card-header bg-light text-dark font-weight-bold">Modifier
-					une specialite</div>
+					une specialité</div>
 				<div class="card-body bg-light">
 					<form th:action="@{/specialite/save}" method="post">
 						<div class="form-group">

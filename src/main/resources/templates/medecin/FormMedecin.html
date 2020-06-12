@@ -11,8 +11,8 @@
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a
-					th:href="@{/medecin/listeMedecin}">Medecins</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Formulaire d'Ajout</li>
+					th:href="@{/medecin/listeMedecin}">Medecin</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Nouveau medecin</li>
 			</ol>
 		</nav>
 		<div class="col-md-8 offset-2">
@@ -21,13 +21,13 @@
 				<div class="card-body bg-light">
 					<form th:action="@{/medecin/saveMedecin}" method="post">
 						<div class="form-group">
-							<label class="font-weight-bold">Carte d'Identite :</label> <input
+							<label class="font-weight-bold">Carte d'identité :</label> <input
 								class="form-control" placeholder="Carte d'Identite" type="text"
 								name="cin" th:value="${medecin.cin}" /> <span
 								th:errors="${medecin.cin}"></span>
 						</div>
 						<div class="form-group">
-							<label class="font-weight-bold">Adresse Email :</label> <input
+							<label class="font-weight-bold">Adresse d'Email :</label> <input
 								class="form-control" placeholder="Adresse email" type="text"
 								name="email" th:value="${medecin.email}" /> <span
 								th:errors="${medecin.email}"></span>
@@ -50,7 +50,7 @@
 								th:errors="${medecin.telephone}"></span>
 						</div>
 						<div class="form-group">
-							<label class="font-weight-bold">Specialite du Medecin : </label>
+							<label class="font-weight-bold">Specialité du Medecin : </label>
 							<select class="form-control" th:field="*{medecin.specialite.id}">
 								<option th:each="i : ${specialites}" th:value="${i.id}"
 									th:text="${i.nom}" th:selected="i.id==medecin.specialite.id">

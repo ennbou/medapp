@@ -27,11 +27,11 @@
 							<form th:action="@{index}" method="get" class="form-inline">
 
 
-								<input type="text" name="motCle" placeholder="CIN ou Nom..."
+								<input type="text" name="motCle" placeholder="Nom ou CIN..."
 									class="form-control bg-light">&nbsp;&nbsp;
 
 								<button class="btn btn-outline-secondary">
-									<li class="fa fa-search">Chercher</li>
+									<i class="fa fa-search"> Rechercher</i>
 								</button>
 							</form>
 						</div>
@@ -97,7 +97,7 @@
 							<li th:each="page,status:${pages}" class="btn"><a
 								th:class="${status.index==currentPage?'btn btn-warning':'btn btn-light'}"
 								th:href="@{index(page=${status.index},size=${size},motCle=${motCle})}"
-								th:text="${status.index}"> </a></li>
+								th:text="${status.index+1}"> </a></li>
 						</ul>
 					</div>
 				</div>

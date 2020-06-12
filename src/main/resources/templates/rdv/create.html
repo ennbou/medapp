@@ -10,7 +10,7 @@ layout:decorate="~{fr_template.html(title='Rendez Vous')}">
 <section layout:fragment="content">
     <div class="col-md-9 offset-2">
         <div class="card">
-            <div class="card-header bg-light text-dark font-weight-bold">Ajouter un rendez-vous pour</div>
+            <div class="card-header bg-light text-dark font-weight-bold">Ajouter un nouveau Rendez-Vous</div>
             <div class="card-body bg-light">
                 <form th:action="@{save}" method="post">
 <input type="hidden" name="idpatient" th:value="${patient.getId()}">
@@ -41,7 +41,7 @@ layout:decorate="~{fr_template.html(title='Rendez Vous')}">
                     
                    
                     <div class="form-group">
-                        <label class="font-weight-bold">Date Rendez-Vous : </label>
+                        <label class="font-weight-bold">Date de Rendez-Vous : </label>
                         <input type="date" class="form-control" name="date">
                        
                     </div>
