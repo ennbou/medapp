@@ -140,8 +140,8 @@
         </tfoot>
     </table>
 
-    <nav aria-label="pagination">
-        <ul class="pagination pagination-sm">
+    <nav aria-label="pagination" th:if="${#lists.size(pages) > 1}">
+        <ul class="pagination pagination-sm justify-content-center">
             <li th:class="${status.index==pageActual?'page-item active':'page-item'}"
                 th:each="page,status:${pages}">
                 <a href="#"

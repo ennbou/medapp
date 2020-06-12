@@ -103,12 +103,12 @@ public class PatientController {
     }
 
     @RequestMapping("/{id}/update")
-    public String update(Patient patient, @RequestParam("imageFile") MultipartFile imageFile, @PathVariable Long id) {
-        Patient p = patientRepository.findById(id).get();
+    public String update(@Valid Patient patient, @RequestParam("imageFile") MultipartFile imageFile, @PathVariable Long id) {
+        //Patient p = patientRepository.findById(id).get();
         String pathImage = imageFile.getOriginalFilename();
         if (!pathImage.isEmpty()) {
-            p.setImage(pathImage);
-            p = patient;
+            patient.setImage(pathImage);
+//            p = patient;
             try {
                 service.saveImage(imageFile);
             } catch (IOException e) {
@@ -116,7 +116,7 @@ public class PatientController {
             }
         }
 
-        patientRepository.save(p);
+        patientRepository.save(patient);
 
         return "redirect:/patient/index?motCle=";
     }
