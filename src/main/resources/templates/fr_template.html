@@ -8,8 +8,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="MedApp Application">
-    <meta name="author" content="GLSID">
+    <meta name="description" content="MedApp Application de gestion du cabinet">
+    <meta name="author" content="group GLSID">
 
 
     <title th:text="${title}">MedApp</title>
@@ -74,7 +74,7 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
                aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-user"></i>
-                <span>Gérer les Patients</span>
+                <span>Patients</span>
             </a>
             <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
@@ -88,8 +88,8 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-clipboard-list"></i>
-                <span>Gérer les rendez-vous</span>
+                <i class="fa fa-calendar"></i>
+                <span>Rendez-Vous</span>
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
@@ -102,8 +102,8 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
                aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-clipboard-check"></i>
-                <span>Gérer les consultations</span>
+                <i class="fa fa-calendar"></i>
+                <span>Consultations</span>
             </a>
             <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
@@ -116,14 +116,13 @@
         <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
                aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>Gérer les spécialités</span>
+               <i class="fa fa-clone"></i>          
+                <span>Spécialités</span>
             </a>
             <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" th:href="@{/specialite/listeSpecialite}">Liste des spécialités</a>
-                    <a class="collapse-item" th:href="@{/specialite/search}">Recherche </a>
-                    <a class="collapse-item" th:href="@{/specialite/ajouterSpecialite}">Ajouter des spécialités</a>
+                    <a class="collapse-item" th:href="@{/specialite/listeSpecialite}">Liste</a>
+                    <a class="collapse-item" th:href="@{/specialite/ajouterSpecialite}">Ajouter</a>
                 </div>
             </div>
         </li>
@@ -132,14 +131,13 @@
         <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
                aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>Gérer les médecins</span>
+                <i class="fas fa-fw fa-user"></i>
+                <span>Médecins</span>
             </a>
             <div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" th:href="@{/medecin/listeMedecin}">Liste des médecins</a>
-                    <a class="collapse-item" th:href="@{/medecin/search}">Recherche </a>
-                    <a class="collapse-item" th:href="@{/medecin/ajouterMedecin}">Ajouter des médecins</a>
+                    <a class="collapse-item" th:href="@{/medecin/listeMedecin}">Liste</a>
+                    <a class="collapse-item" th:href="@{/medecin/ajouterMedecin}">Ajouter</a>
                 </div>
             </div>
         </li>
@@ -148,14 +146,13 @@
         <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
                aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>Gérer les secrétaires</span>
+                <i class="fas fa-fw fa-user"></i>
+                <span>Secrétaires</span>
             </a>
             <div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" th:href="@{/secretaire/listeSecretaire}">Liste des secrétaires</a>
-                    <a class="collapse-item" th:href="@{/secretaire/search}">Recherche </a>
-                    <a class="collapse-item" th:href="@{/secretaire/ajouterSecretaire}">Ajouter des secrétaires</a>
+                    <a class="collapse-item" th:href="@{/secretaire/listeSecretaire}">Liste</a>
+                    <a class="collapse-item" th:href="@{/secretaire/ajouterSecretaire}">Ajouter</a>
                 </div>
             </div>
         </li>
@@ -267,7 +264,7 @@
             </section>
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
+            <footer class="sticky-footer bg-light">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span>Copyright &copy; MEDApp 2020</span>
@@ -302,7 +299,6 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <h1> I git it !!! </h1>
                 <a class="btn btn-primary" href="login.html">Logout</a>
             </div>
         </div>
@@ -326,7 +322,11 @@
 
 <script>
     $(document).ready(() => {
-        $('#data-table, #data-table2').DataTable();
+        $('#data-table, #data-table2').DataTable({
+            "language": {
+                "url": "http://cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
+            }
+        } );
     })
 </script>
 

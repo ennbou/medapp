@@ -17,6 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
+import java.util.Random;
 
 // exclude = {SecurityAutoConfiguration.class}
 @SpringBootApplication()
@@ -87,6 +89,9 @@ public class MedappApplication implements ApplicationRunner {
         specialiteRepository.save(s1);
         specialiteRepository.save(s2);
         specialiteRepository.save(s3);
+        
+        Long i=1L;
+        System.out.println(specialiteRepository.findById(i).get().getId());
     }
 
     void initMedecine() {
@@ -117,12 +122,15 @@ public class MedappApplication implements ApplicationRunner {
     }
 
     void initConsultation() {
+    	List<Medecin> medecins =medecinRepository.findAll();
         rendezVousRepository.findAll().forEach(rdv -> {
+        	int i=new Random().nextInt(medecins.size());
             Consultation c = new Consultation();
             c.setDate(LocalDate.now());
             c.setHeure_debut(LocalTime.now());
+            c.setResultat("exemple");
             c.setHeure_fin(LocalTime.now().plusHours(1));
-            c.setMedecin(rdv.getSpecialite().getListMedecins().get(0));
+            c.setMedecin(medecins.get(i));
             c.setRendezVous(rdv);
             consultationRepository.save(c);
         });

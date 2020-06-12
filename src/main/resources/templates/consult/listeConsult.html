@@ -4,6 +4,30 @@
 	layout:decorate="~{fr_template.html(title='Consultations')}">
 <head>
 <meta charset="UTF-8">
+<style type="text/css">
+
+.hide1, .hide2, .hide3{
+  display: none;
+}
+    
+.myDIV:hover + .hide3 {
+  display: block;
+  color: red;
+  font-size: 9px
+}
+
+.myDIV:hover + .hide2 {
+  display: block;
+  color: green;
+  font-size: 9px
+}
+
+.myDIV:hover + .hide1 {
+  display: block;
+  color: blue;
+  font-size: 9px
+}
+</style>
 </head>
 <body>
 
@@ -63,9 +87,8 @@
 						<th>Patient</th>
 						<th>Date</th>
 						<th>Heure d'entrée</th>
-						<th>Heure de sortie</th>
-						<th>Resultat</th>
-						<th>Medecin</th>
+						<th>Medecin concerné</th>
+						<th></th>
 						<th></th>
 						<th></th>
 					</tr>
@@ -77,24 +100,33 @@
 							th:text="${cslt.rendezVous.dossier.patient.nom}+' '+${cslt.rendezVous.dossier.patient.prenom}"></td>
 						<td th:text="${cslt.date}"></td>
 						<td th:text="${cslt.heure_debut}"></td>
-						<td th:text="${cslt.heure_fin}"></td>
-						<td th:text="${cslt.resultat}"></td>
 						<td th:text="${cslt.medecin.nom}+' '+${cslt.medecin.prenom}"></td>
 						<td>
-							<div class="pl-sm-1">
+							<div class="pl-sm-1 myDIV">
+								<a class="btn btn-info"
+									th:href="@{/consult/affiche(id=${cslt.id})}">
+									<li class="fa fa-address-card"></li>
+								</a>
+							</div>
+							<div class="hide1">En détail</div>
+						</td>
+						<td>
+							<div class="pl-sm-1 myDIV">
 								<a class="btn btn-success"
 									th:href="@{/consult/modification(id=${cslt.id})}">
 									<li class="fa fa-edit"></li>
 								</a>
 							</div>
+							<div class="hide2">Modifier</div>
 						</td>
 						<td>
-							<div class="pl-sm-1">
+							<div class="pl-sm-1 myDIV">
 								<a
 									onclick="javascript:return confirm('Etes-vous sûr de vouloir supprimer cette consultation ?')"
 									th:href="@{/consult/suppression(id=${cslt.id}, page=${pageActual}, size=${size})}"
 									class="btn btn-danger"><li class="fa fa-trash"></li></a>
 							</div>
+							<div class="hide3">Supprimer</div>
 						</td>
 
 					</tr>

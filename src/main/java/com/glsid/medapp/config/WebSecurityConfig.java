@@ -51,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             @Override
             public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
                 Personne p = personneRepository.findByCin(s);
-                if (p == null) throw new UsernameNotFoundException("CIN not found");
+                if (p == null) throw new UsernameNotFoundException("CIN n'existe pas");
                 return new MyUserDetails(p);
             }
         });
