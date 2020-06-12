@@ -12,7 +12,11 @@ import java.util.stream.Collectors;
 
 public class MyUserDetails implements UserDetails {
 
-    private Long id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Long id;
     private String cin;
     private String password;
     private String fullName;

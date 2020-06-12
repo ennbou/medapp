@@ -74,7 +74,7 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
                aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-user"></i>
-                <span>Gérer les Patients</span>
+                <span>Patients</span>
             </a>
             <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
@@ -89,7 +89,7 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-clipboard-list"></i>
-                <span>Gérer les rendez-vous</span>
+                <span>Rendez-Vous</span>
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
@@ -103,7 +103,7 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
                aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-clipboard-check"></i>
-                <span>Gérer les consultations</span>
+                <span>Consultations</span>
             </a>
             <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
@@ -116,14 +116,14 @@
         <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
                aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>Gérer les spécialités</span>
+               <i class="fas fa-fw fa-clipboard-check"></i>          
+                <span>Spécialités</span>
             </a>
             <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" th:href="@{/specialite/listeSpecialite}">Liste des spécialités</a>
-                    <a class="collapse-item" th:href="@{/specialite/search}">Recherche </a>
-                    <a class="collapse-item" th:href="@{/specialite/ajouterSpecialite}">Ajouter des spécialités</a>
+                    <a class="collapse-item" th:href="@{/specialite/listeSpecialite}">Liste</a>
+                    <a class="collapse-item" th:href="@{/specialite/search}">Recherche</a>
+                    <a class="collapse-item" th:href="@{/specialite/ajouterSpecialite}">Ajouter</a>
                 </div>
             </div>
         </li>
@@ -132,14 +132,14 @@
         <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
                aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>Gérer les médecins</span>
+                <i class="fas fa-fw fa-user"></i>
+                <span>Médecins</span>
             </a>
             <div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" th:href="@{/medecin/listeMedecin}">Liste des médecins</a>
-                    <a class="collapse-item" th:href="@{/medecin/search}">Recherche </a>
-                    <a class="collapse-item" th:href="@{/medecin/ajouterMedecin}">Ajouter des médecins</a>
+                    <a class="collapse-item" th:href="@{/medecin/listeMedecin}">Liste</a>
+                    <a class="collapse-item" th:href="@{/medecin/search}">Recherche</a>
+                    <a class="collapse-item" th:href="@{/medecin/ajouterMedecin}">Ajouter</a>
                 </div>
             </div>
         </li>
@@ -148,14 +148,14 @@
         <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
                aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>Gérer les secrétaires</span>
+                <i class="fas fa-fw fa-user"></i>
+                <span>Secrétaires</span>
             </a>
             <div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" th:href="@{/secretaire/listeSecretaire}">Liste des secrétaires</a>
-                    <a class="collapse-item" th:href="@{/secretaire/search}">Recherche </a>
-                    <a class="collapse-item" th:href="@{/secretaire/ajouterSecretaire}">Ajouter des secrétaires</a>
+                    <a class="collapse-item" th:href="@{/secretaire/listeSecretaire}">Liste</a>
+                    <a class="collapse-item" th:href="@{/secretaire/search}">Recherche</a>
+                    <a class="collapse-item" th:href="@{/secretaire/ajouterSecretaire}">Ajouter</a>
                 </div>
             </div>
         </li>

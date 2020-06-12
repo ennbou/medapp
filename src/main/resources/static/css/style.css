@@ -6,3 +6,7 @@ body{
 	margin-right:20dp;
 	color: green;
 }
+
+.back{
+	background-image: url('../../static/img/back.jpg');
+}
