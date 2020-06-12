@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 
 @Entity
@@ -19,9 +21,8 @@ import javax.validation.constraints.NotNull;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Personne {
 
-
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.TABLE)
     private Long id;
     @NotBlank
     @Column(unique = true)
@@ -38,6 +39,12 @@ public class Personne {
     private String telephone;
     @Email
     @NotNull
+    @Column(unique = true)
     private String email;
-
+    @NotBlank
+    @NotNull
+    private String password;
+    @NotBlank
+    @NotNull
+    private String roles;
 }

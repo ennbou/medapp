@@ -1,8 +1,9 @@
 package com.glsid.medapp;
 
+import com.glsid.medapp.config.ROLE;
 import com.glsid.medapp.dao.*;
 
-//>>>>>>> 00d610350c8ff80a53e018ccf4678346a9cf91ae
+
 import com.glsid.medapp.modele.*;
 import com.glsid.medapp.modele.Exception;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,6 +21,8 @@ import java.time.LocalTime;
 // exclude = {SecurityAutoConfiguration.class}
 @SpringBootApplication()
 public class MedappApplication implements ApplicationRunner {
+
+    PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
     @Autowired
     PatientRepository patientRepository;
@@ -46,7 +50,7 @@ public class MedappApplication implements ApplicationRunner {
     void initpatient() {
         for (int i = 0; i < 20; i++) {
             Patient p = Patient.builder().nom("nom" + (i + 1)).prenom("prenom" + (i + 1)).cin("MC1234" + i).
-                    sexe(i % 2 == 0).telephone("06118912").email("email@email").address("adress 474").
+                    sexe(i % 2 == 0).telephone("06118912").email("patient" + i + "@medapp.ma").password(encoder.encode("pass")).roles(ROLE.ROLE_PATIENT.name()).address("adress 474").
                     dateNaissance(LocalDate.now().minusYears(20 + i)).image("path").build();
             patientRepository.save(p);
 
@@ -66,9 +70,9 @@ public class MedappApplication implements ApplicationRunner {
 
     void initSecretaire() {
         Secretaire s1 = Secretaire.builder().cin("MC1243").prenom("prenom 1").nom("nom 1").
-                telephone("06347853423").email("email@medapp.ma").build();
+                telephone("06347853423").email("secretaire1@medapp.ma").password(encoder.encode("pass")).roles(ROLE.ROLE_SECRETAIRE.name()).build();
         Secretaire s2 = Secretaire.builder().cin("MC973497").prenom("prenom 2").nom("nom 2").
-                telephone("069749").email("email2@medapp.ma").build();
+                telephone("069749").email("secretaire2@medapp.ma").password(encoder.encode("pass")).roles(ROLE.ROLE_SECRETAIRE.name()).build();
 
         secretaireRepository.save(s1);
         secretaireRepository.save(s2);
@@ -88,7 +92,8 @@ public class MedappApplication implements ApplicationRunner {
     void initMedecine() {
         specialiteRepository.findAll().forEach(spec -> {
             Medecin m = Medecin.builder().nom("nom " + (spec.getId()) + 1).cin("MC1243" + spec.getId()).prenom("prenom " + (spec.getId()) + 1).
-                    telephone("06347853423").email("email@medapp.ma").build();
+                    telephone("06347853423").email("medecin" + spec.getId() + "@medapp.ma").password(encoder.encode("pass"))
+                    .roles(ROLE.ROLE_PATIENT.name() + "," + ROLE.ROLE_ADMIN.name() + "," + ROLE.ROLE_SECRETAIRE.name()).build();
             m.setSpecialite(spec);
             medecinRepository.save(m);
         });

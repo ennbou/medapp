@@ -57,7 +57,7 @@
                                 <a th:href="@{/patient/{id}/edit(id = ${p.id})}" class="btn btn-success text-white"><i class="fa fa-edit"></i></a>
                                 </div>
                                 <div class="pl-sm-1">
-                                <a th:href="@{/patient/{id}/rdvs(id = ${p.id})}" class="btn btn-warning text-white"><i class="fa fa-address-card"></i></a>
+                                <a th:href="@{/patient/detail/{id}(id = ${p.id})}" class="btn btn-warning text-white"><i class="fa fa-address-card"></i></a>
                                 </div>
                                 <div class="pl-sm-1">
                                 <a th:href="@{/rdv/{id}/create(id=${p.id})}" class="btn btn-primary text-white"><i class="fa fa-plus"></i></a>

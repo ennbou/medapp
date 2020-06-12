@@ -97,7 +97,8 @@
 				<li th:each="page,status:${pages}" class="btn"><a
 					th:class="${status.index==pageActual?'btn btn-warning':'btn btn-light'}"
 					th:href="@{/consult(page=${status.index},size=${size})}"
-					th:text="${status.index+1}"> </a></li>
+					th:text="${status.index+1}"> </a>
+				</li>
 			</ul>
 		</div>
 

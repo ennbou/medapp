@@ -25,7 +25,7 @@ public class Specialite {
     public static final String ID_F = "id_specialite";
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
     @Size(min = 4, max = 30)

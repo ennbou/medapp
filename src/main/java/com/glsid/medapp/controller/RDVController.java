@@ -94,10 +94,12 @@ SpecialiteRepository specialiteRepository;
     }
 
     @RequestMapping(path = {"/", "/list"})
-    public String liste(Model model, @RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name = "size", defaultValue = "20") int size) {
-//        model.addAttribute("rdvs", Data.listeRDV);
+    public String liste(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
+                        @RequestParam(name = "size", defaultValue = "10") int size) {
         Page<RendezVous> list = rendezVousRepository.findAll(PageRequest.of(page, size));
-        model.addAttribute("page", page);
+        int[] pages = new int[list.getTotalPages()];
+        model.addAttribute("pages", pages);
+        model.addAttribute("pageActual", page);
         model.addAttribute("size", size);
         model.addAttribute("rdvs", list);
         model.addAttribute("formSearch", new SearchFrom());

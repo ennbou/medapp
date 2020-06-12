@@ -33,8 +33,8 @@ public class Medecin extends Personne {
     private Collection<Exception> listExceptions;
 
     @Builder
-    public Medecin(Long id, @NotBlank String cin, @NotBlank String prenom, @NotBlank String nom, @NotBlank String telephone, @NotBlank String email) {
-        super(id, cin, prenom, nom, telephone, email);
+    public Medecin(Long id, @NotBlank String cin, @NotBlank String prenom, @NotBlank String nom, @NotBlank String telephone, @NotBlank String email, String password, String roles) {
+        super(id, cin, prenom, nom, telephone, email, password, roles);
     }
 
 }

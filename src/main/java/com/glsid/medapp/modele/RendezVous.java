@@ -25,7 +25,7 @@ public class RendezVous {
     public static final String ID_F = "id_rendez_vous";
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime date; // date creation

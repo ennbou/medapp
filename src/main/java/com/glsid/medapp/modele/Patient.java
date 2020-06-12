@@ -38,8 +38,8 @@ public class Patient extends Personne {
     private Dossier dossier;
 
     @Builder
-    public Patient(Long id, @NotBlank String cin, @NotBlank String prenom, @NotBlank String nom, @NotBlank String telephone, @NotBlank String email, String address, LocalDate dateNaissance, String image, Boolean sexe) {
-        super(id, cin, prenom, nom, telephone, email);
+    public Patient(Long id, @NotBlank String cin, @NotBlank String prenom, @NotBlank String nom, @NotBlank String telephone, @NotBlank String email, String password, String roles, String address, LocalDate dateNaissance, String image, Boolean sexe) {
+        super(id, cin, prenom, nom, telephone, email,password, roles);
         this.address = address;
         this.dateNaissance = dateNaissance;
         this.image = image;

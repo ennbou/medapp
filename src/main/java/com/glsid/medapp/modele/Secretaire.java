@@ -26,7 +26,7 @@ public class Secretaire extends Personne {
     private Collection<RendezVous> listRendezVous;
 
     @Builder
-    public Secretaire(Long id, @NotBlank String cin, @NotBlank String prenom, @NotBlank String nom, @NotBlank String telephone, @NotBlank String email) {
-        super(id, cin, prenom, nom, telephone, email);
+    public Secretaire(Long id, @NotBlank String cin, @NotBlank String prenom, @NotBlank String nom, @NotBlank String telephone, @NotBlank String email, String password, String roles) {
+        super(id, cin, prenom, nom, telephone, email, password, roles);
     }
 }

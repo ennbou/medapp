@@ -1,7 +1,9 @@
 package com.glsid.medapp.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.glsid.medapp.config.MyUserDetails;
 import com.glsid.medapp.dao.ConsultationRepository;
 import com.glsid.medapp.dao.RendezVousRepository;
 import com.glsid.medapp.modele.Consultation;
@@ -9,6 +11,7 @@ import com.glsid.medapp.modele.RendezVous;
 import com.glsid.medapp.dao.DossierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,17 +22,8 @@ import com.glsid.medapp.service.IPatientService;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * TODO complete le formulaire d'ajouter(image, validation ... )
- * TODO button redection to create new Patient
- * TODO Recherche par CIN ou Nom&Prenom
- * TODO add page infos patient (RDV, Consultation)
- * TODO redirection pour ajouter un nouveau RDV
- */
 
 @Controller
 @RequestMapping("/patient")
@@ -48,7 +42,6 @@ public class PatientController {
 
     @Autowired
     IPatientService service;
-
 
     @RequestMapping(path = {"/liste", "/index", "/"})
     public String index(Model model, String motCle,
@@ -73,20 +66,20 @@ public class PatientController {
     }
 
     @PostMapping("/save")
-    public String save(@Valid Patient patient,@RequestParam("imageFile") MultipartFile imageFile, BindingResult bindingResult) {
+    public String save(@Valid Patient patient, @RequestParam("imageFile") MultipartFile imageFile, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "/patient/create";
 
 
-            String pathImage = imageFile.getOriginalFilename();
-            if(!pathImage.isEmpty()){
-                patient.setImage(pathImage);
-                try {
-                    service.saveImage(imageFile);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        String pathImage = imageFile.getOriginalFilename();
+        if (!pathImage.isEmpty()) {
+            patient.setImage(pathImage);
+            try {
+                service.saveImage(imageFile);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+        }
 
 
         patientRepository.save(patient);
@@ -104,10 +97,10 @@ public class PatientController {
     }
 
     @RequestMapping("/{id}/update")
-    public String update(Patient patient,@RequestParam("imageFile") MultipartFile imageFile, @PathVariable Long id) {
+    public String update(Patient patient, @RequestParam("imageFile") MultipartFile imageFile, @PathVariable Long id) {
         Patient p = patientRepository.findById(id).get();
         String pathImage = imageFile.getOriginalFilename();
-        if(!pathImage.isEmpty()){
+        if (!pathImage.isEmpty()) {
             p.setImage(pathImage);
             p = patient;
             try {
@@ -143,8 +136,22 @@ public class PatientController {
         return "patient/detail";
     }
 
+    @RequestMapping("/detail")
+    public String detail(HttpServletRequest request) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long id;
+        if (principal instanceof MyUserDetails)
+            id = ((MyUserDetails) principal).getId();
+        else
+            id = 1;
+
+        return "redirect:/patient/detail/" + id;
+
+    }
+
+
     @RequestMapping("/{id}/rdvs")
-    public String rdvs(@PathVariable Long id, Model model){
+    public String rdvs(@PathVariable Long id, Model model) {
         model.addAttribute("rdvs", patientRepository.findById(id).get().getDossier().getListRendezVous());
         model.addAttribute("patient", patientRepository.findById(id).get());
         return "patient/rdvs";

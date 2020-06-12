@@ -2,12 +2,13 @@
 <html lang="fr"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       layout:decorate="~{fr_template.html(title='Liste des RDVs')}">
 <body>
 
 <section layout:fragment="content">
 
-    <nav aria-label="breadcrumb">
+    <nav aria-label="breadcrumb" sec:authorize="hasRole('ROLE_SECRETAIRE')">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Patient</a></li>
             <li class="breadcrumb-item active">Liste</li>
@@ -15,7 +16,8 @@
         </ol>
     </nav>
 
-    <p class="h3">Detail Patient</p>
+    <p class="h3" sec:authorize="hasRole('ROLE_SECRETAIRE')">Detail Patient</p>
+    <p class="h3" sec:authorize="hasRole('ROLE_PATIENT')">Mon Dossier</p>
 
     <div class="card mb-3">
         <div class="row no-gutters">
@@ -23,7 +25,7 @@
                 <img th:src="@{/img/h.png}" class="card-img my-auto" alt="image patient">
             </div>
             <div class="col-md-8">
-                <div class="card-header bg-transparent border-0">
+                <div class="card-header bg-transparent border-0" sec:authorize="hasRole('ROLE_SECRETAIRE')">
                     <button class="btn btn-primary"><i class="fas fa-edit"></i>edit</button>
                 </div>
                 <div class="card-body">
@@ -37,19 +39,70 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Demande un nouveau Rendez-vous</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{save}" method="post">
+                        <input type="hidden" name="idpatient" th:value="1">
+                        
+                        <div class="form-group">
+                            <label class="font-weight-bold">Specialite : </label>
+                            <select class="form-control select2" name="idspec">
+                                <option value="spec1" selected>specialite1</option>
+                                <option value="spec2">specialite2</option>
+                                <option value="spec3">specialite3</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="font-weight-bold">Description: </label>
+                            <textarea class="form-control" placeholder="entrer une description ...." rows="3"
+                                      name="description"></textarea>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annule</button>
+                    <button type="button" class="btn btn-primary">Demande</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="card p-3">
         <div class="card-headerd text-right">
-            <button class="btn btn-primary"><i class="fas fa-plus"></i>Ajouter un RDV</button>
+            <button class="btn btn-primary" sec:authorize="hasRole('ROLE_SECRETAIRE')">
+                <i class="fas fa-plus"></i>Ajouterun RDV
+            </button>
+            <button sec:authorize="hasRole('ROLE_PATIENT')" type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#exampleModalCenter">Demande RDV
+            </button>
         </div>
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
                 <a class="nav-link active mx-3" id="pills-rdv-tab" data-toggle="pill" href="#pills-rdv" role="tab"
-                   aria-controls="pills-rdv" aria-selected="true">RDVs</a>
+                   aria-controls="pills-rdv" aria-selected="true">
+                    <span sec:authorize="hasRole('ROLE_PATIENT')">Mes</span>
+                    RDVs
+                </a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link mx-3" id="pills-consultation-tab" data-toggle="pill" href="#pills-consultation"
                    role="tab"
-                   aria-controls="pills-consultation" aria-selected="false">Consultations</a>
+                   aria-controls="pills-consultation" aria-selected="false">
+                    <span sec:authorize="hasRole('ROLE_PATIENT')">Mes</span>
+                    Consultations
+                </a>
             </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
