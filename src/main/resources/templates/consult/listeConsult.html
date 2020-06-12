@@ -7,26 +7,28 @@
     <style type="text/css">
 
         .hide1, .hide2, .hide3 {
-            display: none;
+            visibility: hidden;
+            padding: 0%
         }
 
         .myDIV:hover + .hide3 {
-            display: block;
+            visibility: visible;
             color: red;
             font-size: 9px
         }
 
         .myDIV:hover + .hide2 {
-            display: block;
+            visibility: visible;
             color: green;
             font-size: 9px
         }
 
         .myDIV:hover + .hide1 {
-            display: block;
+            visibility: visible;
             color: blue;
             font-size: 9px
         }
+        
     </style>
 </head>
 <body>
@@ -108,7 +110,7 @@
                                     <li class="fa fa-address-card"></li>
                                 </a>
                             </div>
-                            <div class="hide1">En détail</div>
+                            <span class="hide1">En détail</span>
                         </td>
                         <td>
                             <div class="pl-sm-1 myDIV">
@@ -117,7 +119,7 @@
                                     <li class="fa fa-edit"></li>
                                 </a>
                             </div>
-                            <div class="hide2">Modifier</div>
+                            <span class="hide2">Modifier</span>
                         </td>
                         <td>
                             <div class="pl-sm-1 myDIV">
@@ -128,7 +130,7 @@
                                     <li class="fa fa-trash"></li>
                                 </a>
                             </div>
-                            <div class="hide3">Supprimer</div>
+                            <span class="hide3">Supprimer</span>
                         </td>
 
                     </tr>

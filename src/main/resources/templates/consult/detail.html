@@ -10,6 +10,7 @@
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="/consult">Consultation</a></li>
+				<li class="breadcrumb-item"><a href="#">Détail</a></li>
 				<li class="breadcrumb-item active" aria-current="page" th:text="${consult.rendezVous.dossier.patient.nom}+' '+${consult.rendezVous.dossier.patient.prenom}"></li>
 			</ol>
 		</nav>
@@ -17,32 +18,27 @@
 		<div class="container">
 					<div class="card">
 						<div class="card-header bg-primary text-white">
-						<label>Afficher les informations de "<strong th:text="${consult.rendezVous.dossier.patient.nom}+' '+${consult.rendezVous.dossier.patient.prenom}"></strong>" en détail</label>
+						<label>Les informations de "<strong th:text="${consult.rendezVous.dossier.patient.nom}+' '+${consult.rendezVous.dossier.patient.prenom}"></strong>" :</label>
 						</div>
 						<div class="card-body">
 							<form th:action="@{/consult}" method="get">
-								<label>Dossier Médical :</label> 
-								<input type="text" disabled th:value="${consult.rendezVous.dossier.code}" class="form-control"> 
+								<label class="font-weight-bold">Numéro du dossier médical :</label> 
+								<span th:text="${consult.rendezVous.dossier.code}" class="form-control"> </span>
 								<br>
-								<label>Date de consultation :</label> 
-								<input type="date" disabled  th:value="${consult.date}" class="form-control"> 
+								<label class="font-weight-bold">Date de consultation :</label> 
+								<span th:text="${consult.date}" class="form-control"> </span>
 								<br>
-								<label>Heure d'entrée :</label> 
-								<input type="time" disabled th:value="${consult.heure_debut}" class="form-control"> 
+								<label class="font-weight-bold">Heure d'entrée :</label> 
+								<span th:text="${consult.heure_debut}" class="form-control"></span> 
 								<br>
-								<label>Heure de sortie :</label> 
-								<input type="time" disabled th:value="${consult.heure_fin}" class="form-control"> 
+								<label class="font-weight-bold">Heure de sortie :</label> 
+								<span th:text="${consult.heure_fin}" class="form-control"></span>
 								<br>
-								<label>Medecin concerné :</label> 
-								<select class="form-control" th:field="*{consult.medecin.id}" disabled>
-   		 							<option th:each="i : ${medecins}" th:value="${i.id}" th:text="${i.nom}+' '+${i.prenom}"
-   		 							th:selected="${i.id==consult.medecin.id}">
-   		 							</option>
-								</select>
+								<label class="font-weight-bold">Medecin concerné :</label> 
+								<span th:text="${consult.medecin.nom}+' '+${consult.medecin.prenom}" class="form-control"></span>
 								<br>
-								<label>Resultat :</label> 
-								<textarea  type="text" disabled th:text="${consult.resultat}" class="form-control"> 
-								</textarea>
+								<label class="font-weight-bold">Resultat obtenu :</label> 
+								<span  th:text="${consult.resultat}" class="form-control"> </span>
 								<br>
 								<div class="form-row text-center">
 								<div class="col-12">

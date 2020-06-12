@@ -8,23 +8,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
     
-    <style type="text/css">
-       
+    <style type="text/css"> 
        body{
-          background-image: url(https://previews.123rf.com/images/ipopba/ipopba1706/ipopba170600019/80132009-m%C3%A9dical-ic%C3%B4ne-r%C3%A9seau-avec-%C3%A9cran-virtuel-interface-moderne-sur-le-concept-de-r%C3%A9seau-de-technologie-de-l-amp-o.jpg);
+          background-image: url(https://bmcmiri.com/wp-content/uploads/2019/08/bigstock-Doctor-In-Hospital-Background-224963761.jpg);
           background-repeat: no-repeat;
           background-size: cover;
        }
     </style>
        
 </head>
-<body class="h-100">
-<div class="row d-flex justify-content-center h-100">
-    <div class="card">
-    <div class="card-body">
-    <div class="col-12 my-auto">
+<body>
+<div class="container">
+<div class="row justify-content-center align-items-center">
+    <div class="card" style="width: 30rem;">
+    <div class="card-body h-100">
+    <div class="col-12">
         <form class="form-signin" th:action="@{/login}" method="post">
-            <div class="text-center mb-4">
+            <div class="mb-4 text-center">
                 <div class="mb-4">
                     <i class="fas fa-hospital position-relative w-25 h-25 text-primary"></i>
                 </div>
@@ -42,21 +42,23 @@
                 <input type="password" id="inputPassword" name="password" class="form-control" placeholder=""
                        required>
             </div>
+            
+            <div th:if="${param.error}" class="text-danger mb-4">
+                Le nom de l'utilisateur ou le mot de passe est incorrect!
+            </div>
+            
+              <div th:if="${param.logout}" class="text-success mb-4">
+                Vous avez réussi à déconnecter!
+            </div>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
             <p class="mt-5 mb-3 text-muted text-center">MedApp © 2019-2020</p>
-            <p class="mt-5 mb-3 text-muted text-center">
-            <div th:if="${param.error}" class="h4 text-danger">
-                e nom de l'utilisateur ou le mot de passe est incorrect!
-            </div>
-            <div th:if="${param.logout}" class="h4 text-success">
-                Vous avez réussi à déconnecter!
-            </div>
+
         </form>
     </div> 
     </div>
     </div> 
-
+</div>
 </div>
 </body>
 </html>
