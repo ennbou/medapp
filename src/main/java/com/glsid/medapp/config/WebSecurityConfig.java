@@ -21,28 +21,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+    	
+    	http.formLogin().loginPage("/login").permitAll().and().logout().permitAll();
+    	
+    	http.authorizeRequests()
+    			.antMatchers("/img/**","/css/**","/webjars/**","/h2-console/**").permitAll();
+    	
         http.authorizeRequests()
                 .antMatchers( "/patient/detail", "/patient/detail/**")
-                .hasRole("PATIENT")
-                .and()
-                .authorizeRequests()
+                .hasRole("PATIENT");
+        
+        http.authorizeRequests()
                 .antMatchers("/rdv/**", "/patient/**", "/patient/detail/**", "/consult/**")
-                .hasRole("SECRETAIRE")
-                .and()
-                .authorizeRequests()
+                .hasRole("SECRETAIRE");
+        
+        http.authorizeRequests()
                 .antMatchers("/**")
-                .hasRole("ADMIN")
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll();
-        
-        http.authorizeRequests().antMatchers("/").permitAll().and().authorizeRequests().antMatchers("/console/**").permitAll();
-        
-        http.authorizeRequests().antMatchers("/static/**/**").permitAll().anyRequest().authenticated();
+                .hasRole("ADMIN");
+               
+
+        http.authorizeRequests().anyRequest().authenticated();
         
         http.csrf().disable();
         
