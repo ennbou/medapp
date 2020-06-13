@@ -158,14 +158,22 @@
         <ul class="pagination pagination-sm justify-content-center">
             <li th:class="${status.index==pageActual?'page-item active':'page-item'}"
                 th:each="page,status:${pages}">
-                <a href="#"
+                <a th:if="${#strings.isEmpty(search)}" href="#"
                    class="page-link"
                    th:href="@{/consult(page=${status.index},size=${size})}"
                    th:text="${status.index+1}"></a>
+
+                  <form th:if="${!#strings.isEmpty(search)}" th:action="@{/consult/recherche}" method="Post">
+                   <input type="hidden" name="search" th:value="${search}">
+                   <input type="hidden" name="date1" th:value="${date1}">
+                   <input type="hidden" name="date2" th:value="${date2}">
+                   <input type="hidden" name="page" th:value="${status.index}">
+                   <input type="hidden" name="size" th:value="${size}">
+                   <button class="page-link" th:text="${status.index+1}"></button>
+                  </form>
             </li>
         </ul>
     </nav>
-
 
 </section>
 
