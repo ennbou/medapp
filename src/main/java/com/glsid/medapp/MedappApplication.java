@@ -51,7 +51,7 @@ public class MedappApplication implements ApplicationRunner {
 
     void initpatient() {
         for (int i = 0; i < 20; i++) {
-            Patient p = Patient.builder().nom("nom" + (i + 1)).prenom("prenom" + (i + 1)).cin("MC1234" + i).
+            Patient p = Patient.builder().nom("nom" + (i + 1)).prenom("prenom" + (i + 1)).cin("MC12341" + i).
                     sexe(i % 2 == 0).telephone("06118912").email("patient" + i + "@medapp.ma").password(encoder.encode("pass")).roles(ROLE.ROLE_PATIENT.name()).address("adress 474").
                     dateNaissance(LocalDate.now().minusYears(20 + i)).image("path").build();
             patientRepository.save(p);
@@ -96,7 +96,7 @@ public class MedappApplication implements ApplicationRunner {
 
     void initMedecine() {
         specialiteRepository.findAll().forEach(spec -> {
-            Medecin m = Medecin.builder().nom("nom " + (spec.getId()) + 1).cin("MC1243" + spec.getId()).prenom("prenom " + (spec.getId()) + 1).
+            Medecin m = Medecin.builder().nom("nom " + (spec.getId()) + 1).cin("MC12430" + spec.getId()).prenom("prenom " + (spec.getId()) + 1).
                     telephone("06347853423").email("medecin" + spec.getId() + "@medapp.ma").password(encoder.encode("pass"))
                     .roles(ROLE.ROLE_PATIENT.name() + "," + ROLE.ROLE_ADMIN.name() + "," + ROLE.ROLE_SECRETAIRE.name()).build();
             m.setSpecialite(spec);

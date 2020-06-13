@@ -21,8 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
+        http.authorizeRequests()
                 .antMatchers( "/patient/detail", "/patient/detail/**")
                 .hasRole("PATIENT")
                 .and()
@@ -33,8 +32,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/**")
                 .hasRole("ADMIN")
-                .anyRequest()
-                .authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -42,6 +39,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll();
+        
+        http.authorizeRequests().antMatchers("/").permitAll().and().authorizeRequests().antMatchers("/console/**").permitAll();
+        
+        http.authorizeRequests().antMatchers("/static/**/**").permitAll().anyRequest().authenticated();
+        
+        http.csrf().disable();
+        
+        http.headers().frameOptions().disable();
+        
+        http.exceptionHandling().accessDeniedPage("/consult/erreur");
     }
 
     @Override

@@ -133,4 +133,9 @@ public class ConsultationController {
 		return "consult/erreur";
 	}
 	
+	@PostMapping(path ="/h2-console")
+	public String resource() {
+		return "/h2-console";
+	}
+	
 }
