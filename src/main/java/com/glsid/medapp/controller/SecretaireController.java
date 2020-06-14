@@ -9,9 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.glsid.medapp.dao.SecretaireRepository;
@@ -41,15 +39,6 @@ public class SecretaireController {
 		return "secretaire/listeSecretaire";
 	}
 	
-	@GetMapping(path = "/secretaire/deleteSecretaires")
-	public String delete(Long id, String page, String size) {
-		if(!secretaireRepository.findById(id).get().getListRendezVous().isEmpty()) {
-			return "secretaire/alert";
-		}
-		secretaireRepository.deleteById(id);
-		return "redirect:/secretaire/listeSecretaire?page="+page+"&size="+size;
-	}
-	
 	@GetMapping(path = "/secretaire/ajouterSecretaire")
 	public String formSecretaire(Model model) {
 		Secretaire secretaire = new Secretaire();
@@ -73,10 +62,4 @@ public class SecretaireController {
 		return "redirect:/secretaire/listeSecretaire";
 	}
 	
-	@RequestMapping("/secretaire/{id}/rendezVous")
-	public String listRendezVous(@PathVariable Long id, Model model) {
-		model.addAttribute("rendezVous", secretaireRepository.findById(id).get().getListRendezVous());
-		model.addAttribute("secretaire", secretaireRepository.findById(id).get());
-		return "secretaire/rendezVous";
-	}
 }

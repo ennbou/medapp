@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -140,8 +141,6 @@ public class RDVController {
             return "rdv/create";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date = LocalDate.parse(dateConsult, formatter);
-        // identifier le secretaire
-        //rv.setSecretaire(secretaire);
         rv.setId(null);
         rv.setDate(LocalDateTime.now());
         rv.setDescription(description);
@@ -151,6 +150,9 @@ public class RDVController {
         cslt.setDate(date);
         cslt.setMedecin(medecinRepository.findById(idMedecin).get());
         cslt.setRendezVous(rv);
+        cslt.setResultat("");
+        cslt.setHeure_debut(LocalTime.of(0,0,1));
+        cslt.setHeure_fin(LocalTime.of(0,0,1));
         rendezVousRepository.save(rv);
         consultationRepository.save(cslt);
         return "redirect:/rdv/list";

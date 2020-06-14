@@ -41,15 +41,6 @@ public class MedecinController {
 		return "medecin/listeMedecin";
 	}
 	
-	@GetMapping(path = "/medecins/deleteMedecins")
-	public String delete(Long id, String page, String size) {
-		if(!medecinRepository.findById(id).get().getListConsultations().isEmpty()) {
-			return "medecin/alert";
-		}
-		medecinRepository.deleteById(id);
-		return "redirect:/medecin/listeMedecin?page="+page+"&size="+size;
-	}
-	
 	@GetMapping(path = "/medecin/ajouterMedecin")
 	public String formMedecin(Model model) {
 		Medecin medecin = new Medecin();

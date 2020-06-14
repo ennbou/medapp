@@ -30,15 +30,11 @@ public class RendezVous {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = Secretaire.ID_F)
-    private Secretaire secretaire;
-
-    @ManyToOne
     @JoinColumn(name = Specialite.ID_F)
     private Specialite specialite;
 
 
-    @OneToOne(mappedBy = "rendezVous", cascade = {CascadeType.ALL})
+    @OneToOne(mappedBy = "rendezVous")
     private Consultation consultation;
 
     @ManyToOne

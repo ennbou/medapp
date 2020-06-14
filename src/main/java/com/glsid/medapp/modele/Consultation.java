@@ -30,7 +30,7 @@ public class Consultation {
     private LocalTime heure_fin;
     private String resultat;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = RendezVous.ID_F)
     private RendezVous rendezVous;
 

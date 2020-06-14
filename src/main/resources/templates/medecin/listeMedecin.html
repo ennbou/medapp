@@ -69,12 +69,6 @@
 											<a th:href="@{/medecin/{id}/consultations(id=${m.id})}"
 												class="btn btn-primary"><li class="fa fa-address-card"></li></a>
 										</div>
-										<div class="pl-sm-1">
-											<a
-												onclick="javascript:return confirm('Voulez vous supprimer ce medecin?')"
-												th:href="@{/medecins/deleteMedecins(id=${m.id},page=${currentPage},size=${size})}"
-												class="btn btn-danger"><li class="fa fa-trash"></li></a>
-										</div>
 									</div>
 								</td>
 
