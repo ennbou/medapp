@@ -140,8 +140,7 @@ public class RDVController {
             return "rdv/create";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date = LocalDate.parse(dateConsult, formatter);
-
-        //il reste encore comment savoir le secretaire connecté
+        // identifier le secretaire
         //rv.setSecretaire(secretaire);
         rv.setId(null);
         rv.setDate(LocalDateTime.now());
@@ -150,11 +149,7 @@ public class RDVController {
         rv.setSpecialite(specialiteRepository.findById(idspec).get());
         Consultation cslt=new Consultation();
         cslt.setDate(date);
-        //specifier l'
-        //
-        //
         cslt.setMedecin(medecinRepository.findById(idMedecin).get());
-        //rv.setConsultation(cslt);
         cslt.setRendezVous(rv);
         rendezVousRepository.save(rv);
         consultationRepository.save(cslt);
