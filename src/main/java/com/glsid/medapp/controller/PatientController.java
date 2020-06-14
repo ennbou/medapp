@@ -37,13 +37,10 @@ public class PatientController {
     PatientRepository patientRepository;
     @Autowired
     DossierRepository dossierRepository;
-
     @Autowired
     RendezVousRepository rendezVousRepository;
-
     @Autowired
     ConsultationRepository consultationRepository;
-
     @Autowired
     IPatientService service;
 

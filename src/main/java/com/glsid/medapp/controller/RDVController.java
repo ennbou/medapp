@@ -1,8 +1,11 @@
 package com.glsid.medapp.controller;
 
+import com.glsid.medapp.dao.ConsultationRepository;
+import com.glsid.medapp.dao.MedecinRepository;
 import com.glsid.medapp.dao.PatientRepository;
 import com.glsid.medapp.dao.RendezVousRepository;
 import com.glsid.medapp.dao.SpecialiteRepository;
+import com.glsid.medapp.modele.Consultation;
 import com.glsid.medapp.modele.RendezVous;
 
 import javax.validation.Valid;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,12 +35,16 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/rdv")
 public class RDVController {
 	
-@Autowired
-private RendezVousRepository rendezVousRepository;
-@Autowired
-private PatientRepository patientRepository;
-@Autowired
-SpecialiteRepository specialiteRepository;
+	@Autowired
+	private RendezVousRepository rendezVousRepository;
+	@Autowired
+	private PatientRepository patientRepository;
+	@Autowired
+	SpecialiteRepository specialiteRepository;
+	@Autowired
+	MedecinRepository medecinRepository;
+	@Autowired
+	ConsultationRepository consultationRepository;
 
     @PostMapping("/search")
     public String search(Model model, SearchFrom searchFrom) {
@@ -118,16 +126,38 @@ SpecialiteRepository specialiteRepository;
         model.addAttribute("rendezVous", rv);
         model.addAttribute("patient", patientRepository.findById(id).get());
         model.addAttribute("spes",specialiteRepository.findAll());
+        model.addAttribute("medecins",medecinRepository.findAll());
+        model.addAttribute("dateNow",LocalDate.now());
         return "rdv/create";
     }
     
     @PostMapping("/{id}/save")
-    public String save(@Valid RendezVous rv, @RequestParam Long idpatient, @RequestParam Long idspec, BindingResult bindingResult) {
+    public String save(@Valid RendezVous rv, @RequestParam Long idpatient, @RequestParam Long idspec,
+    		@RequestParam Long idMedecin, @RequestParam String description, @RequestParam String dateConsult,
+    		BindingResult bindingResult) {
+    	
         if (bindingResult.hasErrors())
             return "rdv/create";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(dateConsult, formatter);
+
+        //il reste encore comment savoir le secretaire connecté
+        //rv.setSecretaire(secretaire);
+        rv.setId(null);
+        rv.setDate(LocalDateTime.now());
+        rv.setDescription(description);
         rv.setDossier(patientRepository.findById(idpatient).get().getDossier());
         rv.setSpecialite(specialiteRepository.findById(idspec).get());
+        Consultation cslt=new Consultation();
+        cslt.setDate(date);
+        //specifier l'
+        //
+        //
+        cslt.setMedecin(medecinRepository.findById(idMedecin).get());
+        //rv.setConsultation(cslt);
+        cslt.setRendezVous(rv);
         rendezVousRepository.save(rv);
+        consultationRepository.save(cslt);
         return "redirect:/rdv/list";
     }
 

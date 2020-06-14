@@ -38,7 +38,7 @@ public class RendezVous {
     private Specialite specialite;
 
 
-    @OneToOne(mappedBy = "rendezVous")
+    @OneToOne(mappedBy = "rendezVous", cascade = {CascadeType.ALL})
     private Consultation consultation;
 
     @ManyToOne

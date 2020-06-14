@@ -1,3 +1,4 @@
+
 package com.glsid.medapp.config;
 
 import com.glsid.medapp.dao.PersonneRepository;
@@ -25,14 +26,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     	http.formLogin().loginPage("/login").permitAll().and().logout().permitAll();
     	
     	http.authorizeRequests()
-    			.antMatchers("/img/**","/css/**","/webjars/**","/h2-console/**").permitAll();
+    			.antMatchers("/img/**","/css/**","/js/**","/webfonts/**","/webjars/**","/h2-console/**").permitAll();
     	
         http.authorizeRequests()
-                .antMatchers( "/patient/detail", "/patient/detail/**")
+                .antMatchers("/","/patient/detail", "/patient/detail/**")
                 .hasRole("PATIENT");
         
         http.authorizeRequests()
-                .antMatchers("/rdv/**", "/patient/**", "/patient/detail/**", "/consult/**")
+                .antMatchers("/","/rdv/**", "/patient/**", "/patient/detail/**", "/consult/**")
                 .hasRole("SECRETAIRE");
         
         http.authorizeRequests()
