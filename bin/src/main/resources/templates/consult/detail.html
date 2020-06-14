@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fr_template.html(title='Consultations')}">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	<section layout:fragment="content">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/consult">Consultation</a></li>
+				<li class="breadcrumb-item active" aria-current="page" th:text="${consult.rendezVous.dossier.patient.nom}+' '+${consult.rendezVous.dossier.patient.prenom}"></li>
+			</ol>
+		</nav>
+		
+		<div class="container">
+					<div class="card">
+						<div class="card-header bg-primary text-white">
+						<label>Afficher les informations de "<strong th:text="${consult.rendezVous.dossier.patient.nom}+' '+${consult.rendezVous.dossier.patient.prenom}"></strong>" en détail</label>
+						</div>
+						<div class="card-body">
+							<form th:action="@{/consult}" method="get">
+								<label>Dossier Médical :</label> 
+								<input type="text" disabled th:value="${consult.rendezVous.dossier.code}" class="form-control"> 
+								<br>
+								<label>Date de consultation :</label> 
+								<input type="date" disabled  th:value="${consult.date}" class="form-control"> 
+								<br>
+								<label>Heure d'entrée :</label> 
+								<input type="time" disabled th:value="${consult.heure_debut}" class="form-control"> 
+								<br>
+								<label>Heure de sortie :</label> 
+								<input type="time" disabled th:value="${consult.heure_fin}" class="form-control"> 
+								<br>
+								<label>Medecin concerné :</label> 
+								<select class="form-control" th:field="*{consult.medecin.id}" disabled>
+   		 							<option th:each="i : ${medecins}" th:value="${i.id}" th:text="${i.nom}+' '+${i.prenom}"
+   		 							th:selected="${i.id==consult.medecin.id}">
+   		 							</option>
+								</select>
+								<br>
+								<label>Resultat :</label> 
+								<textarea  type="text" disabled th:text="${consult.resultat}" class="form-control"> 
+								</textarea>
+								<br>
+								<div class="form-row text-center">
+								<div class="col-12">
+								<button class="btn btn-success text-white" >Retourner</button>
+								</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+		
+	</section>
+
+</body>
+</html>

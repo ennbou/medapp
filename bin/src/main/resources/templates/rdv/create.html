@@ -1,50 +1,55 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org"
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-layout:decorate="~{fr_template.html(title='ajouter un rendez-vous')}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fr_template.html(title='ajouter un rendez-vous')}">
 <body>
- 
+
 <section layout:fragment="content">
-    <div class="col-md-8 offset-2">
+    <div class="col-md-9 offset-2">
         <div class="card">
-            <div class="card-header bg-light text-dark font-weight-bold">Ajouter un rendez-vous</div>
+            <div class="card-header bg-light text-dark font-weight-bold">Ajouter un rendez-vous pour</div>
             <div class="card-body bg-light">
                 <form th:action="@{save}" method="post">
-                  <div class="form-group">
-                        <label class="font-weight-bold">Patient : </label>
-                         <select class="form-control select2">
-							<option  disabled selected>Choisir un patient</option>
-							</select>
-						
-                    </div>
+                    <input type="hidden" name="idpatient" th:value="${patient.getId()}">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+
+                            <li class="breadcrumb-item" th:text="${patient.nom}"></li>
+                            <li class="breadcrumb-item" th:text="${patient.prenom}"></li>
+                            <li class="breadcrumb-item active" th:text="${patient.cin}"></li>
+                        </ol>
+                    </nav>
+
                     <div class="form-group">
                         <label class="font-weight-bold">Specialite : </label>
-                         <select class="form-control select2">
-							<option  disabled selected>Choisir une specialite</option>
-							</select>
-						
+                        <select class="form-control select2" name="idspec">
+                            <option disabled selected>Choisir une specialite</option>
+                            <option th:each="sp:${spes}" th:text="${sp.getNom()}" th:value="${sp.getId()}"></option>
+                        </select>
+
                     </div>
                     <div class="form-group">
                         <label class="font-weight-bold">Medecin : </label>
-                         <select class="form-control select2">
-							<option  disabled selected>Choisir un medecin</option>
-							</select>
-						
+                        <select class="form-control select2">
+                            <option disabled selected>Choisir un medecin</option>
+                        </select>
+
                     </div>
-                    
-                   
+
+
                     <div class="form-group">
                         <label class="font-weight-bold">Date RDV : </label>
                         <input type="date" class="form-control" name="date">
-                       
+
                     </div>
-                   
+
                     <div class="form-group">
                         <label class="font-weight-bold">Description: </label>
-                        <textarea class="form-control" placeholder="entrer une description ...."  rows="3" name="description"></textarea>
-                       
+                        <textarea class="form-control" placeholder="entrer une description ...." rows="3"
+                                  name="description"></textarea>
+
                     </div>
-                    
+
                     <div class="form-group">
                         <button type="submit" class="btn btn-success text-white offset-10">Enregister</button>
                     </div>
