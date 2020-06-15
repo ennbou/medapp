@@ -92,9 +92,6 @@ public class MedappApplication implements ApplicationRunner {
         specialiteRepository.save(s1);
         specialiteRepository.save(s2);
         specialiteRepository.save(s3);
-        
-        Long i=1L;
-        System.out.println(specialiteRepository.findById(i).get().getId());
     }
 
     void initMedecine() {
@@ -110,18 +107,14 @@ public class MedappApplication implements ApplicationRunner {
 
     void initRDV() {
         specialiteRepository.findAll().forEach(spec -> {
-            secretaireRepository.findAll().forEach(sec -> {
                 dossierRepository.findAll().forEach(dossier -> {
                     RendezVous rdv = new RendezVous();
                     rdv.setDescription("la description de RDV par le patient.");
                     rdv.setDate(LocalDateTime.now().minusDays(10));
                     rdv.setSpecialite(spec);
-                    rdv.setSecretaire(sec);
                     rdv.setDossier(dossier);
                     rendezVousRepository.save(rdv);
                 });
-
-            });
         });
     }
 
@@ -144,7 +137,7 @@ public class MedappApplication implements ApplicationRunner {
         medecinRepository.findAll().forEach(medecin -> {
             Exception e = new Exception();
             e.setDate(LocalDate.now().plusDays(20));
-            e.setRaison("pour une raison");
+            e.setRaison("Raison x");
             e.setMedecin(medecin);
             exceptionRepository.save(e);
         });

@@ -1,29 +1,32 @@
-.background{
+.background {
 	background-image: url('/img/Background.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .hide1, .hide2, .hide3 {
-            visibility: hidden;
-            padding: 0%
-        }
+	visibility: hidden;
+	padding: 0%
+}
 
-        .myDIV:hover + .hide3 {
-            visibility: visible;
-            color: red;
-            font-size: 9px
-        }
+.myDIV:hover+.hide3 {
+	visibility: visible;
+	color: red;
+	font-size: 9px
+}
 
-        .myDIV:hover + .hide2 {
-            visibility: visible;
-            color: green;
-            font-size: 9px
-        }
+.myDIV:hover+.hide2 {
+	visibility: visible;
+	color: green;
+	font-size: 9px
+}
 
-        .myDIV:hover + .hide1 {
-            visibility: visible;
-            color: blue;
-            font-size: 9px
-        }
-        
+.myDIV:hover+.hide1 {
+	visibility: visible;
+	color: blue;
+	font-size: 9px
+}
+
+.center {
+	margin-top: 3%;
+}

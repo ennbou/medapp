@@ -23,8 +23,8 @@
 						<div class="card-body">
 							<form th:action="@{save}" method="post">
 								<input type="hidden" name="id" th:value="${consult.id}" class="form-control">
-								<label class="font-weight-bold">Numéro du dossier médical :</label> 
 								<input type="hidden" name="rendezVous" th:value="${consult.rendezVous.id}" class="form-control"> 
+								<label class="font-weight-bold">Numéro du dossier médical :</label> 
 								<input type="text" disabled th:value="${consult.rendezVous.dossier.code}" class="form-control"> 
 								<br>
 								<label class="font-weight-bold">Date de consultation :</label> 
