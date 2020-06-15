@@ -3,6 +3,9 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fr_template.html(title='Rendez-Vous')}">
+<head>
+<meta charset="utf-8">
+</head>
 <body>
 
 <section layout:fragment="content">
@@ -113,13 +116,10 @@
         <tr th:each="rdv : ${rdvs}" th:data-id="${rdv.id}">
             <td th:text="${#temporals.format(rdv.date, 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td class="text-center">
-                <button type="button" class="btn btn-warning" th:unless="${rdv.consultation.date}">
+                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter">
                     <span class="fas fa-circle"></span>
                 </button>
-                <span class="text-success" th:if="${rdv.consultation.date}">
-                    <span class="fas fa-check-circle"></span>
-                </span>
-
+               
             </td>
             <td th:text="${rdv.dossier.patient.nom+ ' ' +rdv.dossier.patient.prenom}"></td>
             <td th:text="${rdv.specialite.nom}"></td>
@@ -150,6 +150,42 @@
             </li>
         </ul>
     </nav>
+     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Confirmer un nouveau Rendez-Vous</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{save}" method="post">
+                        <input type="hidden" th:name="idpatient" >
+                        <div class="form-group">
+                            <label class="font-weight-bold">Medecin : </label>
+                            <select class="form-control select2" th:name="idspec">
+                            <option disabled selected>Selectionner un medecin </option>
+                                <option th:each="medecin:${medecins}" th:text="${medecin.getNom()+' '+ medecin.getPrenom()}" th:value="${medecin.getId()}"></option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="font-weight-bold">Date : </label>
+                            <input class="form-control" placeholder="Saisir une description..." rows="3"
+                                      type="date" th:name="date"></input>
+                        </div>
+						<button type="submit" class="btn btn-primary">Confirmer</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
 
 </section>
 

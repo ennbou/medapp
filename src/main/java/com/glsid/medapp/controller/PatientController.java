@@ -160,18 +160,19 @@ public class PatientController {
         return "redirect:/patient/detail/" + id;
 
     }
-    @PostMapping("detail/save")
+    @PostMapping("/detail/save")
     public String save(HttpServletRequest request,@RequestParam  Long idpatient) {
     	RendezVous rv=new RendezVous();
     
-    	Consultation c=new Consultation();
+    	//Consultation c=new Consultation();
     	rv.setDescription(request.getParameter("description").trim());
     	rv.setSpecialite(specialiteRepository.findById(Long.valueOf(request.getParameter("idspec").trim())).get());
     	rv.setDate(LocalDateTime.now());
     	rv.setDossier(patientRepository.findById(idpatient).get().getDossier());
-    	c.setDate(LocalDate.now());
-    	c.setRendezVous(rv);
-    	rv.setConsultation(c);
+		/*
+		 * c.setDate(LocalDate.now()); c.setRendezVous(rv);
+		 */
+    	rv.setConsultation(null);
     	
     
     	

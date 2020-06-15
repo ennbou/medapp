@@ -185,15 +185,13 @@
                     <tr data-id="rdv.id" th:each="rdv:${rdvs}">
                         <td th:text="${#temporals.format(rdv.date, 'yyyy-MM-dd HH:mm:ss')}"></td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-warning" th:unless="${rdv.consultation.date}">
+                            <button type="button" class="btn btn-warning" >
                                 <span class="fas fa-circle"></span>
                             </button>
-                            <span class="text-success" th:if="${rdv.consultation.date}">
-                                <span class="fas fa-check-circle"></span>
-                            </span>
+                        
                         </td>
                         <td th:text="${rdv.specialite.nom}"></td>
-                        <td th:text="${#temporals.format(rdv.consultation.date, 'yyyy-MM-dd')}">-----------</td>
+                        <td th:text="ppp">-----------</td>
                         <td th:text="${rdv.description}"></td>
                     </tr>
                     </tbody>
