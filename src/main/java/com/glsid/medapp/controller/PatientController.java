@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import com.glsid.medapp.config.MyUserDetails;
 import com.glsid.medapp.dao.ConsultationRepository;
 import com.glsid.medapp.dao.RendezVousRepository;
+import com.glsid.medapp.dao.SpecialiteRepository;
 import com.glsid.medapp.modele.Consultation;
 import com.glsid.medapp.modele.RendezVous;
 import com.glsid.medapp.dao.DossierRepository;
@@ -24,6 +25,9 @@ import com.glsid.medapp.service.IPatientService;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +45,8 @@ public class PatientController {
     RendezVousRepository rendezVousRepository;
     @Autowired
     ConsultationRepository consultationRepository;
+    @Autowired
+    SpecialiteRepository specialiteRepository;
     @Autowired
     IPatientService service;
 
@@ -130,12 +136,15 @@ public class PatientController {
         List<RendezVous> rdvs = patientRepository.findById(id).get().getDossier().getListRendezVous();
         model.addAttribute("rdvs", rdvs);
         List<Consultation> consultations = new ArrayList<>();
+        
         rdvs.forEach(rdv -> {
             Consultation c = rdv.getConsultation();
             if (c == null) return;
             consultations.add(c);
         });
         model.addAttribute("consultations", consultations);
+        model.addAttribute("patient",patientRepository.findById(id).get());
+        model.addAttribute("spes",specialiteRepository.findAll());
         return "patient/detail";
     }
 
@@ -151,6 +160,29 @@ public class PatientController {
         return "redirect:/patient/detail/" + id;
 
     }
+    @PostMapping("detail/save")
+    public String save(HttpServletRequest request,@RequestParam  Long idpatient) {
+    	RendezVous rv=new RendezVous();
+    
+    	Consultation c=new Consultation();
+    	rv.setDescription(request.getParameter("description").trim());
+    	rv.setSpecialite(specialiteRepository.findById(Long.valueOf(request.getParameter("idspec").trim())).get());
+    	rv.setDate(LocalDateTime.now());
+    	rv.setDossier(patientRepository.findById(idpatient).get().getDossier());
+    	c.setDate(LocalDate.now());
+    	c.setRendezVous(rv);
+    	rv.setConsultation(c);
+    	
+    
+    	
+    	
+    	
+    	
+        rendezVousRepository.save(rv);
+        
+        return "redirect:/patient/detail/" + idpatient;
+    }
+
 
 
     @RequestMapping("/{id}/rdvs")

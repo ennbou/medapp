@@ -34,11 +34,12 @@
 					<td th:text="${rendezVous.date}"></td>
 					<td th:text="${rendezVous.description}"></td>
 					<td class="text-center">
-						<button type="button" class="btn btn-warning"
-							th:unless="${rendezVous.status}">
+						<button type="button" class="btn btn-warning" th:unless="${rendezVous.getConsultation().date}">
 							<span class="fas fa-circle"></span>
-						</button> <span class="text-success" th:if="${rendezVous.status}"> <span
-							class="fas fa-check-circle"></span>
+						</button>
+						<span class="text-success" th:if="${rendezVous.getConsultation().date}"> 
+						<span class="fas fa-check-circle">
+						</span>
 					</span>
 					</td>
 				</tr>

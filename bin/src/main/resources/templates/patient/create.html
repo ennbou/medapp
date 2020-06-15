@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{fr_template.html(title='Patient')}">
+	layout:decorate="~{fr_template.html(title='Patients')}">
 <head>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
@@ -35,6 +35,11 @@
 							</div>
 						</div>
 
+						<div class="form-group">
+							<label class="font-weight-bold">Carte d'identité :</label> <input
+								class="form-control" placeholder="Carte d'Identite" type="text"
+								th:field="*{cin}" />
+						</div>
 						<div class="form-group">
 							<label class="font-weight-bold">Prenom :</label> <input
 								placeholder="Prenom" type="text" th:field="*{prenom}"

@@ -1,115 +1,117 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{fr_template.html(title='Patient')}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fr_template.html(title='Patients')}">
 <head>
-<meta charset="utf-8">
+    <meta charset="utf-8">
 </head>
 <body>
 
-	<section layout:fragment="content">
-		<nav aria-label="breadcrumb">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a
-					th:href="@{/patient/index?motCle=}">Patient</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Modification</li>
-			</ol>
-		</nav>
-		<div class="col-md-8 offset-2">
-			<div class="alert alert-success" role="alert">valider les
-				informations du patient !</div>
-		</div>
+<section layout:fragment="content">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a
+                    th:href="@{/patient/index?motCle=}">Patient</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Modification</li>
+        </ol>
+    </nav>
+    <div class="col-md-8 offset-2">
+        <div class="alert alert-success" role="alert">valider les
+            informations du patient !
+        </div>
+    </div>
 
-		<div class="col-md-8 offset-2">
-			<div class="card">
-				<div class="card-header bg-light text-dark font-weight-bold">Valider
-					un patient</div>
-				<div class="card-body bg-light">
-					<form th:action="@{update}" method="post" th:object="${patient}">
+    <div class="col-md-8 offset-2">
+        <div class="card">
+            <div class="card-header bg-light text-dark font-weight-bold">Valider
+                un patient
+            </div>
+            <div class="card-body bg-light">
+                <form th:action="@{update}" method="post" th:object="${patient}"
+                      enctype="multipart/form-data">
 
-						<div class="row offset-2 text-center w-50 h-50 mb-5">
-							<div class="col w-50 h-50">
-								<img th:src="@{/img/profiles/{img}(img=${patient.getImage()})}"
-									class="col mx-auto img-fluid" />
-							</div>
+                    <div class="row offset-2 text-center w-50 h-50 mb-5">
+                        <div class="col w-50 h-50">
+                            <img th:src="@{/img/profiles/{img}(img=${patient.getImage()})}"
+                                 class="col mx-auto img-fluid"/>
+                        </div>
 
-							<div class="custom-file">
-								<input type="file" name="imageFile" id="imageFile"
-									class="custom-file-input"> <label for="imageFile"
-									class="custom-file-label">Choise file</label>
-							</div>
+                        <div class="custom-file">
+                            <input type="file" name="imageFile" id="imageFile"
+                                   class="custom-file-input"> <label for="imageFile"
+                                                                     class="custom-file-label">Choise file</label>
+                        </div>
 
-						</div>
+                    </div>
 
-						<div class="form-group">
-							<label class="font-weight-bold">Prenom</label> <input type="text"
-								th:field="*{cin}" class="form-control"
-								th:errorclass="is-invalid"> <span
-								th:if="${#fields.hasErrors('cin')}" th:errors="*{cin}"
-								class="text-danger"></span>
-						</div>
+                    <div class="form-group">
+                        <label class="font-weight-bold">Carte d'identité :</label>
+                        <input type="text" th:field="*{cin}" class="form-control"
+                               th:errorclass="is-invalid">
+                        <span th:if="${#fields.hasErrors('cin')}" th:errors="*{cin}" class="text-danger"></span>
+                    </div>
 
-						<div class="form-group">
-							<label class="font-weight-bold">Prenom :</label> <input
-								placeholder="Prenom" type="text" th:field="*{prenom}"
-								class="form-control" th:errorclass="is-invalid"> <span
-								th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"
-								class="text-danger"></span>
-						</div>
-						<div class="form-group">
-							<label class="font-weight-bold">Nom :</label> <input
-								placeholder="Nom" type="text" th:field="*{nom}"
-								class="form-control" th:errorclass="is-invalid"> <span
-								th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"
-								class="text-danger"></span>
-						</div>
-						<div class="form-group">
-							<label class="font-weight-bold">Telephone :</label> <input
-								placeholder="Telephone" type="text" th:field="*{telephone}"
-								class="form-control" th:errorclass="is-invalid"> <span
-								th:errors="*{telephone}" class="text-danger"></span>
-						</div>
-						<div class="form-group">
-							<label class="font-weight-bold">Email :</label> <input
-								placeholder="Email" type="text" th:field="*{email}"
-								th:errorclass="is-invalid" class="form-control"> <span
-								th:errors="*{email}" class="text-danger"></span>
-						</div>
-						<div class="form-group">
-							<label class="font-weight-bold">Date de naissance :</label> <input
-								type="date" th:field="*{dateNaissance}" class="form-control"
-								th:errorclass="is-invalid"> <span
-								th:errors="*{dateNaissance}" class="text-danger"></span>
-						</div>
-						<div class="form-group">
-							<label class="font-weight-bold">Adresse :</label> <input
-								placeholder="Address" type="text" th:field="*{address}"
-								class="form-control" th:errorclass="is-invalid"> <span
-								th:errors="*{address}" class="text-danger"></span>
-						</div>
-						<div class="form-group">
-							<label class="font-weight-bold mr-3">Sexe :</label>
+                    <div class="form-group">
+                        <label class="font-weight-bold">Prenom :</label> <input
+                            placeholder="Prenom" type="text" th:field="*{prenom}"
+                            class="form-control" th:errorclass="is-invalid"> <span
+                            th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"
+                            class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="font-weight-bold">Nom :</label> <input
+                            placeholder="Nom" type="text" th:field="*{nom}"
+                            class="form-control" th:errorclass="is-invalid"> <span
+                            th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"
+                            class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="font-weight-bold">Telephone :</label> <input
+                            placeholder="Telephone" type="text" th:field="*{telephone}"
+                            class="form-control" th:errorclass="is-invalid"> <span
+                            th:errors="*{telephone}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="font-weight-bold">Email :</label> <input
+                            placeholder="Email" type="text" th:field="*{email}"
+                            th:errorclass="is-invalid" class="form-control"> <span
+                            th:errors="*{email}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="font-weight-bold">Date de naissance :</label> <input
+                            type="date" th:field="*{dateNaissance}" class="form-control"
+                            th:errorclass="is-invalid"> <span
+                            th:errors="*{dateNaissance}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="font-weight-bold">Adresse :</label> <input
+                            placeholder="Address" type="text" th:field="*{address}"
+                            class="form-control" th:errorclass="is-invalid"> <span
+                            th:errors="*{address}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="font-weight-bold mr-3">Sexe :</label>
 
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" th:field="*{sexe}"
-									th:value="1"> <label class="form-check-label"
-									th:for="${#ids.prev('sexe')}">Homme</label>
-							</div>
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" th:field="*{sexe}"
-									th:value="0"> <label class="form-check-label"
-									th:for="${#ids.prev('sexe')}">Femme</label>
-							</div>
-							<span th:errors="*{sexe}" class="text-danger"></span>
-						</div>
-						<div class="form-group">
-							<button class="btn btn-success text-white offset-10">Enregister</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</section>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" th:field="*{sexe}"
+                                   th:value="1"> <label class="form-check-label"
+                                                        th:for="${#ids.prev('sexe')}">Homme</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" th:field="*{sexe}"
+                                   th:value="0"> <label class="form-check-label"
+                                                        th:for="${#ids.prev('sexe')}">Femme</label>
+                        </div>
+                        <span th:errors="*{sexe}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success text-white offset-10">Enregister</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 
 </body>
 </html>

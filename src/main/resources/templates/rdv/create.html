@@ -25,7 +25,7 @@
 
                     <div class="form-group">
                         <label class="font-weight-bold">Specialité : </label>
-                        <select class="form-control select2" name="idspec">
+                        <select class="form-control select2" th:name="idspec">
                             <option disabled selected>Selectionner une specialité</option>
                             <option th:each="sp:${spes}" th:text="${sp.getNom()}" th:value="${sp.getId()}"></option>
                         </select>

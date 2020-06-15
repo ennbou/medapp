@@ -97,6 +97,7 @@ public class RDVController {
         model.addAttribute("rdvs", list);
         model.addAttribute("formSearch", searchFrom);
         model.addAttribute("specialites", specialiteRepository.findAll());
+       
 
         return "rdv/list";
     }
@@ -112,6 +113,7 @@ public class RDVController {
         model.addAttribute("rdvs", list);
         model.addAttribute("formSearch", new SearchFrom());
         model.addAttribute("specialites", specialiteRepository.findAll());
+        model.addAttribute("medecins",medecinRepository.findAll());
         return "rdv/list";
     }
 
@@ -155,7 +157,8 @@ public class RDVController {
         consultationRepository.save(cslt);
         return "redirect:/rdv/list";
     }
-
+    
+    
 }
 
 @NoArgsConstructor

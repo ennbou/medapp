@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{fr_template.html(title='Medecin')}">
+	layout:decorate="~{fr_template.html(title='Medecins')}">
 <head>
 <meta charset="utf-8">
 </head>
@@ -29,6 +29,12 @@
 							<i class="fa fa-search"> Rechercher</i>
 						</button>
 					</div>
+					
+					<div class="float-right mb-4">
+							<a th:href="@{/medecin/ajouterMedecin}" class="btn btn-primary"><li
+								class="fa fa-plus-circle"></li>&nbsp;&nbsp;Ajouter</a>
+					</div>
+					
 				</form>
 				<p />
 				<div class="justify-content-center table-responsive">
@@ -76,14 +82,16 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="d-flex justify-content-center">
-					<ul class="nav nav-pills">
-						<li th:each="page,status:${pages}" class="btn"><a
-							th:class="${status.index==currentPage?'btn btn-warning':'btn btn-light'}"
-							th:href="@{/medecin/listeMedecin(page=${status.index},size=${size},motCle=${motCle})}"
-							th:text="${status.index+1}"> </a></li>
+				<nav aria-label="pagination" th:if="${#lists.size(pages) > 1}">
+					<ul class="pagination pagination-sm justify-content-center">
+						<li th:class="${status.index==currentPage?'page-item active':'page-item'}"
+							th:each="page,status:${pages}">
+							<a class="page-link"
+							   th:href="@{/medecin/listeMedecin(page=${status.index},size=${size},motCle=${motCle})}"
+							   th:text="${status.index+1}"></a>
+						</li>
 					</ul>
-				</div>
+				</nav>
 			</div>
 		</div>
 	</section>
