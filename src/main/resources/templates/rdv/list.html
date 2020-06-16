@@ -113,13 +113,14 @@
 			<tbody>
 
 				<tr th:each="rdv : ${rdvs}" th:data-id="${rdv.id}">
-					<td th:text="${#temporals.format(rdv.date, 'dd/MM/yyyy')}"></td>
+					<td th:text="${#temporals.format(rdv.date, 'dd/MM/yyyy HH:mm')}"></td>
 					
 					<td class="text-center">
-						<button th:if="${rdv.consultation}" type="button" class="btn btn-warning">
+						<button th:if="${rdv.consultation}" type="button" class="btn btn-success">
 							<span class="fa fa-check-square"></span>
 						</button>
-						<button th:unless="${rdv.consultation}" type="button" class="btn btn-warning" data-toggle="modal"
+						
+						<button th:unless="${rdv.consultation}" type="button" class="btn btn-danger" data-toggle="modal"
 							data-target="#exampleModalCenter">
 							<span class="fa fa-square"></span>
 						</button>
@@ -151,7 +152,7 @@
 										<div class="form-group">
 											<label class="font-weight-bold">Medecin : </label> 
 											<select class="form-control select2" th:name="idMedecin">
-												<option disabled selected>Selectionner un medecin</option>
+												<option disabled>Selectionner un(e) medecin(e)</option>
 												<option th:each="medecin:${medecins}"
 													th:text="${medecin.getNom()+' '+ medecin.getPrenom()}"
 													th:value="${medecin.getId()}"></option>
