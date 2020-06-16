@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-      layout:decorate="~{fr_template.html(title='Nom prenom')}">
+      layout:decorate="~{fr_template.html(title='Patient')}">
 <head>
 <meta charset="utf-8">
 </head>
@@ -29,13 +29,13 @@
             </div>
             <div class="col-md-8">
                 <div class="card-header bg-transparent border-0" sec:authorize="hasRole('ROLE_SECRETAIRE') OR hasRole('ROLE_PATIENT')">
-                    <button class="btn btn-primary"><i class="fas fa-edit"></i>Modifier</button>
+                    <a th:href="@{/patient/{id}/edit (id=${patient.id})}" class="btn btn-primary float-right"><i class="fas fa-edit"></i>Modifier</a>
                 </div>
                 <div class="card-body">
                     <h3 class="card-title" th:text="|${patient.getNom()} ${patient.getPrenom()}|"><i class="fas fa-male"></i></h3>
+                    <p class="card-text" th:text="${#temporals.format(patient.dateNaissance, 'dd/MM/yyyy')}"></p>
                     <p class="card-text" th:text="${patient.cin}"></p>
                     <p class="card-text" th:text="${patient.address}"></p>
-                    <p class="card-text" th:text="${patient.dateNaissance}"></p>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Demander un nouveau Rendez-Vous</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Nouveau rendez-vous</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -58,7 +58,7 @@
                         <div class="form-group">
                             <label class="font-weight-bold">Specialité : </label>
                             <select class="form-control select2" th:name="idspec">
-                            <option disabled selected>Selectionner une specialité</option>
+                            	<option disabled selected>Selectionner une specialité</option>
                                 <option th:each="sp:${spes}" th:text="${sp.getNom()}" th:value="${sp.getId()}"></option>
                             </select>
                         </div>
@@ -68,12 +68,11 @@
                             <textarea class="form-control" placeholder="Saisir une description..." rows="3"
                                       type="text" th:name="description"></textarea>
                         </div>
-						<button type="submit" class="btn btn-primary">Demander</button>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary">Envoyer</button>
+                    		<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                		</div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    
                 </div>
             </div>
         </div>
@@ -82,10 +81,10 @@
     <div class="card p-3">
         <div class="card-headerd text-right">
             <button class="btn btn-primary" sec:authorize="hasRole('ROLE_SECRETAIRE') OR hasRole('ROLE_PATIENT')">
-                <i class="fas fa-plus"></i>  Ajouter un Rendez-Vous
+                <i class="fas fa-plus"></i>  Ajouter un rendez-vous
             </button>
             <button sec:authorize="hasRole('ROLE_PATIENT')" type="button" class="btn btn-primary" data-toggle="modal"
-                    data-target="#exampleModalCenter"><i class="fas fa-plus"></i> Demander un Rendez-Vous
+                    data-target="#exampleModalCenter"><i class="fas fa-plus"></i> Nouveau rendez-vous
             </button>
         </div>
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -93,7 +92,7 @@
                 <a class="nav-link active mx-3" id="pills-rdv-tab" data-toggle="pill" href="#pills-consultation" role="tab"
                    aria-controls="pills-rdv" aria-selected="true">
                     <span sec:authorize="hasRole('ROLE_PATIENT')">Mes</span>
-                    Consultations
+                    consultations
                 </a>
             </li>
             <li class="nav-item" role="presentation">
@@ -101,7 +100,7 @@
                    role="tab"
                    aria-controls="pills-consultation" aria-selected="false">
                     <span sec:authorize="hasRole('ROLE_PATIENT')">Mes</span>
-                   Rendez_vous
+                   rendez-vous
                 </a>
             </li>
         </ul>
@@ -110,62 +109,33 @@
                 <table id="data-table" class="table table-striped table-bordered">
                     <thead>
                     <tr>
-                        <th>Date de création</th>
-                        <th>Statut</th>
-                        <th>Specialité</th>
-                        <th>Date de Rendez-Vous</th>
-                        <th>Description</th>
+                        <th>Date</th>
+                        <th>Heure d'entrée</th>
+                        <th>Heure de sortie</th>
+                        <th>Medecin concerné</th>
+                        <th>Resultat</th>
                     </tr>
                     </thead>
                     <tbody>
-
-                    <tr data-id="rdv.id">
-                        <td>2020-05-24 20:23:31</td>
-                        <td class="text-center">
-                            <span class="text-success">
-                                <span class="fas fa-check-circle"></span>
-                            </span>
+						<tr th:each="cslt : ${consultations}" data-id="${cslt.id}">
+                        <td th:text="${#temporals.format(cslt.date,'dd/MM/yyyy')}"></td>
+                        <td th:if="${#strings.equals(cslt.heure_debut,'00:00:01')}"></td>
+                        <td th:unless="${#strings.equals(cslt.heure_debut,'00:00:01')}" th:text="${#temporals.format(cslt.heure_debut,'HH:mm')}"></td>
+                        
+                        <td th:if="${#strings.equals(cslt.heure_fin,'00:00:01')}"></td>
+                        <td th:unless="${#strings.equals(cslt.heure_fin,'00:00:01')}" th:text="${#temporals.format(cslt.heure_fin,'HH:mm')}"></td>
+                       
+                        <td th:text="${cslt.medecin.nom}+' '+${cslt.medecin.prenom}"></td>
+                        <td>
+                            <div class="text-center">
+                                <a class="btn btn-info"
+                                   th:href="@{/consult/affiche(id=${cslt.id})}">
+                                    <li class="fa fa-address-card"></li>
+                                </a>
+                            </div>
                         </td>
-
-                        <td>specialite 1</td>
-                        <td>2020-06-03</td>
-                        <td>la description de RDV par le patient.</td>
                     </tr>
-                    <tr data-id="rdv.id">
-                        <td>2020-05-24 20:23:31</td>
-                        <td class="text-center">
-                            <span class="text-success">
-                                <span class="fas fa-check-circle"></span>
-                            </span>
-                        </td>
-                        <td>specialite 1</td>
-                        <td>2020-06-03</td>
-                        <td>la description de RDV par le patient.</td>
-                    </tr>
-                    <tr data-id="rdv.id">
-                        <td>2020-05-24 20:23:31</td>
-                        <td class="text-center">
-                            <span class="text-success">
-                                <span class="fas fa-check-circle"></span>
-                            </span>
-                        </td>
-
-                        <td>specialite 1</td>
-                        <td>2020-06-03</td>
-                        <td>la description de RDV par le patient.</td>
-                    </tr>
-                    <tr data-id="rdv.id">
-                        <td>2020-05-24 20:23:31</td>
-                        <td class="text-center">
-                            <span class="text-success">
-                                <span class="fas fa-check-circle"></span>
-                            </span>
-                        </td>
-
-                        <td>specialite 1</td>
-                        <td>2020-06-03</td>
-                        <td>la description de RDV par le patient.</td>
-                    </tr>
+                    
                     </tbody>
                 </table>
             </div>
@@ -173,9 +143,9 @@
                 <table id="data-table2" class="table table-striped table-bordered">
                     <thead>
                     <tr>
-                        <th>Date creation</th>
-                        <th>Statut</th>
-                        <th>Specialite</th>
+                        <th>Date de création</th>
+                        <th>Status</th>
+                        <th>Specialité</th>
                         <th>Date RDV</th>
                         <th>Description</th>
                     </tr>
@@ -183,7 +153,7 @@
                     <tbody>
 
                     <tr data-id="rdv.id" th:each="rdv:${rdvs}">
-                        <td th:text="${#temporals.format(rdv.date, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                        <td th:text="${#temporals.format(rdv.date, 'dd/MM/yyyy HH:mm')}"></td>
                         <td class="text-center">
                             <button type="button" class="btn btn-warning" >
                                 <span class="fas fa-circle"></span>
@@ -191,7 +161,8 @@
                         
                         </td>
                         <td th:text="${rdv.specialite.nom}"></td>
-                        <td th:text="ppp">-----------</td>
+                        <td th:if="${rdv.consultation}" th:text="${#temporals.format(rdv.consultation.date, 'dd/MM/yyyy')}"></td>
+            			<td th:unless="${rdv.consultation}"></td>
                         <td th:text="${rdv.description}"></td>
                     </tr>
                     </tbody>

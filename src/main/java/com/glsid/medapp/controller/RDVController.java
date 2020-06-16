@@ -112,6 +112,7 @@ public class RDVController {
         model.addAttribute("pageActual", page);
         model.addAttribute("size", size);
         model.addAttribute("rdvs", list);
+        model.addAttribute("localDate", LocalDate.now());
         model.addAttribute("formSearch", new SearchFrom());
         model.addAttribute("specialites", specialiteRepository.findAll());
         model.addAttribute("medecins",medecinRepository.findAll());
@@ -156,6 +157,23 @@ public class RDVController {
         cslt.setHeure_debut(LocalTime.of(0,0,1));
         cslt.setHeure_fin(LocalTime.of(0,0,1));
         rendezVousRepository.save(rv);
+        consultationRepository.save(cslt);
+        return "redirect:/rdv/list";
+    }
+    
+    @PostMapping("/save")
+    public String saveConsult(@RequestParam Long idRDV, @RequestParam Long idMedecin, 
+    		@RequestParam String daterdv) {
+    	
+        Consultation cslt=new Consultation();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dateRDV = LocalDate.parse(daterdv, formatter);
+        cslt.setDate(dateRDV);
+        cslt.setMedecin(medecinRepository.findById(idMedecin).get());
+        cslt.setResultat("");
+        cslt.setHeure_debut(LocalTime.of(0,0,1));
+        cslt.setHeure_fin(LocalTime.of(0,0,1));
+        cslt.setRendezVous(rendezVousRepository.findById(idRDV).get());
         consultationRepository.save(cslt);
         return "redirect:/rdv/list";
     }

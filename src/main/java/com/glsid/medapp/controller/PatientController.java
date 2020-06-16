@@ -25,9 +25,7 @@ import com.glsid.medapp.service.IPatientService;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -163,22 +161,12 @@ public class PatientController {
     @PostMapping("/detail/save")
     public String save(HttpServletRequest request,@RequestParam  Long idpatient) {
     	RendezVous rv=new RendezVous();
-    
-    	//Consultation c=new Consultation();
     	rv.setDescription(request.getParameter("description").trim());
     	rv.setSpecialite(specialiteRepository.findById(Long.valueOf(request.getParameter("idspec").trim())).get());
     	rv.setDate(LocalDateTime.now());
     	rv.setDossier(patientRepository.findById(idpatient).get().getDossier());
-		/*
-		 * c.setDate(LocalDate.now()); c.setRendezVous(rv);
-		 */
-    	rv.setConsultation(null);
-    	
-    
-    	
-    	
-    	
-    	
+    	//
+    	//rv.setConsultation(new Consultation());
         rendezVousRepository.save(rv);
         
         return "redirect:/patient/detail/" + idpatient;

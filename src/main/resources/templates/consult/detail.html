@@ -33,7 +33,7 @@
 									<div class="col-3">
 										<span class="font-weight-bold">Date de consultation :</span>
 									</div> 
-									<span th:text="${consult.date}" class="col-9"> </span>
+									<span th:text="${#temporals.format(consult.date,'dd/MM/yyyy')}" class="col-9"> </span>
 								</div>
 								<br>
 								<div class="row">

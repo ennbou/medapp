@@ -75,12 +75,12 @@
                         <td th:text="${cslt.rendezVous.dossier.code}"></td>
                         <td
                                 th:text="${cslt.rendezVous.dossier.patient.nom}+' '+${cslt.rendezVous.dossier.patient.prenom}"></td>
-                        <td th:text="${cslt.date}"></td>
+                        <td th:text="${#temporals.format(cslt.date,'dd/MM/yyyy')}"></td>
                         <td th:if="${#strings.equals(cslt.heure_debut,'00:00:01')}"></td>
-                        <td th:unless="${#strings.equals(cslt.heure_debut,'00:00:01')}" th:text="${cslt.heure_debut}"></td>
+                        <td th:unless="${#strings.equals(cslt.heure_debut,'00:00:01')}" th:text="${#temporals.format(cslt.heure_debut,'HH:mm')}"></td>
                         
                         <td th:if="${#strings.equals(cslt.heure_fin,'00:00:01')}"></td>
-                        <td th:unless="${#strings.equals(cslt.heure_fin,'00:00:01')}" th:text="${cslt.heure_fin}"></td>
+                        <td th:unless="${#strings.equals(cslt.heure_fin,'00:00:01')}" th:text="${#temporals.format(cslt.heure_fin,'HH:mm')}"></td>
                        
                         <td th:text="${cslt.medecin.nom}+' '+${cslt.medecin.prenom}"></td>
                         <td>

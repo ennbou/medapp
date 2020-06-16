@@ -35,7 +35,7 @@ public class ConsultationController {
             @RequestParam(name = "page", defaultValue = "0") int page,
             @RequestParam(name = "size", defaultValue = "10") int size) {
 		//Page<Consultation> consults = consultationRepository.findAll(PageRequest.of(page, size));
-		d1= LocalDate.of(2018, 1, 1);
+		d1= LocalDate.of(2020, 1, 1);
 		d2= LocalDate.now();
 		Page<Consultation> consults = consultationRepository.searchUsingDate(search, d1, d2, PageRequest.of(page, size));
         int[] pages = new int[consults.getTotalPages()];
@@ -81,7 +81,7 @@ public class ConsultationController {
 			return "consult/consultPatient";
 		}
 		consultationRepository.save(consultation);
-		return "redirect:"+"";
+		return "redirect:";
 	}
 	
 	// delete consultation
