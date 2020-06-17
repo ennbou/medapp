@@ -22,14 +22,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-    	
+
     	http.formLogin().loginPage("/login").permitAll().and().logout().permitAll();
     	
     	http.authorizeRequests()
     			.antMatchers("/img/**","/css/**","/js/**","/webfonts/**","/webjars/**","/h2-console/**").permitAll();
     	
+    	// not yet specified user connect --> updated that {\\\\d+}
         http.authorizeRequests()
-                .antMatchers("/","/patient/detail", "/patient/detail/**")
+                .antMatchers("/","/patient/detail","/patient/detail/{\\\\d+}","/patient/{\\\\d+}/edit",
+                		"/patient/{\\\\d+}/update","/consult/affiche**")
                 .hasRole("PATIENT");
         
         http.authorizeRequests()

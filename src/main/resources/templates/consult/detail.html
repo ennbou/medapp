@@ -7,7 +7,7 @@
 </head>
 <body>
 	<section layout:fragment="content">
-		<nav aria-label="breadcrumb">
+		<nav aria-label="breadcrumb" sec:authorize="hasRole('ROLE_SECRETAIRE')">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="/consult">Consultation</a></li>
 				<li class="breadcrumb-item"><a href="#">Résultat</a></li>
@@ -21,7 +21,7 @@
 						<label>Résultat de "<strong th:text="${consult.rendezVous.dossier.patient.nom}+' '+${consult.rendezVous.dossier.patient.prenom}"></strong>" :</label>
 						</div>
 						<div class="card-body">
-							<form th:action="@{/consult}" method="get">
+							<form th:action="@{/}" method="get">
 								<div class="row">
 									<div class="col-3">
 										<span class="font-weight-bold">Dossier médical Nᵒ :</span>
@@ -48,7 +48,7 @@
 								<br>
 								<div class="form-row text-center">
 								<div class="col-12">
-								<button class="btn btn-success text-white" >Retourner à la liste</button>
+								<button class="btn btn-success text-white" >Retourner</button>
 								</div>
 								</div>
 							</form>

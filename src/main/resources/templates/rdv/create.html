@@ -26,7 +26,7 @@
                     <div class="form-group">
                         <label class="font-weight-bold">Specialité : </label>
                         <select class="form-control select2" th:name="idspec">
-                            <option disabled selected>Selectionner une specialité</option>
+                            <option disabled>Selectionner une specialité</option>
                             <option th:each="sp:${spes}" th:text="${sp.getNom()}" th:value="${sp.getId()}"></option>
                         </select>
                     </div>
@@ -34,7 +34,7 @@
                     <div class="form-group">
                         <label class="font-weight-bold">Medecin : </label>
                         <select class="form-control select2" name="idMedecin">
-                            <option disabled selected>Selectionner un(e) medecin(e)</option>
+                            <option disabled>Selectionner un(e) medecin(e)</option>
                             <option th:each="md:${medecins}" th:text="${md.getNom()+' '+md.getPrenom()}" th:value="${md.getId()}"></option>
                         </select>
 

@@ -19,8 +19,4 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     @Query("SELECT p FROM Patient p WHERE p.nom LIKE %:motCle% or p.cin LIKE %:motCle%")
     public Page<Patient> listPatient(@Param("motCle") String motCle, Pageable pageable);
 
-
-
-
-
 }

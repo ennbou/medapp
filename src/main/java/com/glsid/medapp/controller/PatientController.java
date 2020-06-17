@@ -165,8 +165,6 @@ public class PatientController {
     	rv.setSpecialite(specialiteRepository.findById(Long.valueOf(request.getParameter("idspec").trim())).get());
     	rv.setDate(LocalDateTime.now());
     	rv.setDossier(patientRepository.findById(idpatient).get().getDossier());
-    	//
-    	//rv.setConsultation(new Consultation());
         rendezVousRepository.save(rv);
         
         return "redirect:/patient/detail/" + idpatient;

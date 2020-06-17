@@ -11,7 +11,7 @@
 
 <section layout:fragment="content">
 
-    <nav aria-label="breadcrumb" sec:authorize="hasRole('ROLE_SECRETAIRE') OR hasRole('ROLE_PATIENT')">
+    <nav aria-label="breadcrumb" sec:authorize="hasRole('ROLE_SECRETAIRE')">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Patient</a></li>
             <li class="breadcrumb-item active"><a href="#">Liste</a></li>
@@ -80,7 +80,7 @@
 
     <div class="card p-3">
         <div class="card-headerd text-right">
-            <button class="btn btn-primary" sec:authorize="hasRole('ROLE_SECRETAIRE') OR hasRole('ROLE_PATIENT')">
+            <button class="btn btn-primary" sec:authorize="hasRole('ROLE_SECRETAIRE')">
                 <i class="fas fa-plus"></i>  Ajouter un rendez-vous
             </button>
             <button sec:authorize="hasRole('ROLE_PATIENT')" type="button" class="btn btn-primary" data-toggle="modal"
@@ -92,7 +92,7 @@
                 <a class="nav-link active mx-3" id="pills-rdv-tab" data-toggle="pill" href="#pills-consultation" role="tab"
                    aria-controls="pills-rdv" aria-selected="true">
                     <span sec:authorize="hasRole('ROLE_PATIENT')">Mes</span>
-                    consultations
+                    Consultations
                 </a>
             </li>
             <li class="nav-item" role="presentation">
@@ -100,7 +100,7 @@
                    role="tab"
                    aria-controls="pills-consultation" aria-selected="false">
                     <span sec:authorize="hasRole('ROLE_PATIENT')">Mes</span>
-                   rendez-vous
+                   	Rendez-vous
                 </a>
             </li>
         </ul>
