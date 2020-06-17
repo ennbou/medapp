@@ -66,8 +66,6 @@
                         <th>Heure de sortie</th>
                         <th>Medecin concerné</th>
                         <th></th>
-                        <th></th>
-                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -84,35 +82,31 @@
                        
                         <td th:text="${cslt.medecin.nom}+' '+${cslt.medecin.prenom}"></td>
                         <td>
-                            <div class="myDIV">
-                                <a class="btn btn-info"
+                        <div class="row">
+                            <div class="col-4">
+                                <a class="btn btn-info myDIV"
                                    th:href="@{/consult/affiche(id=${cslt.id})}">
                                     <li class="fa fa-address-card"></li>
                                 </a>
+                                <p class="hide1">Resultat</p>
                             </div>
-                            <span class="hide1">Resultat</span>
-                        </td>
-                        <td>
-                            <div class="myDIV">
-                                <a class="btn btn-success"
+                            <div class="col-4">
+                                <a class="btn btn-success myDIV"
                                    th:href="@{/consult/modification(id=${cslt.id})}">
                                     <li class="fa fa-edit"></li>
                                 </a>
+                                <p class="hide2">Modifier</p>
                             </div>
-                            <span class="hide2">Modifier</span>
-                        </td>
-                        <td>
-                            <div class="myDIV">
-                                <a
-                                        onclick="javascript:return confirm('Etes-vous sûr de vouloir supprimer cette consultation ?')"
+                            <div class="col-4">
+                                <a onclick="javascript:return confirm('Etes-vous sûr de vouloir supprimer cette consultation ?')"
                                         th:href="@{/consult/suppression(id=${cslt.id}, page=${pageActual}, size=${size})}"
-                                        class="btn btn-danger">
+                                        class="btn btn-danger myDIV">
                                     <li class="fa fa-trash"></li>
                                 </a>
+                                <p class="hide3">Supprimer</p>
                             </div>
-                            <span class="hide3">Supprimer</span>
+                            </div>
                         </td>
-
                     </tr>
 
                     <tr th:if="${consults.empty}">
@@ -121,8 +115,6 @@
                         <td></td>
                         <td>Aucun</td>
                         <td>resultat !</td>
-                        <td></td>
-                        <td></td>
                         <td></td>
                         <td></td>
                     </tr>
