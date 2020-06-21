@@ -24,7 +24,7 @@ import java.util.Random;
 @SpringBootApplication()
 public class MedappApplication implements ApplicationRunner {
 
-    PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    private static PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
     @Autowired
     PatientRepository patientRepository;
@@ -43,6 +43,9 @@ public class MedappApplication implements ApplicationRunner {
     @Autowired
     ExceptionRepository exceptionRepository;
 
+    public static PasswordEncoder getEncoder() {
+    	return encoder;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(MedappApplication.class, args);
@@ -73,10 +76,10 @@ public class MedappApplication implements ApplicationRunner {
 
     void initSecretaire() {
         Secretaire s1 = Secretaire.builder().cin("MC1243").prenom("prenom 1").nom("nom 1").
-                telephone("06347853423").email("secretaire1@medapp.ma").password(encoder.encode("pass"))
+                telephone("0634785342").email("secretaire1@medapp.ma").password(encoder.encode("pass"))
                 .roles(ROLE.ROLE_SECRETAIRE.name()).build();
         Secretaire s2 = Secretaire.builder().cin("MC973497").prenom("prenom 2").nom("nom 2").
-                telephone("069749").email("secretaire2@medapp.ma").password(encoder.encode("pass"))
+                telephone("0697495651").email("secretaire2@medapp.ma").password(encoder.encode("pass"))
                 .roles(ROLE.ROLE_SECRETAIRE.name()).build();
 
         secretaireRepository.save(s1);
@@ -97,9 +100,9 @@ public class MedappApplication implements ApplicationRunner {
     void initMedecine() {
         specialiteRepository.findAll().forEach(spec -> {
             Medecin m = Medecin.builder().nom("nom " + (spec.getId()) + 1).cin("MC12430" + spec.getId())
-            		.prenom("prenom " + (spec.getId()) + 1).telephone("06347853423")
+            		.prenom("prenom " + (spec.getId()) + 1).telephone("063478534")
             		.email("medecin" + spec.getId() + "@medapp.ma").password(encoder.encode("pass"))
-                    .roles(ROLE.ROLE_PATIENT.name() + "," + ROLE.ROLE_ADMIN.name() + "," + ROLE.ROLE_SECRETAIRE.name()).build();
+                    .roles(ROLE.ROLE_ADMIN.name() + "," + ROLE.ROLE_SECRETAIRE.name()).build();
             m.setSpecialite(spec);
             medecinRepository.save(m);
         });

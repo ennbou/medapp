@@ -68,15 +68,6 @@ public class ConsultationController {
 		return "redirect:" + id;
 	}
 
-	// show detail
-	@GetMapping(path = "/consult/affiche")
-	public String show(Model model, Long id) {
-		Consultation consult = consultationRepository.findById(id).get();
-		model.addAttribute("consult", consult);
-		model.addAttribute("medecins", medecinRepository.findAll());
-		return "consult/detail";
-	}
-
 	// save consultation
 	@PostMapping(path = "/consult/save")
 	public String save(@Valid Consultation consultation, BindingResult bindingResult) {
@@ -132,7 +123,7 @@ public class ConsultationController {
 
 	// ERROR
 	@ExceptionHandler(RuntimeException.class)
-	@PostMapping(path = { "/404", "/403", "/500", "**/**/error" })
+	@PostMapping(path = { "/404", "/403", "/500", "/**/404","/**/403","/**/500" })
 	public String accessDenied() {
 		return "erreur";
 	}

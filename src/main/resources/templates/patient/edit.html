@@ -30,7 +30,7 @@
                 <form th:action="@{update}" method="post" th:object="${patient}"
                       enctype="multipart/form-data">
 
-                    <div class="row offset-2 text-center w-50 h-50 mb-5">
+                    <div class="row offset-3 w-50 h-50 mb-5">
                         <div class="col w-50 h-50">
                             <img th:src="@{/img/profiles/{img}(img=${patient.getImage()})}"
                                  class="col mx-auto img-fluid"/>
@@ -38,8 +38,8 @@
 
                         <div class="custom-file">
                             <input type="file" name="imageFile" id="imageFile"
-                                   class="custom-file-input"> <label for="imageFile"
-                                                                     class="custom-file-label">Choise file</label>
+                                   class="custom-file-input"> 
+                                   <label for="imageFile" class="custom-file-label">Choisir une nouvelle photo...</label>
                         </div>
 
                     </div>
@@ -104,7 +104,18 @@
                         </div>
                         <span th:errors="*{sexe}" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
+                    <hr class="sidebar-divider my-0">
+						<div class="form-group">
+							<label class="font-weight-bold">Nouveau mot de passe :</label> <input
+								placeholder="******" type="password" th:name="passwordPatient"
+								class="form-control">
+								 <small id="passwordHelpInline" class="text-muted">
+      								Ne taper rien si vous n'êtes pas besoin de changer le mot de passe actuel.
+    							</small>
+    							<input placeholder="Address" type="hidden" th:field="*{password}">
+						</div>
+						<hr class="sidebar-divider my-0">
+                    <div class="form-group marginTop">
                         <button class="btn btn-success text-white offset-10">Enregister</button>
                     </div>
                 </form>

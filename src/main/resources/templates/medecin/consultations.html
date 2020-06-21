@@ -26,20 +26,23 @@
 					<th>Date</th>
 					<th>Heure d'entrée</th>
 					<th>Heure de sortie</th>
-					<th>Resultat</th>
 				</tr>
 			</thead>
 			<tbody>
 
-				<tr th:each="consultation : ${consultations}">
+				<tr th:each="cslt : ${consultations}">
 
-					<td th:text="${consultation.getRendezVous().getDossier().code}"></td>
-					<td
-						th:text="${consultation.getRendezVous().getDossier().getPatient().nom}+' '+${consultation.getRendezVous().getDossier().getPatient().prenom}"></td>
-					<td th:text="${consultation.date}"></td>
-					<td th:text="${consultation.heure_debut}"></td>
-					<td th:text="${consultation.heure_fin}"></td>
-					<td th:text="${consultation.resultat}"></td>
+					<td th:text="${cslt.rendezVous.dossier.code}"></td>
+								<td
+									th:text="${cslt.rendezVous.dossier.patient.nom}+' '+${cslt.rendezVous.dossier.patient.prenom}"></td>
+								<td th:text="${#temporals.format(cslt.date,'dd/MM/yyyy')}"></td>
+								<td th:if="${#strings.equals(cslt.heure_debut,'00:00:01')}">--:--</td>
+								<td th:unless="${#strings.equals(cslt.heure_debut,'00:00:01')}"
+									th:text="${#temporals.format(cslt.heure_debut,'HH:mm')}"></td>
+
+								<td th:if="${#strings.equals(cslt.heure_fin,'00:00:01')}">--:--</td>
+								<td th:unless="${#strings.equals(cslt.heure_fin,'00:00:01')}"
+									th:text="${#temporals.format(cslt.heure_fin,'HH:mm')}"></td>
 				</tr>
 			</tbody>
 			<tfoot>
@@ -49,7 +52,6 @@
 					<th>Date</th>
 					<th>Heure d'entrée</th>
 					<th>Heure de sortie</th>
-					<th>Resultat</th>
 				</tr>
 			</tfoot>
 		</table>

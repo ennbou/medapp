@@ -25,19 +25,18 @@
 					<form th:action="@{save}" method="post" th:object="${patient}"
 						enctype="multipart/form-data">
 
-						<div class="row offset-2 text-center w-50 h-50 mb-5">
-							<img src="/img/hf.png" id="profile-img-tag"
-								class="col mx-auto img-fluid" />
+						<div class="row offset-3 w-50 h-50 mb-4">
+							<img th:src="@{/img/h.png}" class="width" alt="image patient">
 							<div class="custom-file">
 								<input type="file" name="imageFile" id="imageFile"
 									class="custom-file-input"> <label for="imageFile"
-									class="custom-file-label">choisir un fichier</label>
+									class="custom-file-label">Ajouter une photo de ce patient</label>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="font-weight-bold">Carte d'identité :</label> <input
-								class="form-control" placeholder="Carte d'Identite" type="text"
+								class="form-control" placeholder="CIN" type="text"
 								th:field="*{cin}" />
 						</div>
 						<div class="form-group">
@@ -56,13 +55,13 @@
 						</div>
 						<div class="form-group">
 							<label class="font-weight-bold">Telephone :</label> <input
-								placeholder="Telephone" type="text" th:field="*{telephone}"
+								placeholder="06XXXXXXXX" type="text" th:field="*{telephone}"
 								class="form-control" th:errorclass="is-invalid"> <span
 								th:errors="*{telephone}" class="text-danger"></span>
 						</div>
 						<div class="form-group">
 							<label class="font-weight-bold">Email :</label> <input
-								placeholder="Email" type="text" th:field="*{email}"
+								placeholder="exemple@MedApp.com" type="text" th:field="*{email}"
 								th:errorclass="is-invalid" class="form-control"> <span
 								th:errors="*{email}" class="text-danger"></span>
 						</div>
@@ -74,7 +73,7 @@
 						</div>
 						<div class="form-group">
 							<label class="font-weight-bold">Adresse :</label> <input
-								placeholder="Address" type="text" th:field="*{address}"
+								placeholder="..." type="text" th:field="*{address}"
 								class="form-control" th:errorclass="is-invalid"> <span
 								th:errors="*{address}" class="text-danger"></span>
 						</div>
@@ -83,7 +82,7 @@
 
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="radio" th:field="*{sexe}"
-									th:value="1"> <label class="form-check-label"
+									th:value="1" checked> <label class="form-check-label"
 									th:for="${#ids.prev('sexe')}">Homme</label>
 							</div>
 							<div class="form-check form-check-inline">
@@ -93,7 +92,15 @@
 							</div>
 							<span th:errors="*{sexe}" class="text-danger"></span>
 						</div>
+						
+						<hr class="sidebar-divider my-0">
 						<div class="form-group">
+							<label class="font-weight-bold">Mot de passe :</label> <input
+								placeholder="******" type="password" th:name="password"
+								class="form-control">
+						</div>
+						<hr class="sidebar-divider my-0">
+						<div class="form-group marginTop">
 							<button class="btn btn-success text-white offset-10">Enregister</button>
 						</div>
 					</form>

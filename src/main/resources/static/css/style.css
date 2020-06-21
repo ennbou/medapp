@@ -4,6 +4,22 @@
 	background-size: cover;
 }
 
+.main {
+	background-image: url('/img/Main.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: lightblue;
+}
+
+.marginTop{
+	margin-top:2%;
+}
+
+.width{
+	width:60%;
+	margin:5%;
+}
+
 .hide1, .hide2, .hide3 {
 	margin-top:5px;
 	font-size: 9px;

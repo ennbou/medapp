@@ -41,7 +41,7 @@ public class Personne {
     private String email;
     @NotBlank
     @NotNull
-    private String password = "pass";
+    private String password;
     @NotNull
     private String roles = "";
 }

@@ -4,6 +4,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,12 +14,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.glsid.medapp.MedappApplication;
 import com.glsid.medapp.dao.MedecinRepository;
 import com.glsid.medapp.dao.SpecialiteRepository;
 import com.glsid.medapp.modele.Medecin;
 
 @Controller
 public class MedecinController {
+	
+	private PasswordEncoder encoder=MedappApplication.getEncoder();
 	
 	@Autowired
 	public MedecinRepository medecinRepository;
@@ -69,6 +73,7 @@ public class MedecinController {
             model.addAttribute("specialites", specialiteRepository.findAll());
             return "medecin/FormMedecin";
         }
+        medecin.setPassword(encoder.encode(medecin.getPassword()));
         medecinRepository.save(medecin);
         return "redirect:/medecin/listeMedecin";
     }

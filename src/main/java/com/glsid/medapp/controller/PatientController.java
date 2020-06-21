@@ -3,7 +3,9 @@ package com.glsid.medapp.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.glsid.medapp.MedappApplication;
 import com.glsid.medapp.config.MyUserDetails;
+import com.glsid.medapp.config.ROLE;
 import com.glsid.medapp.dao.ConsultationRepository;
 import com.glsid.medapp.dao.RendezVousRepository;
 import com.glsid.medapp.dao.SpecialiteRepository;
@@ -12,8 +14,8 @@ import com.glsid.medapp.modele.RendezVous;
 import com.glsid.medapp.dao.DossierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,8 +35,8 @@ import java.util.List;
 @RequestMapping("/patient")
 public class PatientController {
 
-    PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-
+	private PasswordEncoder encoder=MedappApplication.getEncoder();
+	
     @Autowired
     PatientRepository patientRepository;
     @Autowired
@@ -67,11 +69,12 @@ public class PatientController {
     public String create(Model model) {
         Patient p = new Patient();
         model.addAttribute("patient", p);
+        //model.addAttribute("dateNow",LocalDate.now());
         return "patient/create";
     }
 
     @PostMapping("/save")
-    public String save(@Valid Patient patient, @RequestParam("imageFile") MultipartFile imageFile, BindingResult bindingResult) {
+    public String save(@Valid Patient patient,@RequestParam("password") String pass, @RequestParam("imageFile") MultipartFile imageFile, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "/patient/create";
 
@@ -87,8 +90,11 @@ public class PatientController {
         }
 
 
-        patient.setPassword(encoder.encode("pass"));
-
+        patient.setPassword(encoder.encode(pass));
+        patient.setRoles(ROLE.ROLE_PATIENT.name());
+        //problem with image
+        patient.setImage("path");
+        //
         patientRepository.save(patient);
 
         return "redirect:/patient/index?motCle=";
@@ -104,12 +110,18 @@ public class PatientController {
     }
 
     @RequestMapping("/{id}/update")
-    public String update(@Valid Patient patient, @RequestParam("imageFile") MultipartFile imageFile, @PathVariable Long id) {
+    public String update(@Valid Patient patient,@RequestParam("passwordPatient") String password, 
+    		@RequestParam("imageFile") MultipartFile imageFile, @PathVariable Long id) {
         //Patient p = patientRepository.findById(id).get();
+    	
+    	if(!password.contentEquals("")) {
+    		patient.setPassword(encoder.encode(password));
+    	}
+    	
         String pathImage = imageFile.getOriginalFilename();
         if (!pathImage.isEmpty()) {
             patient.setImage(pathImage);
-//            p = patient;
+            // p = patient;
             try {
                 service.saveImage(imageFile);
             } catch (IOException e) {
@@ -119,7 +131,7 @@ public class PatientController {
 
         patientRepository.save(patient);
 
-        return "redirect:/patient/index?motCle=";
+        return "redirect:/patient/detail/"+patient.getId();
     }
 
     @RequestMapping("/{id}/delete")
@@ -134,6 +146,14 @@ public class PatientController {
         List<RendezVous> rdvs = patientRepository.findById(id).get().getDossier().getListRendezVous();
         model.addAttribute("rdvs", rdvs);
         List<Consultation> consultations = new ArrayList<>();
+        
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof MyUserDetails && ((MyUserDetails) principal).getAuthorities().contains(new SimpleGrantedAuthority("ROLE_PATIENT"))) {
+        	if(id!=((MyUserDetails) principal).getId()) {
+        		return "redirect:/patient/detail/"+((MyUserDetails) principal).getId();
+        	}
+        }
+        	
         
         rdvs.forEach(rdv -> {
             Consultation c = rdv.getConsultation();
@@ -158,6 +178,15 @@ public class PatientController {
         return "redirect:/patient/detail/" + id;
 
     }
+    
+    @PostMapping("/search")
+    public String search(@RequestParam("cin") String cin) {
+    	Patient p=patientRepository.search(cin);
+    	if(p!=null)
+    		return "redirect:/patient/detail/" + p.getId();
+    	return "redirect:/patient/index?motCle=";
+    }
+    
     @PostMapping("/detail/save")
     public String save(HttpServletRequest request,@RequestParam  Long idpatient) {
     	RendezVous rv=new RendezVous();

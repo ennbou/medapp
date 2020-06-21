@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,12 +13,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.glsid.medapp.MedappApplication;
 import com.glsid.medapp.dao.SecretaireRepository;
 import com.glsid.medapp.modele.Secretaire;
 
 
 @Controller
 public class SecretaireController {
+	
+	private PasswordEncoder encoder=MedappApplication.getEncoder();
 	
 	@Autowired
 	SecretaireRepository secretaireRepository;
@@ -58,6 +62,7 @@ public class SecretaireController {
 		if(bindingResult.hasErrors()) {
 			return "secretaire/FormSecretaire";
 		}
+		secretaire.setPassword(encoder.encode(secretaire.getPassword()));
 		secretaireRepository.save(secretaire);
 		return "redirect:/secretaire/listeSecretaire";
 	}

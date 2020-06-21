@@ -1,153 +1,197 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{fr_template.html(title='Consultations')}">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fr_template.html(title='Consultations')}">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 </head>
 <body>
 
-<section layout:fragment="content">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a th:href="@{/consult}">Consultation</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Liste</li>
-        </ol>
-    </nav>
+	<section layout:fragment="content">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a th:href="@{/consult}">Consultation</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Liste</li>
+			</ol>
+		</nav>
 
-    <div class="card">
-        <div class="card-header bg-light text-dark font-weight-bold">Liste des consultations</div>
-        <div class="card-body bg-light">
-            <div class="d-flex float-right">
-                <div class="container">
-                    <form th:action="@{/consult/recherche}" method="Post">
-                        <div class="row">
-                            <div class="col-12">
-                                <input class="form-control" type="search" name="search"
-                                       placeholder="nom, prenom ou nᵒ de dossier" th:value="${search}"/>
-                                <div class="row p-4 p-md-2">
-                                    <div class="col-3">
-                                        <input class="form-control text-center" type="text" disabled
-                                               th:value="Entre"/>
-                                    </div>
-                                    <div class="col-3">
-                                        <input class="form-control" type="Date" name="date1"
-                                               th:value="${date1}"/>
-                                    </div>
-                                    <div class="col-2">
-                                        <input class="form-control text-center" type="text" disabled
-                                               th:value="Et"/>
-                                    </div>
-                                    <div class="col-3">
-                                        <input class="form-control" type="Date" name="date2"
-                                               th:value="${date2}"/>
-                                    </div>
-                                    <div class="col-1">
-                                        <button class="btn btn-outline-secondary">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-
-            <div class="col-auto justify-content-center table-responsive">
-                <table class="table table-striped text-center" style="width: 100%">
-                    <thead class="thead-dark">
-                    <tr>
-                        <th>Dossier</th>
-                        <th>Patient</th>
-                        <th>Date</th>
-                        <th>Heure d'entrée</th>
-                        <th>Heure de sortie</th>
-                        <th>Medecin concerné</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="cslt : ${consults}" data-id="${cslt.id}">
-                        <td th:text="${cslt.rendezVous.dossier.code}"></td>
-                        <td
-                                th:text="${cslt.rendezVous.dossier.patient.nom}+' '+${cslt.rendezVous.dossier.patient.prenom}"></td>
-                        <td th:text="${#temporals.format(cslt.date,'dd/MM/yyyy')}"></td>
-                        <td th:if="${#strings.equals(cslt.heure_debut,'00:00:01')}"></td>
-                        <td th:unless="${#strings.equals(cslt.heure_debut,'00:00:01')}" th:text="${#temporals.format(cslt.heure_debut,'HH:mm')}"></td>
-                        
-                        <td th:if="${#strings.equals(cslt.heure_fin,'00:00:01')}"></td>
-                        <td th:unless="${#strings.equals(cslt.heure_fin,'00:00:01')}" th:text="${#temporals.format(cslt.heure_fin,'HH:mm')}"></td>
-                       
-                        <td th:text="${cslt.medecin.nom}+' '+${cslt.medecin.prenom}"></td>
-                        <td>
-                        <div class="row">
-                            <div class="col-4">
-                                <a class="btn btn-info myDIV"
-                                   th:href="@{/consult/affiche(id=${cslt.id})}">
-                                    <li class="fa fa-address-card"></li>
-                                </a>
-                                <p class="hide1">Resultat</p>
-                            </div>
-                            <div class="col-4">
-                                <a class="btn btn-success myDIV"
-                                   th:href="@{/consult/modification(id=${cslt.id})}">
-                                    <li class="fa fa-edit"></li>
-                                </a>
-                                <p class="hide2">Modifier</p>
-                            </div>
-                            <div class="col-4">
-                                <a onclick="javascript:return confirm('Etes-vous sûr de vouloir supprimer cette consultation ?')"
-                                        th:href="@{/consult/suppression(id=${cslt.id}, page=${pageActual}, size=${size})}"
-                                        class="btn btn-danger myDIV">
-                                    <li class="fa fa-trash"></li>
-                                </a>
-                                <p class="hide3">Supprimer</p>
-                            </div>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr th:if="${consults.empty}">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>Aucun</td>
-                        <td>resultat !</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+		<div class="card">
+			<div class="card-header bg-light text-dark font-weight-bold">Liste
+				des consultations</div>
+			<div class="card-body bg-light">
+				<div class="d-flex float-right">
+					<div class="container">
+						<form th:action="@{/consult/recherche}" method="Post">
+							<div class="row">
+								<div class="col-12">
+									<input class="form-control" type="search" name="search"
+										placeholder="nom, prenom ou nᵒ de dossier"
+										th:value="${search}" />
+									<div class="row p-4 p-md-2">
+										<div class="col-3">
+											<input class="form-control text-center" type="text" disabled
+												th:value="Entre" />
+										</div>
+										<div class="col-3">
+											<input class="form-control" type="Date" name="date1"
+												th:value="${date1}" />
+										</div>
+										<div class="col-2">
+											<input class="form-control text-center" type="text" disabled
+												th:value="Et" />
+										</div>
+										<div class="col-3">
+											<input class="form-control" type="Date" name="date2"
+												th:value="${date2}" />
+										</div>
+										<div class="col-1">
+											<button class="btn btn-outline-secondary">
+												<i class="fa fa-search"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
 
 
-    <nav aria-label="pagination" class="mt-3" th:if="${#lists.size(pages) > 1}">
-        <ul class="pagination pagination-sm justify-content-center">
-            <li th:class="${status.index==pageActual?'page-item active':'page-item'}"
-                th:each="page,status:${pages}">
-                <a th:if="${#strings.isEmpty(search)}" href="#"
-                   class="page-link"
-                   th:href="@{/consult(page=${status.index},size=${size})}"
-                   th:text="${status.index+1}"></a>
+				<div class="col-auto justify-content-center table-responsive">
+					<table class="table table-striped text-center" style="width: 100%">
+						<thead class="thead-dark">
+							<tr>
+								<th>Dossier</th>
+								<th>Patient</th>
+								<th>Date</th>
+								<th>Heure d'entrée</th>
+								<th>Heure de sortie</th>
+								<th>Medecin concerné</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="cslt : ${consults}" data-id="${cslt.id}">
+								<td th:text="${cslt.rendezVous.dossier.code}"></td>
+								<td
+									th:text="${cslt.rendezVous.dossier.patient.nom}+' '+${cslt.rendezVous.dossier.patient.prenom}"></td>
+								<td th:text="${#temporals.format(cslt.date,'dd/MM/yyyy')}"></td>
+								<td th:if="${#strings.equals(cslt.heure_debut,'00:00:01')}">--:--</td>
+								<td th:unless="${#strings.equals(cslt.heure_debut,'00:00:01')}"
+									th:text="${#temporals.format(cslt.heure_debut,'HH:mm')}"></td>
 
-                  <form th:if="${!#strings.isEmpty(search)}" th:action="@{/consult/recherche}" method="Post">
-                   <input type="hidden" name="search" th:value="${search}">
-                   <input type="hidden" name="date1" th:value="${date1}">
-                   <input type="hidden" name="date2" th:value="${date2}">
-                   <input type="hidden" name="page" th:value="${status.index}">
-                   <input type="hidden" name="size" th:value="${size}">
-                   <button class="page-link" th:text="${status.index+1}"></button>
-                  </form>
-            </li>
-        </ul>
-    </nav>
+								<td th:if="${#strings.equals(cslt.heure_fin,'00:00:01')}">--:--</td>
+								<td th:unless="${#strings.equals(cslt.heure_fin,'00:00:01')}"
+									th:text="${#temporals.format(cslt.heure_fin,'HH:mm')}"></td>
 
-</section>
+								<td th:text="${cslt.medecin.nom}+' '+${cslt.medecin.prenom}"></td>
+								<td>
+									<div class="row">
+										<div class="col-4">
+											<a class="btn btn-info myDIV" type="button" href=""
+												data-toggle="modal" data-target="#exampleModal">
+												<li class="fa fa-address-card"></li>
+											</a>
+											<p class="hide1">Résultat</p>
+										</div>
+										<div class="col-4">
+											<a class="btn btn-success myDIV"
+												th:href="@{/consult/modification(id=${cslt.id})}">
+												<li class="fa fa-edit"></li>
+											</a>
+											<p class="hide2">Modifier</p>
+										</div>
+
+										<div class="modal fade text-left" id="exampleModal" tabindex="-1"
+											role="dialog" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h3 class="modal-title" id="exampleModalLongTitle" 
+														th:text="${cslt.rendezVous.dossier.patient.nom}+' '+${cslt.rendezVous.dossier.patient.prenom}"></h3>
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														<div class="form-group">
+															<span class="font-weight-bold marginTop">Dossier médical Nᵒ :</span>
+															<span th:text="${cslt.rendezVous.dossier.code}"
+															class="col-9"> </span> <br> <hr class="sidebar-divider"> <span
+															class="font-weight-bold">Date de consultation :</span> <span
+															th:text="${#temporals.format(cslt.date,'dd/MM/yyyy')}"
+															class="col-9"> </span> <br> <hr class="sidebar-divider"> <span
+															class="font-weight-bold">Medecin(e) :</span> <span
+															th:text="${cslt.medecin.nom}+' '+${cslt.medecin.prenom}"
+															class="col-9"></span> <br> <hr class="sidebar-divider"> <label
+															class="font-weight-bold">Résultat :</label>
+															<textarea disabled type="text" th:text="${cslt.resultat}"
+															class="form-control"> </textarea>
+															<br>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary"
+																data-dismiss="modal">Annuler</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-4">
+											<a
+												onclick="javascript:return confirm('Etes-vous sûr de vouloir supprimer cette consultation ?')"
+												th:href="@{/consult/suppression(id=${cslt.id}, page=${pageActual}, size=${size})}"
+												class="btn btn-danger myDIV">
+												<li class="fa fa-trash"></li>
+											</a>
+											<p class="hide3">Supprimer</p>
+										</div>
+									</div>
+								</td>
+							</tr>
+
+							<tr th:if="${consults.empty}">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td>Aucun</td>
+								<td>resultat !</td>
+								<td></td>
+								<td></td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+
+		<nav aria-label="pagination" class="mt-3"
+			th:if="${#lists.size(pages) > 1}">
+			<ul class="pagination pagination-sm justify-content-center">
+				<li
+					th:class="${status.index==pageActual?'page-item active':'page-item'}"
+					th:each="page,status:${pages}"><a
+					th:if="${#strings.isEmpty(search)}" href="#" class="page-link"
+					th:href="@{/consult(page=${status.index},size=${size})}"
+					th:text="${status.index+1}"></a>
+
+					<form th:if="${!#strings.isEmpty(search)}"
+						th:action="@{/consult/recherche}" method="Post">
+						<input type="hidden" name="search" th:value="${search}"> <input
+							type="hidden" name="date1" th:value="${date1}"> <input
+							type="hidden" name="date2" th:value="${date2}"> <input
+							type="hidden" name="page" th:value="${status.index}"> <input
+							type="hidden" name="size" th:value="${size}">
+						<button class="page-link" th:text="${status.index+1}"></button>
+					</form></li>
+			</ul>
+		</nav>
+
+	</section>
 
 </body>
 </html>

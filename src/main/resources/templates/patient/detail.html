@@ -13,19 +13,20 @@
 
     <nav aria-label="breadcrumb" sec:authorize="hasRole('ROLE_SECRETAIRE')">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Patient</a></li>
-            <li class="breadcrumb-item active"><a href="#">Liste</a></li>
-            <li class="breadcrumb-item active" aria-current="page">p1</li>
+            <li class="breadcrumb-item"><a th:href="@{/patient/index?motCle=}">Patient</a></li>
+            <li class="breadcrumb-item active"><a th:href="@{/patient/index?motCle=}">Liste</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+            	<span th:text="|${patient.getNom()} ${patient.getPrenom()}|"></span>
+            </li>
         </ol>
     </nav>
 
-    <p class="h3" sec:authorize="hasRole('ROLE_SECRETAIRE')">Detail Patient</p>
-    <p class="h3" sec:authorize="hasRole('ROLE_PATIENT')">Mon Dossier</p>
+	<p class="h3" sec:authorize="hasRole('ROLE_PATIENT')">Mon Dossier</p>
 
     <div class="card mb-3">
         <div class="row no-gutters">
-            <div class="col-md-4 h-100">
-                <img th:src="@{/img/h.png}" class="card-img my-auto" alt="image patient">
+            <div class="col-md-4">
+                <img th:src="@{/img/h.png}" class="width" alt="image patient">
             </div>
             <div class="col-md-8">
                 <div class="card-header bg-transparent border-0" sec:authorize="hasRole('ROLE_SECRETAIRE') OR hasRole('ROLE_PATIENT')">
@@ -80,9 +81,10 @@
 
     <div class="card p-3">
         <div class="card-headerd text-right">
-            <button class="btn btn-primary" sec:authorize="hasRole('ROLE_SECRETAIRE')">
+            <a class="btn btn-primary" sec:authorize="hasRole('ROLE_SECRETAIRE')" 
+            	th:href="@{/rdv/{id}/create (id=${patient.id})}">
                 <i class="fas fa-plus"></i>  Ajouter un rendez-vous
-            </button>
+            </a>
             <button sec:authorize="hasRole('ROLE_PATIENT')" type="button" class="btn btn-primary" data-toggle="modal"
                     data-target="#exampleModalCenter"><i class="fas fa-plus"></i> Nouveau rendez-vous
             </button>
@@ -112,27 +114,62 @@
                         <th>Date</th>
                         <th>Heure d'entrée</th>
                         <th>Heure de sortie</th>
-                        <th>Medecin concerné</th>
+                        <th>Medecin(e) concerné(e)</th>
                         <th>Resultat</th>
                     </tr>
                     </thead>
                     <tbody>
 						<tr th:each="cslt : ${consultations}" data-id="${cslt.id}">
                         <td th:text="${#temporals.format(cslt.date,'dd/MM/yyyy')}"></td>
-                        <td th:if="${#strings.equals(cslt.heure_debut,'00:00:01')}"></td>
+                        <td th:if="${#strings.equals(cslt.heure_debut,'00:00:01')}">--:--</td>
                         <td th:unless="${#strings.equals(cslt.heure_debut,'00:00:01')}" th:text="${#temporals.format(cslt.heure_debut,'HH:mm')}"></td>
                         
-                        <td th:if="${#strings.equals(cslt.heure_fin,'00:00:01')}"></td>
+                        <td th:if="${#strings.equals(cslt.heure_fin,'00:00:01')}">--:--</td>
                         <td th:unless="${#strings.equals(cslt.heure_fin,'00:00:01')}" th:text="${#temporals.format(cslt.heure_fin,'HH:mm')}"></td>
                        
                         <td th:text="${cslt.medecin.nom}+' '+${cslt.medecin.prenom}"></td>
                         <td>
-                            <div class="text-center">
-                                <a class="btn btn-info"
-                                   th:href="@{/consult/affiche(id=${cslt.id})}">
-                                    <li class="fa fa-address-card"></li>
-                                </a>
-                            </div>
+                            <div class="d-flex justify-content-center">
+											<a class="btn btn-info" type="button" href=""
+												data-toggle="modal" data-target="#exampleModal">
+												<li class="fa fa-address-card"></li>
+											</a>
+							</div>
+                            
+                            <div class="modal fade text-left" id="exampleModal" tabindex="-1"
+											role="dialog" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h3 class="modal-title" id="exampleModalLongTitle" 
+														th:text="${cslt.rendezVous.dossier.patient.nom}+' '+${cslt.rendezVous.dossier.patient.prenom}"></h3>
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														<div class="form-group">
+														<span class="font-weight-bold">Date de consultation :</span>
+														<span th:text="${#temporals.format(cslt.date,'dd/MM/yyyy')}"
+															class="col-9"> </span> <br> <hr class="sidebar-divider"> <span
+															class="font-weight-bold">Medecin(e) :</span> <span
+															th:text="${cslt.medecin.nom}+' '+${cslt.medecin.prenom}"
+															class="col-9"></span> <br> <hr class="sidebar-divider"> <label
+															class="font-weight-bold">Résultat :</label>
+															<textarea disabled type="text" th:text="${cslt.resultat}"
+															class="form-control"> </textarea>
+															<br>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary"
+																data-dismiss="modal">Annuler</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+                            
                         </td>
                     </tr>
                     
